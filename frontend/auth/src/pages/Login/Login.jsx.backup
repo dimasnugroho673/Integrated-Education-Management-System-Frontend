@@ -1,0 +1,449 @@
+import React, {useState, Fragment} from 'react';
+import { Link, Redirect } from 'react-router-dom';
+import axios from 'axios'
+import Ripples from 'react-ripples'
+// import "./LoginStyle.css";
+
+const Login = () => {
+
+    const[username, setUsername]    = useState('');
+    const[pass, setPassword]        = useState('');
+    const[redirect, setRedirect]    = useState(false);
+    const[error, setError]          = useState('');
+    const[showPassword, setShowPassword] = useState(false);
+    const[isSubmit, setIsSubmit] = useState(false);
+
+    const token = localStorage.getItem('token')
+
+    const onChangeUsername = (e) => {
+        const value = e.target.value
+        setUsername(value)
+        setError('')
+    }
+
+    const onChangePassword = (e) => {
+        const value = e.target.value
+        setPassword(value)
+        setError('')
+    }
+
+    const submitLogin = () => {
+
+        setIsSubmit(true);
+
+        if (username == '' || pass == '') {
+            return false;
+        } else {
+            const data = {
+                email: username,
+                password: pass
+            }
+    
+            // localStorage.setItem('token', 'testing')
+            // setRedirect(true)
+    
+            axios.post('https://dummyapi.io/data/api/user/0F8JIqi4zwvb77FGz6Wt', data)
+            .then(result => {
+                if (result){
+                    localStorage.setItem('token', result.data)
+                    setRedirect(true)
+                }
+            })
+            .catch(e => {
+                setError(e.response.data.error)
+                localStorage.setItem('token', 'testing')
+                setRedirect(true)
+            })
+        }
+
+        
+    }
+
+    const handleShowPassword = () => {
+        if (showPassword == true) {
+            setShowPassword(false)
+        } else {
+            setShowPassword(true)
+        }
+    }
+
+    if (token){
+        // if token exist
+        // return <Redirect to="/a/dashboard" />
+        window.location.href = "/a/dashboard"
+    } else {
+
+
+        return (
+            <Fragment>
+
+                    <div className="row" style={{minHeight: "100vh"}}>
+                        <div className="col-md-5 bg-primary mx-auto">
+                            <div className="centered">
+
+                            <svg xlinkHref="http://www.w3.org/1999/xlink" width="400" viewBox="0 0 185.663 149.405">
+                                <defs>
+                                    <linearGradient id="linear-gradient" x1="0.011" y1="0.002" x2="1.011" y2="0.002" gradientUnits="objectBoundingBox">
+                                    <stop offset="0" stop-color="#4399fe"/>
+                                    <stop offset="0.519" stop-color="#d8ffff"/>
+                                    <stop offset="1" stop-color="#479bfe"/>
+                                    </linearGradient>
+                                    <linearGradient id="linear-gradient-2" x1="0.008" y1="-2.718" x2="0.789" y2="-2.718" xlinkHref="#linear-gradient"/>
+                                    <linearGradient id="linear-gradient-3" x1="0.009" y1="-5.438" x2="0.844" y2="-5.438" xlinkHref="#linear-gradient"/>
+                                    <linearGradient id="linear-gradient-4" x1="0.016" y1="-8.158" x2="1.55" y2="-8.158" xlinkHref="#linear-gradient"/>
+                                </defs>
+                                <g id="layer1" transform="translate(-4.158 -2.113)">
+                                    <g id="g1229" transform="translate(-74.609 -45.076)">
+                                    <rect id="rect1207" width="159.451" height="93.886" rx="8.146" transform="translate(78.767 110.401) rotate(-23.355)" fill="#ed6253"/>
+                                    <rect id="rect1205" width="159.451" height="93.886" rx="8.146" transform="matrix(0.972, -0.235, 0.235, 0.972, 83.997, 93.037)" fill="#3db62b"/>
+                                    <rect id="rect835-8" width="159.451" height="93.886" rx="8.146" transform="translate(83.895 77.161) rotate(-5.634)" fill="#d9b62b"/>
+                                    <g id="g1174" transform="translate(59.583 34.27)">
+                                        <rect id="rect835" width="159.451" height="93.886" rx="8.146" transform="translate(36.275 28.03)" fill="#f9f9f9"/>
+                                        <g id="g962" transform="translate(0 0.626)">
+                                        <rect id="rect922" width="44.809" height="57.718" rx="6.413" transform="translate(49.596 45.488)" fill="#e5f7f8"/>
+                                        <g id="g956" transform="translate(-0.792 4.953)">
+                                            <circle id="path839" cx="9.437" cy="9.437" r="9.437" transform="translate(63.618 49.836)" fill="#63d6a2"/>
+                                            <path id="circle946" d="M73,72.244a18.993,18.993,0,0,0-18.891,17.6H92a18.993,18.993,0,0,0-18.942-17.6Z" fill="#63d6a2"/>
+                                        </g>
+                                        </g>
+                                        <g id="g1006">
+                                        <rect id="rect964" width="58.907" height="4.117" transform="translate(101.554 50.596)" fill="url(#linear-gradient)"/>
+                                        <rect id="rect990" width="75.468" height="4.117" transform="translate(101.554 61.795)" fill="url(#linear-gradient-2)"/>
+                                        <rect id="rect994" width="70.579" height="4.117" transform="translate(101.554 72.993)" fill="url(#linear-gradient-3)"/>
+                                        <rect id="rect998" width="38.402" height="4.117" transform="translate(101.554 84.192)" fill="url(#linear-gradient-4)"/>
+                                        </g>
+                                        <g id="g1156" transform="translate(2.239 2.157)">
+                                        <path id="path954" d="M198.266,38.952l-3.37-.986-1.29,3.623-2.678-2.271L188.276,42.1l-1.523-3.164L183.2,40.4l-.1-3.51-3.844-.107,1.332-3.249-3.468-1.661,2.539-2.426-2.492-2.928,3.306-1.184-1.086-3.689,3.5.263.508-3.812,3.092,1.665,2.015-3.275,2.147,2.778,3.173-2.173.832,3.411,3.782-.694-.628,3.455,3.738.9-1.979,2.9,3.047,2.346-2.987,1.845,1.829,3.383-3.48.47Z" fill="#333" fill-rule="evenodd" opacity="0.347"/>
+                                        <g id="g1150">
+                                            <path id="path1012" d="M196.944,38.181l-3.37-.986-1.29,3.623-2.678-2.271-2.652,2.785-1.523-3.164-3.555,1.466-.1-3.51-3.844-.107,1.332-3.249-3.468-1.661,2.539-2.426-2.492-2.928,3.306-1.184-1.086-3.689,3.5.263.508-3.812L185.16,19l2.015-3.275,2.147,2.778,3.173-2.173.832,3.411,3.782-.694-.628,3.455,3.738.9-1.979,2.9,3.047,2.346L198.3,30.494l1.829,3.383-3.48.47Z" fill="#0cbb82" fill-rule="evenodd"/>
+                                            <path id="path1014" d="M182.924,29.419l3.386,3.388,7.278-7.4" fill="none" stroke="#f5f5f5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.924"/>
+                                        </g>
+                                        </g>
+                                    </g>
+                                    </g>
+                                </g>
+                                </svg>
+
+
+
+                            </div>
+                        </div>
+                        <div className="col-md-7">
+                            <div className="container text-left">
+
+                            <section className="m-section-login-form" style={{ verticalAlign: 'middle' }}>
+                                <div className="row">
+                                    <div className="col-md-8 mx-auto">
+
+                                    <section className="mb-5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="93" height="93" viewBox="0 0 93 93">
+                                            <g id="Group_99" data-name="Group 99" transform="translate(-1655 -8)">
+                                                <path id="Path_83" data-name="Path 83" d="M46.5,0A46.5,46.5,0,1,1,0,46.5,46.5,46.5,0,0,1,46.5,0Z" transform="translate(1655 8)" fill="#3f47f4"/>
+                                                <g id="Group_98" data-name="Group 98">
+                                                <path id="Subtraction_2" data-name="Subtraction 2" d="M-1979.2,74.438a5.6,5.6,0,0,1-4.124-1.57,5.6,5.6,0,0,1-1.57-4.125V27.864a5.353,5.353,0,0,1,1.387-3.942,5.356,5.356,0,0,1,3.942-1.387h25.112a6.337,6.337,0,0,1,4.088,1.1,4.232,4.232,0,0,1,1.314,3.431,4.139,4.139,0,0,1-1.314,3.358,6.341,6.341,0,0,1-4.088,1.1h-19.2V43.34h4.683A10.077,10.077,0,0,0-1970.107,48a9.964,9.964,0,0,0,.972,4.319h-4.513V68.744a5.727,5.727,0,0,1-1.5,4.162A5.428,5.428,0,0,1-1979.2,74.438Z" transform="translate(3671 8)" fill="#fff"/>
+                                                <path id="Path_89" data-name="Path 89" d="M6,0A6,6,0,1,1,0,6,6,6,0,0,1,6,0Z" transform="translate(1704 50)" fill="#47c363"/>
+                                                <path id="Path_85" data-name="Path 85" d="M6,0A6,6,0,1,1,0,6,6,6,0,0,1,6,0Z" transform="translate(1709 50)" fill="#f5b62b"/>
+                                                <path id="Path_86" data-name="Path 86" d="M6,0A6,6,0,1,1,0,6,6,6,0,0,1,6,0Z" transform="translate(1715 50)" fill="#f24d47"/>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                    </section>
+
+                                        <h1 class="" style={{ fontWeight : 700 }}>Sign in and Let's journey.</h1>
+                                        <h5 className="text-muted">Welcome back! please sign in with your account.</h5>
+
+                                        {   error && (
+                                                        <p style={{color: "red", marginTop: "20px"}}>{error}</p>
+                                                    )
+                                                }
+
+                                        <form className="mt-5">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Email address</label>
+                                                <input type="email" className={ isSubmit == true && username == '' ? 'form-control is-invalid' : 'form-control' } value={username} onChange={onChangeUsername} placeholder="Email address" />
+                                                { isSubmit == true && username == '' ? <div class="invalid-feedback">
+                                                    Email cannot empty!
+                                                </div> : null }
+                                            </div>
+
+                                        
+                                            <div class="form-group">
+                                                <label for="exampleInputPassword1">Password</label>
+
+                                                <div class="input-group mb-3"> 
+                                                    <input type={ showPassword == true ? 'text' : 'password' } className={ isSubmit == true && pass == '' ? 'form-control is-invalid' : 'form-control' } placeholder="Password" value={pass} onChange={onChangePassword} style={{ border: '1px 0 1px 1px' }} />
+
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text bg-semi-white password-show-icon" onClick={handleShowPassword}>
+                                                            { showPassword ? <span class="fas fa-eye text-primary"></span> : <span class="fas fa-eye"></span> }
+                                                        </span>
+                                                    </div>
+
+                                                    { isSubmit == true && pass == '' ? <div class="invalid-feedback">
+                                                    Password cannot empty!
+                                                    </div> : null }
+
+                                                </div>
+                                            
+                                                <a href="/auth/forgot-password" id="emailHelp" class="form-text text-primary font-weight-bold">Forgot password?</a>
+                                            </div>
+
+                                            {/* <div class="form-group form-check">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+                                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                            </div> */}
+                                            
+                                            <Ripples>
+                                                <button type="button" className="btn btn-primary"  onClick={submitLogin} style={{ minWidth: '100px' }}>Sign in</button>
+                                            </Ripples>
+                                            
+                                        </form>
+                                    </div>
+                                </div>
+                            </section>
+
+                            </div>
+                        </div>
+                    </div>
+            </Fragment>
+        )
+
+
+
+
+
+        // return (
+        //     <Fragment>
+
+        //             <div className="row" style={{minHeight: "100vh"}}>
+        //                 <div className="col-md-5 bg-primary mx-auto">
+        //                     <div className="centered">
+
+        //                     <svg xlinkHref="http://www.w3.org/1999/xlink" width="400" viewBox="0 0 185.663 149.405">
+        //                         <defs>
+        //                             <linearGradient id="linear-gradient" x1="0.011" y1="0.002" x2="1.011" y2="0.002" gradientUnits="objectBoundingBox">
+        //                             <stop offset="0" stop-color="#4399fe"/>
+        //                             <stop offset="0.519" stop-color="#d8ffff"/>
+        //                             <stop offset="1" stop-color="#479bfe"/>
+        //                             </linearGradient>
+        //                             <linearGradient id="linear-gradient-2" x1="0.008" y1="-2.718" x2="0.789" y2="-2.718" xlinkHref="#linear-gradient"/>
+        //                             <linearGradient id="linear-gradient-3" x1="0.009" y1="-5.438" x2="0.844" y2="-5.438" xlinkHref="#linear-gradient"/>
+        //                             <linearGradient id="linear-gradient-4" x1="0.016" y1="-8.158" x2="1.55" y2="-8.158" xlinkHref="#linear-gradient"/>
+        //                         </defs>
+        //                         <g id="layer1" transform="translate(-4.158 -2.113)">
+        //                             <g id="g1229" transform="translate(-74.609 -45.076)">
+        //                             <rect id="rect1207" width="159.451" height="93.886" rx="8.146" transform="translate(78.767 110.401) rotate(-23.355)" fill="#ed6253"/>
+        //                             <rect id="rect1205" width="159.451" height="93.886" rx="8.146" transform="matrix(0.972, -0.235, 0.235, 0.972, 83.997, 93.037)" fill="#3db62b"/>
+        //                             <rect id="rect835-8" width="159.451" height="93.886" rx="8.146" transform="translate(83.895 77.161) rotate(-5.634)" fill="#d9b62b"/>
+        //                             <g id="g1174" transform="translate(59.583 34.27)">
+        //                                 <rect id="rect835" width="159.451" height="93.886" rx="8.146" transform="translate(36.275 28.03)" fill="#f9f9f9"/>
+        //                                 <g id="g962" transform="translate(0 0.626)">
+        //                                 <rect id="rect922" width="44.809" height="57.718" rx="6.413" transform="translate(49.596 45.488)" fill="#e5f7f8"/>
+        //                                 <g id="g956" transform="translate(-0.792 4.953)">
+        //                                     <circle id="path839" cx="9.437" cy="9.437" r="9.437" transform="translate(63.618 49.836)" fill="#63d6a2"/>
+        //                                     <path id="circle946" d="M73,72.244a18.993,18.993,0,0,0-18.891,17.6H92a18.993,18.993,0,0,0-18.942-17.6Z" fill="#63d6a2"/>
+        //                                 </g>
+        //                                 </g>
+        //                                 <g id="g1006">
+        //                                 <rect id="rect964" width="58.907" height="4.117" transform="translate(101.554 50.596)" fill="url(#linear-gradient)"/>
+        //                                 <rect id="rect990" width="75.468" height="4.117" transform="translate(101.554 61.795)" fill="url(#linear-gradient-2)"/>
+        //                                 <rect id="rect994" width="70.579" height="4.117" transform="translate(101.554 72.993)" fill="url(#linear-gradient-3)"/>
+        //                                 <rect id="rect998" width="38.402" height="4.117" transform="translate(101.554 84.192)" fill="url(#linear-gradient-4)"/>
+        //                                 </g>
+        //                                 <g id="g1156" transform="translate(2.239 2.157)">
+        //                                 <path id="path954" d="M198.266,38.952l-3.37-.986-1.29,3.623-2.678-2.271L188.276,42.1l-1.523-3.164L183.2,40.4l-.1-3.51-3.844-.107,1.332-3.249-3.468-1.661,2.539-2.426-2.492-2.928,3.306-1.184-1.086-3.689,3.5.263.508-3.812,3.092,1.665,2.015-3.275,2.147,2.778,3.173-2.173.832,3.411,3.782-.694-.628,3.455,3.738.9-1.979,2.9,3.047,2.346-2.987,1.845,1.829,3.383-3.48.47Z" fill="#333" fill-rule="evenodd" opacity="0.347"/>
+        //                                 <g id="g1150">
+        //                                     <path id="path1012" d="M196.944,38.181l-3.37-.986-1.29,3.623-2.678-2.271-2.652,2.785-1.523-3.164-3.555,1.466-.1-3.51-3.844-.107,1.332-3.249-3.468-1.661,2.539-2.426-2.492-2.928,3.306-1.184-1.086-3.689,3.5.263.508-3.812L185.16,19l2.015-3.275,2.147,2.778,3.173-2.173.832,3.411,3.782-.694-.628,3.455,3.738.9-1.979,2.9,3.047,2.346L198.3,30.494l1.829,3.383-3.48.47Z" fill="#0cbb82" fill-rule="evenodd"/>
+        //                                     <path id="path1014" d="M182.924,29.419l3.386,3.388,7.278-7.4" fill="none" stroke="#f5f5f5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.924"/>
+        //                                 </g>
+        //                                 </g>
+        //                             </g>
+        //                             </g>
+        //                         </g>
+        //                         </svg>
+
+
+
+        //                     </div>
+        //                 </div>
+        //                 <div className="col-md-7">
+        //                     <div className="container text-left">
+
+        //                     <section className="m-section-login-form" style={{ verticalAlign: 'middle' }}>
+        //                         <div className="row">
+        //                             <div className="col-md-8 mx-auto">
+
+        //                             <section className="mb-5">
+        //                                 <svg xmlns="http://www.w3.org/2000/svg" width="93" height="93" viewBox="0 0 93 93">
+        //                                     <g id="Group_99" data-name="Group 99" transform="translate(-1655 -8)">
+        //                                         <path id="Path_83" data-name="Path 83" d="M46.5,0A46.5,46.5,0,1,1,0,46.5,46.5,46.5,0,0,1,46.5,0Z" transform="translate(1655 8)" fill="#3f47f4"/>
+        //                                         <g id="Group_98" data-name="Group 98">
+        //                                         <path id="Subtraction_2" data-name="Subtraction 2" d="M-1979.2,74.438a5.6,5.6,0,0,1-4.124-1.57,5.6,5.6,0,0,1-1.57-4.125V27.864a5.353,5.353,0,0,1,1.387-3.942,5.356,5.356,0,0,1,3.942-1.387h25.112a6.337,6.337,0,0,1,4.088,1.1,4.232,4.232,0,0,1,1.314,3.431,4.139,4.139,0,0,1-1.314,3.358,6.341,6.341,0,0,1-4.088,1.1h-19.2V43.34h4.683A10.077,10.077,0,0,0-1970.107,48a9.964,9.964,0,0,0,.972,4.319h-4.513V68.744a5.727,5.727,0,0,1-1.5,4.162A5.428,5.428,0,0,1-1979.2,74.438Z" transform="translate(3671 8)" fill="#fff"/>
+        //                                         <path id="Path_89" data-name="Path 89" d="M6,0A6,6,0,1,1,0,6,6,6,0,0,1,6,0Z" transform="translate(1704 50)" fill="#47c363"/>
+        //                                         <path id="Path_85" data-name="Path 85" d="M6,0A6,6,0,1,1,0,6,6,6,0,0,1,6,0Z" transform="translate(1709 50)" fill="#f5b62b"/>
+        //                                         <path id="Path_86" data-name="Path 86" d="M6,0A6,6,0,1,1,0,6,6,6,0,0,1,6,0Z" transform="translate(1715 50)" fill="#f24d47"/>
+        //                                         </g>
+        //                                     </g>
+        //                                 </svg>
+        //                             </section>
+
+        //                                 <h1 class="" style={{ fontWeight : 700 }}>Sign in and Let's journey.</h1>
+        //                                 <h5 className="text-muted">Welcome back! please sign in with your account.</h5>
+
+        //                                 {   error && (
+        //                                                 <p style={{color: "red", marginTop: "20px"}}>{error}</p>
+        //                                             )
+        //                                         }
+
+        //                                 <form className="mt-5">
+        //                                     <div class="form-group">
+        //                                         <label for="exampleInputEmail1">Email address</label>
+        //                                         <input type="email" className={ isSubmit == true && username == '' ? 'form-control is-invalid' : 'form-control' } value={username} onChange={onChangeUsername} placeholder="Email address" />
+        //                                         { isSubmit == true && username == '' ? <div class="invalid-feedback">
+        //                                             Email cannot empty!
+        //                                         </div> : null }
+        //                                     </div>
+
+                                        
+        //                                     <div class="form-group">
+        //                                         <label for="exampleInputPassword1">Password</label>
+
+        //                                         <div class="input-group mb-3"> 
+        //                                             <input type={ showPassword == true ? 'text' : 'password' } className={ isSubmit == true && pass == '' ? 'form-control is-invalid' : 'form-control' } placeholder="Password" value={pass} onChange={onChangePassword} style={{ border: '1px 0 1px 1px' }} />
+
+        //                                             <div class="input-group-append">
+        //                                                 <span class="input-group-text bg-semi-white password-show-icon" onClick={handleShowPassword}>
+        //                                                     { showPassword ? <span class="fas fa-eye text-primary"></span> : <span class="fas fa-eye"></span> }
+        //                                                 </span>
+        //                                             </div>
+
+        //                                             { isSubmit == true && pass == '' ? <div class="invalid-feedback">
+        //                                             Password cannot empty!
+        //                                             </div> : null }
+
+        //                                         </div>
+                                            
+        //                                         <a href="/auth/forgot-password" id="emailHelp" class="form-text text-primary font-weight-bold">Forgot password?</a>
+        //                                     </div>
+
+        //                                     {/* <div class="form-group form-check">
+        //                                         <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+        //                                         <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        //                                     </div> */}
+                                            
+        //                                     <Ripples>
+        //                                         <button type="button" className="btn btn-primary"  onClick={submitLogin} style={{ minWidth: '100px' }}>Sign in</button>
+        //                                     </Ripples>
+                                            
+        //                                 </form>
+        //                             </div>
+        //                         </div>
+        //                     </section>
+
+        //                     </div>
+        //                 </div>
+        //             </div>
+
+        //         {/* <div class="split left">
+        //             <div class="centered">
+        //                 <div className="mx-auto mr-5">
+        //                 <svg width="319" height="269" viewBox="0 0 319 269" fill="none" xmlns="http://www.w3.org/2000/svg">
+        //                     <g filter="url(#filter0_d)">
+        //                     <path d="M7 27C7 15.9543 15.9543 7 27 7H276C287.046 7 296 15.9543 296 27V182C296 193.046 287.046 202 276 202H223.75H197.967C191.48 202 185.396 205.146 181.647 210.44L159.66 241.48C155.675 247.106 147.325 247.106 143.34 241.48L121.353 210.44C117.604 205.146 111.52 202 105.033 202H79.25H27C15.9543 202 7 193.046 7 182V27Z" fill="white"/>
+        //                     </g>
+        //                     <rect x="41" y="41" width="60" height="70" rx="9" fill="#FDF8EF"/>
+        //                     <rect x="51" y="51" width="30" height="4" rx="2" fill="#F5CE88"/>
+        //                     <rect x="51" y="59" width="18" height="4" rx="2" fill="#E1D3B8"/>
+        //                     <path d="M52.0254 100.723H53.25V102H52.0254V100.723ZM55.3652 93.3926H59.2383C60.0039 93.3926 60.6211 93.6094 61.0898 94.043C61.5586 94.4727 61.793 95.0781 61.793 95.8594C61.793 96.5312 61.584 97.1172 61.166 97.6172C60.748 98.1133 60.1055 98.3613 59.2383 98.3613H56.5312V102H55.3652V93.3926ZM60.6152 95.8652C60.6152 95.2324 60.3809 94.8027 59.9121 94.5762C59.6543 94.4551 59.3008 94.3945 58.8516 94.3945H56.5312V97.377H58.8516C59.375 97.377 59.7988 97.2656 60.123 97.043C60.4512 96.8203 60.6152 96.4277 60.6152 95.8652ZM66.5625 101.004C66.957 101.004 67.2812 100.963 67.5352 100.881C67.9883 100.729 68.3594 100.436 68.6484 100.002C68.8789 99.6543 69.0449 99.209 69.1465 98.666C69.2051 98.3418 69.2344 98.041 69.2344 97.7637C69.2344 96.6973 69.0215 95.8691 68.5957 95.2793C68.1738 94.6895 67.4922 94.3945 66.5508 94.3945H64.4824V101.004H66.5625ZM63.3105 93.3926H66.7969C67.9805 93.3926 68.8984 93.8125 69.5508 94.6523C70.1328 95.4102 70.4238 96.3809 70.4238 97.5645C70.4238 98.4785 70.252 99.3047 69.9082 100.043C69.3027 101.348 68.2617 102 66.7852 102H63.3105V93.3926ZM72.041 93.3926H78.0117V94.4473H73.207V97.0605H77.4316V98.0859H73.207V102H72.041V93.3926Z" fill="#F5CE88"/>
+        //                     <rect x="87" y="140" width="130" height="30" rx="9" fill="#EFF1FD"/>
+        //                     <rect x="112" y="152" width="80" height="6" rx="3" fill="#4424A7"/>
+        //                     <rect x="121" y="41" width="60" height="70" rx="9" fill="#FFECF2"/>
+        //                     <rect x="131" y="51" width="30" height="4" rx="2" fill="#FFA2C0"/>
+        //                     <rect x="131" y="59" width="18" height="4" rx="2" fill="#EFCAD6"/>
+        //                     <path d="M132.025 100.723H133.25V102H132.025V100.723ZM138.881 93.1582C139.971 93.1582 140.816 93.4453 141.418 94.0195C142.02 94.5938 142.354 95.2461 142.42 95.9766H141.283C141.154 95.4219 140.896 94.9824 140.51 94.6582C140.127 94.334 139.588 94.1719 138.893 94.1719C138.045 94.1719 137.359 94.4707 136.836 95.0684C136.316 95.6621 136.057 96.5742 136.057 97.8047C136.057 98.8125 136.291 99.6309 136.76 100.26C137.232 100.885 137.936 101.197 138.869 101.197C139.729 101.197 140.383 100.867 140.832 100.207C141.07 99.8594 141.248 99.4023 141.365 98.8359H142.502C142.4 99.7422 142.064 100.502 141.494 101.115C140.811 101.854 139.889 102.223 138.729 102.223C137.729 102.223 136.889 101.92 136.209 101.314C135.314 100.514 134.867 99.2773 134.867 97.6055C134.867 96.3359 135.203 95.2949 135.875 94.4824C136.602 93.5996 137.604 93.1582 138.881 93.1582ZM144.688 99.2227C144.715 99.7109 144.83 100.107 145.033 100.412C145.42 100.982 146.102 101.268 147.078 101.268C147.516 101.268 147.914 101.205 148.273 101.08C148.969 100.838 149.316 100.404 149.316 99.7793C149.316 99.3105 149.17 98.9766 148.877 98.7773C148.58 98.582 148.115 98.4121 147.482 98.2676L146.316 98.0039C145.555 97.832 145.016 97.6426 144.699 97.4355C144.152 97.0762 143.879 96.5391 143.879 95.8242C143.879 95.0508 144.146 94.416 144.682 93.9199C145.217 93.4238 145.975 93.1758 146.955 93.1758C147.857 93.1758 148.623 93.3945 149.252 93.832C149.885 94.2656 150.201 94.9609 150.201 95.918H149.105C149.047 95.457 148.922 95.1035 148.73 94.8574C148.375 94.4082 147.771 94.1836 146.92 94.1836C146.232 94.1836 145.738 94.3281 145.438 94.6172C145.137 94.9062 144.986 95.2422 144.986 95.625C144.986 96.0469 145.162 96.3555 145.514 96.5508C145.744 96.6758 146.266 96.832 147.078 97.0195L148.285 97.2949C148.867 97.4277 149.316 97.6094 149.633 97.8398C150.18 98.2422 150.453 98.8262 150.453 99.5918C150.453 100.545 150.105 101.227 149.41 101.637C148.719 102.047 147.914 102.252 146.996 102.252C145.926 102.252 145.088 101.979 144.482 101.432C143.877 100.889 143.58 100.152 143.592 99.2227H144.688ZM152.609 93.3926L155.082 100.723L157.525 93.3926H158.832L155.691 102H154.455L151.32 93.3926H152.609Z" fill="#FFA2C0"/>
+        //                     <rect x="201" y="41" width="60" height="70" rx="9" fill="#E5F7F8"/>
+        //                     <rect x="211" y="51" width="30" height="4" rx="2" fill="#84D8DD"/>
+        //                     <rect x="211" y="59" width="18" height="4" rx="2" fill="#C4DFE0"/>
+        //                     <path d="M212.025 100.723H213.25V102H212.025V100.723ZM218.881 93.1582C219.971 93.1582 220.816 93.4453 221.418 94.0195C222.02 94.5938 222.354 95.2461 222.42 95.9766H221.283C221.154 95.4219 220.896 94.9824 220.51 94.6582C220.127 94.334 219.588 94.1719 218.893 94.1719C218.045 94.1719 217.359 94.4707 216.836 95.0684C216.316 95.6621 216.057 96.5742 216.057 97.8047C216.057 98.8125 216.291 99.6309 216.76 100.26C217.232 100.885 217.936 101.197 218.869 101.197C219.729 101.197 220.383 100.867 220.832 100.207C221.07 99.8594 221.248 99.4023 221.365 98.8359H222.502C222.4 99.7422 222.064 100.502 221.494 101.115C220.811 101.854 219.889 102.223 218.729 102.223C217.729 102.223 216.889 101.92 216.209 101.314C215.314 100.514 214.867 99.2773 214.867 97.6055C214.867 96.3359 215.203 95.2949 215.875 94.4824C216.602 93.5996 217.604 93.1582 218.881 93.1582ZM224.688 99.2227C224.715 99.7109 224.83 100.107 225.033 100.412C225.42 100.982 226.102 101.268 227.078 101.268C227.516 101.268 227.914 101.205 228.273 101.08C228.969 100.838 229.316 100.404 229.316 99.7793C229.316 99.3105 229.17 98.9766 228.877 98.7773C228.58 98.582 228.115 98.4121 227.482 98.2676L226.316 98.0039C225.555 97.832 225.016 97.6426 224.699 97.4355C224.152 97.0762 223.879 96.5391 223.879 95.8242C223.879 95.0508 224.146 94.416 224.682 93.9199C225.217 93.4238 225.975 93.1758 226.955 93.1758C227.857 93.1758 228.623 93.3945 229.252 93.832C229.885 94.2656 230.201 94.9609 230.201 95.918H229.105C229.047 95.457 228.922 95.1035 228.73 94.8574C228.375 94.4082 227.771 94.1836 226.92 94.1836C226.232 94.1836 225.738 94.3281 225.438 94.6172C225.137 94.9062 224.986 95.2422 224.986 95.625C224.986 96.0469 225.162 96.3555 225.514 96.5508C225.744 96.6758 226.266 96.832 227.078 97.0195L228.285 97.2949C228.867 97.4277 229.316 97.6094 229.633 97.8398C230.18 98.2422 230.453 98.8262 230.453 99.5918C230.453 100.545 230.105 101.227 229.41 101.637C228.719 102.047 227.914 102.252 226.996 102.252C225.926 102.252 225.088 101.979 224.482 101.432C223.877 100.889 223.58 100.152 223.592 99.2227H224.688ZM232.609 93.3926L235.082 100.723L237.525 93.3926H238.832L235.691 102H234.455L231.32 93.3926H232.609Z" fill="#7FD6DC"/>
+        //                     <defs>
+        //                     <filter id="filter0_d" x="0" y="0" width="319" height="268.699" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+        //                     <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+        //                     <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+        //                     <feOffset dx="8" dy="8"/>
+        //                     <feGaussianBlur stdDeviation="7.5"/>
+        //                     <feColorMatrix type="matrix" values="0 0 0 0 0.221008 0 0 0 0 0.117361 0 0 0 0 0.541667 0 0 0 0.25 0"/>
+        //                     <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+        //                     <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+        //                     </filter>
+        //                     </defs>
+        //                 </svg>
+        //                 </div>
+        //             </div>
+        //         </div> */}
+
+        //         {/* <div class="split right">
+                  
+        //             <div className="container text-left">
+
+        //                 <section className="m-section-login-form" style={{ verticalAlign: 'middle' }}>
+        //                     <div className="row">
+        //                         <div className="col-md-6 offset-md-3">
+
+        //                             <h1 class="" style={{ fontWeight : 700 }}>Welcome Learner.</h1>
+
+        //                             {   error && (
+        //                                             <p style={{color: "red", marginTop: "20px"}}>{error}</p>
+        //                                         )
+        //                                     }
+
+        //                             <form className="mt-5">
+        //                                 <div class="form-group">
+        //                                     <label for="exampleInputEmail1">Email address</label>
+        //                                     <input type="email" className={ isSubmit == true && username == '' ? 'form-control is-invalid' : 'form-control' } value={username} onChange={onChangeUsername} placeholder="Email address" />
+        //                                     { isSubmit == true && username == '' ? <div class="invalid-feedback">
+        //                                         Email cannot empty!
+        //                                     </div> : null }
+        //                                 </div>
+
+                                    
+        //                                 <div class="form-group">
+        //                                     <label for="exampleInputPassword1">Password</label>
+
+        //                                     <div class="input-group mb-3"> 
+        //                                         <input type={ showPassword == true ? 'text' : 'password' } className={ isSubmit == true && pass == '' ? 'form-control is-invalid' : 'form-control' } placeholder="Password" value={pass} onChange={onChangePassword} style={{ border: '1px 0 1px 1px' }} />
+
+        //                                         <div class="input-group-append">
+        //                                             <span class="input-group-text bg-semi-white password-show-icon" onClick={handleShowPassword}>
+        //                                                 { showPassword ? <span class="fas fa-eye-slash"></span> : <span class="fas fa-eye"></span> }
+        //                                             </span>
+        //                                         </div>
+
+        //                                         { isSubmit == true && pass == '' ? <div class="invalid-feedback">
+        //                                         Password cannot empty!
+        //                                         </div> : null }
+
+        //                                     </div>
+                                           
+        //                                     <a href="/auth/forgot-password" id="emailHelp" class="form-text text-primary font-weight-bold">Forgot password?</a>
+        //                                 </div>
+
+        //                                 <Ripples>
+        //                                     <button type="button" className="btn btn-primary"  onClick={submitLogin} style={{ minWidth: '100px' }}>Sign in</button>
+        //                                 </Ripples>
+                                        
+        //                             </form>
+        //                         </div>
+        //                     </div>
+        //                 </section>
+                        
+        //             </div>
+        //         </div> */}
+        //     </Fragment>
+        // )
+    }
+
+    
+
+}
+
+export default Login

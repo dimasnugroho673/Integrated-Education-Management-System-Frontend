@@ -1,0 +1,11 @@
+version: "3"
+
+services: 
+  nginx:
+    image: nginx:1.19.0-alpine
+    ports: 
+      - "8001:80"
+    volumes: 
+      - ./frontend:/usr/share/nginx/html
+      - ./dev-env/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
+ 

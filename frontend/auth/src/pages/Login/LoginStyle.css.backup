@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap');
+
+* {
+    font-family: 'Nunito', sans-serif !important;
+}
+
+/* utilities */
+
+.bg-primary {
+    background-color: #4047F4 !important;
+}
+
+.bg-semi-white {
+    background-color: #FDFDFF !important;
+    border-color: #E4E6FC !important;
+}
+
+input {
+    background-color: #FDFDFF !important;
+    border-color: #E4E6FC !important;
+}
+
+input::placeholder {
+    font-size: 14px;
+}
+
+.btn-primary {
+    background-color: #4047F4 !important;
+    border-color: #4047F4;
+}
+
+.text-primary {
+    color: #4047F4 !important;
+}
+
+.m-section-login-form {
+    margin-top: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.centered {
+    position: absolute;
+    top: 30%;
+    left: 0%;
+    right: 0%;
+    text-align: center;
+}
+
+/* end utils */
+  
+
+/* Split the screen in half */
+.split {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+  
+  /* Control the left side */
+  .left {
+    left: 0;
+    background-color: #4047F4;
+  }
+  
+  /* Control the right side */
+  .right {
+    right: 0;
+    background-color: white;
+  }
+  
+  /* Style the image inside the centered container, if needed */
+  .centered img {
+    width: 150px;
+    border-radius: 50%;
+  }
+
+  .password-show-icon:hover {
+      cursor: pointer;
+  }
+
+  @media (min-width: 992px) {
+    
+    .m-section-login-form {
+        margin-top: 180px;
+    }
+
+    .split {
+        height: 100%;
+        width: 55%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        overflow-x: hidden;
+        padding-top: 20px;
+      }
+  }
