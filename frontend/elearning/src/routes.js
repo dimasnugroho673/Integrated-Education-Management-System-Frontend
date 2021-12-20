@@ -47,11 +47,11 @@ const QuizList = React.lazy(() => import('./views/list/QuizList'));
 
 const routes = [
   // { path: '/', exact: true, name: 'Home' },
-  { path: '/el/info', name: 'Dashboard', component: Dashboard },
-  { path: '/el/material', exact: true, name: 'TableOfContents', component: TableOfContents },
-  { path: '/el/material/:moduleID', name: 'CourseContainer', component: CourseContainer },
-  { path: '/el/assignment', name: 'AssignmentList', component: AssignmentList },
-  { path: '/el/quiz', name: 'QuizList', component: QuizList },
+  { path: '/el/:courseID/info', name: 'Dashboard', component: Dashboard },
+  { path: '/el/:courseID/material', exact: true, name: 'TableOfContents', component: TableOfContents },
+  { path: '/el/:courseID/material/:moduleID', name: 'CourseContainer', component: CourseContainer },
+  { path: '/el/:courseID/assignment', name: 'AssignmentList', component: AssignmentList },
+  { path: '/el/:courseID/quiz', name: 'QuizList', component: QuizList },
 
 
   { path: '/theme', name: 'Theme', component: Colors, exact: true },

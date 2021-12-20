@@ -1,5 +1,6 @@
 import React from 'react'
 import CIcon from '@coreui/icons-react'
+import { getCourseIDActive } from 'src/utils/Common'
 
 const _nav =  [
   {
@@ -9,7 +10,7 @@ const _nav =  [
   {
     _tag: 'CSidebarNavItem',
     name: 'Info Mata Kuliah',
-    to: '/el/info',
+    to: `/el/${getCourseIDActive()}/info`,
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
     badge: {
       color: 'info',
@@ -19,19 +20,19 @@ const _nav =  [
   {
     _tag: 'CSidebarNavItem',
     name: 'Daftar Quiz',
-    to: '/el/quiz',
+    to: `/el/${getCourseIDActive()}/quiz`,
     icon: 'cil-file',
   },
   {
     _tag: 'CSidebarNavItem',
     name: 'Daftar Tugas',
-    to: '/el/assignment',
+    to: `/el/${getCourseIDActive()}/assignment`,
     icon: 'cil-list',
   },
   {
     _tag: 'CSidebarNavItem',
     name: 'Materi',
-    to: '/el/material',
+    to: `/el/${getCourseIDActive()}/material`,
     icon: 'cil-drop',
   },
   // {

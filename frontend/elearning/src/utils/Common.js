@@ -1,0 +1,25 @@
+import { CButton } from "@coreui/react"
+
+export const transformStatusQuizReadable = (status) => { 
+    if (status) {
+        return <span class="badge badge-pill badge-success">Active</span>
+    } else {
+        return <span class="badge badge-pill badge-danger">Inactive</span>
+    }
+}
+
+export const showActionOpenQuiz = (isActive, isComplete, moduleID) => {
+    if (isActive) {
+        if (isComplete) {
+            return "Sudah dikerjakan"
+        } else {
+            return <CButton type="button" color="primary" variant="outline" onClick={e => window.location.href = `material/${moduleID}?page=1` } size="sm">Kerjakan</CButton>
+        }
+    } else {
+        return ""
+    }
+}
+
+export const getCourseIDActive = () => {
+    return localStorage.getItem('course-id-active')
+}

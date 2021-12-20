@@ -19,6 +19,7 @@ import {
 import navigationMaterials from './_navMaterials'
 import Logo from './logo.png'
 import LogoMini from './logo_mini.png'
+import { getCourseIDActive } from 'src/utils/Common'
 
 const TheSidebarCoursePortal = () => {
   const dispatch = useDispatch()
@@ -37,7 +38,7 @@ const TheSidebarCoursePortal = () => {
       <CSidebarNav>
       
         <div className="mx-left ml-4">
-           <Link to="/el/info" class="btn btn-secondary btn-sm btn-pill my-4 font-weight-bold"><span class="iconify" data-icon="uil:angle-left-b"></span> Kembali ke Home</Link>  
+           <Link to={`/el/${getCourseIDActive()}/info`} class="btn btn-secondary btn-sm btn-pill my-4 font-weight-bold"><span class="iconify" data-icon="uil:angle-left-b"></span> Kembali ke Home</Link>  
         </div>
        
 

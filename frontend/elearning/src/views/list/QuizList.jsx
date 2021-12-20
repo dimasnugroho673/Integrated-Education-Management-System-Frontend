@@ -15,33 +15,51 @@ import {
     CModalHeader,
     CModalTitle,
     CRow,
-  } from '@coreui/react'
-  import CIcon from '@coreui/icons-react'
+  } from '@coreui/react';
+import CIcon from '@coreui/icons-react';
+import axios from "axios";
+import { dataQuizList } from "./DataQuiz";
+import { transformStatusQuizReadable, showActionOpenQuiz } from "src/utils/Common";
 
 
 export default class QuizList extends Component { 
     constructor(props) {
         super(props)
         this.state = {
-            content: [
-                {
-                    quiz: "Kuis 1",
-                    assignedOnTime: "28 Juli 2021 10:00:00",
-                    deadline: "27 Juli 2021 23:59:00",
-                    score: "Lewat"
-                },
-                {
-                    quiz: "Kuis 2",
-                    assignedOnTime: "1 Agustus 2021 07:00:00",
-                    deadline: "1 Agustus 2021 23:59:00",
-                    score: 100
-                }
-            ]
+            isLoading: true,
+            quizzes: [],
         }
 
     }
 
+    fetchQuizzes = () => {
+        axios.get("https://jsonplaceholder.typicode.com/todos").then(response => {
+            if (response.status === 200) {
+                this.setState({ isLoading: false, quizzes: dataQuizList.data })
+            }
+        })
+    }
+
+    componentDidMount = () => {
+        this.fetchQuizzes()
+    }
+
     render() {
+
+        const quizzes = this.state.quizzes
+
+        if (this.state.isLoading) {
+            return (
+                <Fragment>
+                    <div class="text-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </Fragment>
+            )
+        }
+
         return(
             <Fragment>
                 <div class="container-lg">
@@ -65,17 +83,21 @@ export default class QuizList extends Component {
                                                 <th scope="col">Tugas</th>
                                                 <th scope="col">Tanggal</th>
                                                 <th scope="col">Batas Waktu</th>
+                                                <th scope="col">Status</th>
                                                 <th scope="col">Nilai</th>
+                                                <th scope="col">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {this.state.content.map((quiz, index) => (
-                                                <tr style={{ cursor: 'pointer' }} onClick={e => window.location.href = `material/${index}` }>
-                                                    <th scope="row">{index + 1}</th>
-                                                    <td>{quiz.quiz}</td>
-                                                    <td>{quiz.assignedOnTime}</td>
-                                                    <td>{quiz.deadline}</td>
-                                                    <td>{quiz.score}</td>
+                                            {quizzes.map((quiz, index) => (
+                                                <tr>
+                                                    <th>{index + 1}</th>
+                                                    <th>{quiz.moduleName}</th>
+                                                    <th>{quiz.content.meta.assignedDate}</th>
+                                                    <th>{quiz.content.meta.deadline}</th>
+                                                    <th>{transformStatusQuizReadable(quiz.content.meta.isActive)}</th>
+                                                    <th>{quiz.content.meta.score}</th>
+                                                    <th>{showActionOpenQuiz(quiz.content.meta.isActive, quiz.content.meta.isComplete, quiz.moduleID)}</th>
                                                 </tr>
                                             ))}
                                         </tbody>

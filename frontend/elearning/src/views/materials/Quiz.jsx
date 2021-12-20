@@ -7,24 +7,25 @@ import {
     CCardHeader,
     CCol,
     CBreadcrumb,
-  CBreadcrumbItem,
-  CBreadcrumbRouter,
-  CLink,
+    CBreadcrumbItem,
+    CBreadcrumbRouter,
+    CLink,
     CModal,
     CModalBody,
     CModalFooter,
     CModalHeader,
     CModalTitle,
     CRow,
-  } from '@coreui/react'
-  import CIcon from '@coreui/icons-react'
+} from '@coreui/react'
+import CIcon from '@coreui/icons-react'
 import Material from './Material';
 
 
-export default class Quiz extends Component { 
+export default class Quiz extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            isLoading: true,
             activeQuestion: 0,
             showPrevButton: false,
             showNextButton: true,
@@ -167,8 +168,27 @@ export default class Quiz extends Component {
         }
     }
 
-    componentDidMount() {
+    fetchQuestion = () => {
+        let search = window.location.search;
+        let params = new URLSearchParams(search);
+        let activeQuestion = params.get('page');
 
+        setInterval(() => {
+            this.setState({
+                isLoading: false,
+                activeQuestion: parseInt(activeQuestion) - 1
+            })
+
+            this.startTimer()
+        }, 2000);
+    }
+
+    startTimer = () => {
+
+    }
+
+    componentDidMount() {
+        this.fetchQuestion()
     }
 
     // nextQuestion = () => {
@@ -191,7 +211,19 @@ export default class Quiz extends Component {
 
     render() {
 
-        const Questions = this.state.content.dataQuiz[this.state.activeQuestion] 
+        const questions = this.state.content.dataQuiz[this.state.activeQuestion]
+
+        if (this.state.isLoading) {
+            return (
+                <Fragment>
+                    <div class="text-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </Fragment>
+            )
+        }
 
         return (
             <Fragment>
@@ -208,28 +240,30 @@ export default class Quiz extends Component {
                             </div>
                             <div className="card-body">
                                 <ol>
-                                    <li value={ this.state.activeQuestion + 1 }> 
-                                        <div dangerouslySetInnerHTML={ { __html: this.state.content.dataQuiz[this.state.activeQuestion].question } }></div>
+                                    <li value={this.state.activeQuestion + 1}>
+                                        <div dangerouslySetInnerHTML={{ __html: this.state.content.dataQuiz[this.state.activeQuestion].question }}></div>
                                     </li>
                                 </ol>
 
                                 <section className="mb-2 ml-5">
-                                        <h6>Jawaban...</h6>
-                                        {Questions.choices.map(question => (
+                                    <h6>Jawaban...</h6>
+                                    {questions.choices.map(question => (
 
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="answer" id={question.id} value={question.id} onClick={e => this.setState({ answers: {
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="answer" id={question.id} value={question.id} onClick={e => this.setState({
+                                                answers: {
                                                     number: this.state.activeQuestion + 1,
                                                     answer: question.id
-                                                } })} />
-                                                <label class="form-check-label" for={question.id}>
+                                                }
+                                            })} />
+                                            <label class="form-check-label" for={question.id}>
                                                 {question.option}
-                                                </label>
-                                            </div>
-                                            // <p>{question.option}</p>
-                                        ))}
-                                    </section>
-                           
+                                            </label>
+                                        </div>
+                                        // <p>{question.option}</p>
+                                    ))}
+                                </section>
+
                             </div>
                         </div>
 
@@ -269,7 +303,7 @@ export default class Quiz extends Component {
                         <button className="btn btn-info btn-block">Kirim Jawaban</button>
                     </div>
                 </div>
-                
+
             </Fragment>
         )
     }
