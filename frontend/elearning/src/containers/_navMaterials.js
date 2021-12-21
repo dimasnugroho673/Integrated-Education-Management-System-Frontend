@@ -9,7 +9,7 @@ const _navNaterials =  [
   {
     _tag: 'CSidebarNavItem',
     name: 'Silabus',
-    to: '/el/material',
+    to: '/el/module',
     icon: <CIcon name="cil-list" customClasses="c-sidebar-nav-icon"/>,
     badge: {
       color: 'info',
@@ -19,31 +19,31 @@ const _navNaterials =  [
   {
     _tag: 'CSidebarNavItem',
     name: 'Pemrograman Web',
-    to: '/el/material/1',
+    to: '/el/module/1',
     icon: 'cil-book',
   },
   {
     _tag: 'CSidebarNavItem',
     name: 'Apache, Nginx',
-    to: '/el/material/2',
+    to: '/el/module/2',
     icon: 'cil-book',
   },
   {
     _tag: 'CSidebarNavItem',
     name: 'Kuis 1',
-    to: '/el/material/3',
+    to: '/el/module/3',
     icon: 'cil-file',
   },
   {
     _tag: 'CSidebarNavItem',
     name: 'PHP: Aplikasi kalkulator sederhana',
-    to: '/el/material/4',
+    to: '/el/module/4',
     icon: 'cil-book',
   }, 
   {
     _tag: 'CSidebarNavItem',
     name: 'PHP: Aplikasi manajemen mahasiswa sederhana',
-    to: '/el/material/5',
+    to: '/el/module/5',
     icon: 'cil-book',
   },
   

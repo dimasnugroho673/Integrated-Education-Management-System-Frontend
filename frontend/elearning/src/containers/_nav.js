@@ -32,7 +32,7 @@ const _nav =  [
   {
     _tag: 'CSidebarNavItem',
     name: 'Materi',
-    to: `/el/${getCourseIDActive()}/material`,
+    to: `/el/${getCourseIDActive()}/module`,
     icon: 'cil-drop',
   },
   // {

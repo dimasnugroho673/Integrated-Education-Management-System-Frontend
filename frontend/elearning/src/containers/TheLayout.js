@@ -10,7 +10,7 @@ import {
 const TheLayout = () => {
 
   // check is url contain "material"?
-  const isCoursePortal = window.location.href.indexOf('material')
+  const isCoursePortal = window.location.href.indexOf('module')
 
   return (
     <div className="c-app c-default-layout">

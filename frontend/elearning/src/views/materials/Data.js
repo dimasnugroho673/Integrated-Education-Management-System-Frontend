@@ -41,80 +41,83 @@ export const dataModule = [
             "limitDeadline": 10000,
             "dataQuiz": [
                 {
-                    "no": 1,
+                    "number": 1,
                     "question": "Apa itu frontend dev?",
-                    "choices": [
+                    "answerKey": "e",
+                    "answerOptions": [
                         {
-                            "id": "a",
-                            "option": "Ngetik ngetik surat"
+                            "value": "a",
+                            "label": "Ngetik ngetik surat"
                         },
                         {
-                            "id": "b",
-                            "option": "Gamers"
+                            "value": "b",
+                            "label": "Gamers"
                         },
                         {
-                            "id": "c",
-                            "option": "Tukang service"
+                            "value": "c",
+                            "label": "Tukang service"
                         },
                         {
-                            "id": "d",
-                            "option": "Abang konter"
+                            "value": "d",
+                            "label": "Abang konter"
                         },
                         {
-                            "id": "e",
-                            "option": "Orang yang mengerjakan bagian depan sistem yang dilihat oleh user"
+                            "value": "e",
+                            "label": "Orang yang mengerjakan bagian depan sistem yang dilihat oleh user"
                         }
                     ]
                 },
                 {
-                    "no": 2,
+                    "number": 2,
                     "question": "Apa itu backend dev?",
-                    "choices": [
+                    "answerKey": "a",
+                    "answerOptions": [
                         {
-                            "id": "a",
-                            "option": "Orang yang mengerjakan bagian belakang sistem yang tidak terlihat oleh user"
+                            "value": "a",
+                            "label": "Orang yang mengerjakan bagian belakang sistem yang tidak terlihat oleh user"
                         },
                         {
-                            "id": "b",
-                            "option": "Heker"
+                            "value": "b",
+                            "label": "Heker"
                         },
                         {
-                            "id": "c",
-                            "option": "Gamers"
+                            "value": "c",
+                            "label": "Gamers"
                         },
                         {
-                            "id": "d",
-                            "option": "Abang konter"
+                            "value": "d",
+                            "label": "Abang konter"
                         },
                         {
-                            "id": "e",
-                            "option": "Orang gabut"
+                            "value": "e",
+                            "label": "Orang gabut"
                         }
                     ]
                 },
                 {
-                    "no": 3,
+                    "number": 3,
                     "question": "Apa itu fullstack dev?",
-                    "choices": [
+                    "answerKey": "c",
+                    "answerOptions": [
                         {
-                            "id": "a",
-                            "option": "Orang yang mengerjakan ketimpa"
+                            "value": "a",
+                            "label": "Orang yang mengerjakan ketimpa"
                         },
                         {
-                            "id": "b",
-                            "option": "Kuli"
+                            "value": "b",
+                            "label": "Kuli"
                         },
                         {
-                            "id": "c",
-                            "option": "Orang yang dapat mengemban seluruh tugas tim IT"
+                            "value": "c",
+                            "label": "Orang yang dapat mengemban seluruh tugas tim IT"
                         },
                         {
-                            "id": "d",
-                            "option": "Abang konter"
+                            "value": "d",
+                            "label": "Abang konter"
                         },
                         {
-                            "id": "e",
-                            "option": "Orang gabut"
+                            "value": "e",
+                            "label": "Orang gabut"
                         }
                     ]
                 },
