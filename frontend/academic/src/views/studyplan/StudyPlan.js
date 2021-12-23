@@ -1170,7 +1170,7 @@ export class StudyPlan extends Component {
 
         const token = localStorage.getItem("lms-sess-key");
         if (!token) {
-            return <Redirect to="/login" />;
+            return <Redirect to="/auth/login" />;
         }
 
         if (this.state.dataReady === false) {
