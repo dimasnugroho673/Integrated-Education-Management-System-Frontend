@@ -41,10 +41,10 @@ export class Tool extends Component {
     render() {
         const tools = this.state.tools;
 
-        // const token = localStorage.getItem("token");
-        // if (!token) {
-        //     return <Redirect to="/auth/login" />;
-        // }
+        const token = localStorage.getItem("lms-sess-key");
+        if (!token) {
+            return <Redirect to="/login" />;
+        }
 
         if (this.state.dataReady === false) {
             return (

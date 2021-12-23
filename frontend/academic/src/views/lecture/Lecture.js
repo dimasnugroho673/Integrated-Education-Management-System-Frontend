@@ -127,10 +127,10 @@ export default class Lecture extends Component {
     render() {
         const CourseList = this.state.courseList;
 
-        // const token = localStorage.getItem("token");
-        // if (!token) {
-        //     return <Redirect to="/auth/login" />;
-        // }
+        const token = localStorage.getItem("lms-sess-key");
+        if (!token) {
+            return <Redirect to="/auth/login" />;
+        }
 
         if (this.state.dataReady === false) {
             return (

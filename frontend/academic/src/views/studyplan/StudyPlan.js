@@ -1,18 +1,13 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import {
     CButton,
-    CCard,
-    CCardBody,
-    CCardHeader,
-    CCol,
     CModal,
     CModalBody,
     CModalFooter,
     CModalHeader,
     CModalTitle,
-    CRow
 } from '@coreui/react'
-import { Redirect } from "react-router-dom";
 import axios from "axios";
 import StudyPlanList from "./StudyPlanList";
 
@@ -21,11 +16,12 @@ export class StudyPlan extends Component {
         super(props);
         this.state = {
             dataReady: false,
-            // query: '',
+            query: '',
             coursePlan: [],
-            courseTaken: [],
-            sksCount: 21,
+            coursePick: [],
+            sksCount: 0,
             sksMax: 21,
+            modal: false,
         };
     }
 
@@ -1103,51 +1099,79 @@ export class StudyPlan extends Component {
             });
     }
 
-    // searchCourse = (e) => {
-    //   this.setState({ query: e.target.value })
-    // }
-
-    // dynamicSearch = () => {
-    //   return this.state.coursePlan.filter(courseTitle => courseTitle.toString().includes(this.state.query))
-    // }
+    searchCourse = (e) => {
+        this.setState({ query: e.target.value })
+    }
 
     handleClickDetail() {
         alert("Terapkan");
     }
 
     handleClickSubmit() {
-        localStorage.setItem("lirs_status", true);
+        localStorage.setItem('lirs_status', true);
+        localStorage.setItem('course_picked', JSON.stringify(this.state.coursePick))
         window.location.href = "/dashboard";
     }
 
-    handleCalculateSKS = (sksPerStudy, studyTaken) => {
+    handleAddSKS = (sksPerStudy, courseID, courseCode, courseTitle, courseLecture, courseRoom, courseSchedule) => {
+        this.setState({ sksCount: this.state.sksCount + sksPerStudy })
 
-        if (this.state.sksCount - sksPerStudy < 0) {
-            alert("Sisa SKS tidak cukup!")
+        if (sksPerStudy != 0) {
+            //adding new data
+            this.state.coursePick.push({
+                courseID: courseID,
+                courseCode: courseCode,
+                courseTitle: courseTitle,
+                courseCredits: sksPerStudy,
+                courseLecture: courseLecture,
+                courseRoom: courseRoom,
+                courseSchedule: courseSchedule,
+                info: []
+            })
 
-            // HARUSNYA NANTI DISINI ADA SEND BALIK PROPS KE STUDYPLAN UNTUK UNSELECTED MK YANG BARUSAN DIPILIH
-        } else {
-            if (this.state.sksCount <= 0) {
-                alert("Sisa SKS sudah habis!")
-            } else {
-                // KURANGI SISA SKS
-                this.setState({ sksCount: this.state.sksCount - sksPerStudy })
-
-                // TAMBAHIN MK TERAMBIL
-                // Create a new array based on current state:
-                this.setState({courseTaken: [{value: studyTaken}]}); 
+            //updating the state value
+            this.setState({ ...this.state.coursePick })
+        } else if (sksPerStudy == 0) {
+            let index = this.state.coursePick.findIndex(el => el.courseCode === courseCode)
+            this.state.coursePick[index] = {
+                ...this.state.coursePick[index],
+                courseID: courseID,
+                courseLecture: courseLecture,
+                courseRoom: courseRoom,
+                courseSchedule: courseSchedule,
             }
+            this.setState({ ...this.state.coursePick })
         }
+
+        console.table(this.state.coursePick)
+    }
+
+    handleRemoveSKS = (sksPerStudy, courseCode) => {
+        this.setState({ sksCount: this.state.sksCount - sksPerStudy })
+
+        let index = this.state.coursePick.findIndex(el => el.courseCode === courseCode)
+        this.state.coursePick.splice(index, 1)
+        this.setState({ ...this.state.coursePick })
+
+        console.table(this.state.coursePick)
+    }
+
+    setOpenModal() {
+        this.setState({ modal: true })
+    }
+
+    setCloseModal() {
+        this.setState({ modal: false })
     }
 
     render() {
 
         const coursePlan = this.state.coursePlan;
 
-        // const token = localStorage.getItem("token");
-        // if (!token) {
-        //     return <Redirect to="/auth/login" />;
-        // }
+        const token = localStorage.getItem("lms-sess-key");
+        if (!token) {
+            return <Redirect to="/login" />;
+        }
 
         if (this.state.dataReady === false) {
             return (
@@ -1191,7 +1215,7 @@ export class StudyPlan extends Component {
                                                         fontWeight: "bold"
                                                     }}
                                                 >
-                                                    <span>Batas Kredit Semester Ini : {this.state.sksCount}</span>
+                                                    <span>Batas Kredit Semester Ini : 0</span>
                                                 </td>
                                                 <td
                                                     style={{
@@ -1336,7 +1360,7 @@ export class StudyPlan extends Component {
                                                             fontWeight: "bold"
                                                         }}
                                                     >
-                                                        <span>Batas Kredit Semester Ini : {this.state.sksCount}</span>
+                                                        <span>Batas Kredit Semester Ini : {this.state.sksMax}</span>
                                                     </td>
                                                     <td
                                                         style={{
@@ -1345,7 +1369,7 @@ export class StudyPlan extends Component {
                                                             fontWeight: "bold"
                                                         }}
                                                     >
-                                                        <span>Terambil : 0</span>
+                                                        <span>Terambil : {this.state.sksCount}</span>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -1478,7 +1502,7 @@ export class StudyPlan extends Component {
                                                             fontWeight: "bold"
                                                         }}
                                                     >
-                                                        <span>Batas Kredit Semester Ini : {this.state.sksCount}</span>
+                                                        <span>Batas Kredit Semester Ini : {this.state.sksMax}</span>
                                                     </td>
                                                     <td
                                                         style={{
@@ -1487,7 +1511,7 @@ export class StudyPlan extends Component {
                                                             fontWeight: "bold"
                                                         }}
                                                     >
-                                                        <span>Terambil : {this.state.courseTaken.length}</span>
+                                                        <span>Terambil : {this.state.sksCount}</span>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -1571,28 +1595,39 @@ export class StudyPlan extends Component {
                                                         type="text"
                                                         name="search"
                                                         className="form-control card-header-form"
-                                                        // value={this.state.query}
-                                                        // onChange={this.searchCourse}
+                                                        value={this.state.query}
+                                                        onChange={this.searchCourse}
                                                         placeholder="Cari Mata Kuliah"
                                                     />
                                                 </div>
                                             </div>
                                             {/* <StudyPlanContainer coursePlans={this.dynamicSearch()} /> */}
-                                            <div className="card-body" style={{ overflowY: 'scroll', marginTop: '20px' }}>
+                                            {/* <div className="card-body" style={{ overflowY: 'scroll', marginTop: '20px 0px 20px 0px' }}>
                                                 {coursePlan.map(plan => {
                                                     return (
-                                                        <StudyPlanList key={plan.courseCode} data={plan} calculateSKS={this.handleCalculateSKS} />
+                                                        <StudyPlanList key={plan.courseCode} data={plan} addSKS={this.handleAddSKS} removeSKS={this.handleRemoveSKS}
+                                                            maxSKS={this.state.sksMax} countSKS={this.state.sksCount} />
                                                     );
                                                 })}
+                                            </div> */}
+
+                                            <div className="card-body" style={{ overflowY: 'scroll', marginTop: '20px 0px 20px 0px' }}>
+                                                {coursePlan?.filter((dt) =>
+                                                    dt.courseTitle.toLowerCase().includes(this.state.query.toLowerCase())
+                                                )
+                                                    .map(plan => {
+                                                        return (
+                                                            <StudyPlanList key={plan.courseCode} data={plan} addSKS={this.handleAddSKS} removeSKS={this.handleRemoveSKS}
+                                                                maxSKS={this.state.sksMax} countSKS={this.state.sksCount} />
+                                                        );
+                                                    })}
                                             </div>
 
-                                            <div className="card-footer">
+                                            <div style={{ borderRadius: '0 0 10px 10px', borderTop: 'none', padding: '0.75rem 1.25rem' }}>
                                                 <div className="form-group">
                                                     <div
                                                         className="btn btn-primary btn-lg btn-block"
-                                                        data-toggle="modal"
-                                                        data-target="#submitModal"
-                                                        disabled={true}
+                                                        onClick={() => this.setOpenModal()}
                                                     >
                                                         Ajukan
                                                     </div>
@@ -1606,50 +1641,28 @@ export class StudyPlan extends Component {
                             </div>
                         </section>
 
-                        <div
-                            className="modal fade"
-                            tabIndex="-1"
-                            role="dialog"
-                            id="submitModal"
+                        <CModal
+                            show={this.state.modal}
+                            onClose={() => this.setCloseModal()}
                         >
-                            <div className="modal-dialog" role="document">
-                                <div className="modal-content">
-                                    <div className="modal-header">
-                                        <h5 className="modal-title">Ajukan Rencana Studi</h5>
-                                        <button
-                                            type="button"
-                                            className="close"
-                                            data-dismiss="modal"
-                                            aria-label="Close"
-                                        >
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div className="modal-body">
-                                        <p>
-                                            Apakah Kamu Sudah Yakin Dengan Rencana Studi yang
-                                            Diajukan?
-                                        </p>
-                                    </div>
-                                    <div className="modal-footer bg-whitesmoke br">
-                                        <button
-                                            type="button"
-                                            className="btn btn-secondary"
-                                            data-dismiss="modal"
-                                        >
-                                            Batal
-                                        </button>
-                                        <button
-                                            type="button"
-                                            className="btn btn-primary"
-                                            onClick={() => this.handleClickSubmit()}
-                                        >
-                                            Simpan
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            <CModalHeader closeButton>
+                                <CModalTitle>Ajukan Rencana Studi</CModalTitle>
+                            </CModalHeader>
+                            <CModalBody>
+                                Apakah Kamu Sudah Yakin Dengan Rencana Studi yang
+                                Diajukan?
+                            </CModalBody>
+                            <CModalFooter>
+                                <CButton
+                                    color="primary"
+                                    onClick={() => this.handleClickSubmit()}>Simpan</CButton>{' '}
+                                <CButton
+                                    color="secondary"
+                                    onClick={() => this.setCloseModal()}
+                                >Batal</CButton>
+                            </CModalFooter>
+                        </CModal>
+
                     </div >
                 );
             }

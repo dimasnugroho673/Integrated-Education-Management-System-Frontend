@@ -45,10 +45,10 @@ export class Book extends Component {
     render() {
         const books = this.state.books;
 
-        // const token = localStorage.getItem("token");
-        // if (!token) {
-        //     return <Redirect to="/auth/login" />;
-        // }
+        const token = localStorage.getItem("lms-sess-key");
+        if (!token) {
+            return <Redirect to="/auth/login" />;
+        }
 
         if (this.state.dataReady === false) {
             return (
