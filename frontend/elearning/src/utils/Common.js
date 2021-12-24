@@ -8,6 +8,14 @@ export const transformStatusQuizReadable = (status) => {
     }
 }
 
+export const transformStatusModuleStyle = (status) => {
+    if (status) {
+        return <span class="text-success">Active</span>
+    } else {
+        return <span class="text-danger">Inactive</span>
+    }
+}
+
 export const showActionOpenQuiz = (isActive, isComplete, moduleID) => {
     if (isActive) {
         if (isComplete) {
