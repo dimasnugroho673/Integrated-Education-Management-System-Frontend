@@ -60,7 +60,7 @@ const TheSidebarCoursePortal = () => {
           {
             _tag: 'CSidebarNavItem',
             name: `${module.moduleTitle}`,
-            to: `/el/module/${module.moduleID}`,
+            to: `/el/${getCourseIDActive()}/module/${module.moduleID}`,
             icon: generateModuleIcon(module.moduleType),
           }
         )

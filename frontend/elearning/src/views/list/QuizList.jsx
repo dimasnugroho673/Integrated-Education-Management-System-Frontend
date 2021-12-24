@@ -20,7 +20,7 @@ import CIcon from '@coreui/icons-react';
 import axios from "axios";
 import { dataQuizList } from "./DataQuiz";
 import { transformStatusQuizReadable, showActionOpenQuiz } from "src/utils/Common";
-
+import { generateModuleIcon, getCourseIDActive, getCourseSessionIDActive, getKeyToken } from 'src/utils/Common'
 
 export default class QuizList extends Component { 
     constructor(props) {
@@ -33,12 +33,19 @@ export default class QuizList extends Component {
     }
 
     fetchQuizzes = () => {
-        axios.get("https://jsonplaceholder.typicode.com/todos").then(response => {
-            if (response.status === 200) {
-                this.setState({ isLoading: false, quizzes: dataQuizList.data })
-            }
-        })
+        const params = {
+            api_token: `${getKeyToken()}`,
+            courseID: `${getCourseIDActive()}`,
+            sessionID: `${getCourseSessionIDActive()}`,
+            moduleType: 'quiz',
+            withContent: true
+          }
+      
+          axios.get(`${process.env.REACT_APP_API_ENDPOINT}/modules`, { params: params }).then(response => {
+            this.setState({ isLoading: false, modules: response.data.data, quizzes: response.data.data })
+          })
     }
+
 
     componentDidMount = () => {
         this.fetchQuizzes()
@@ -92,12 +99,12 @@ export default class QuizList extends Component {
                                             {quizzes.map((quiz, index) => (
                                                 <tr>
                                                     <th>{index + 1}</th>
-                                                    <th>{quiz.moduleName}</th>
-                                                    <th>{quiz.content.meta.assignedDate}</th>
-                                                    <th>{quiz.content.meta.deadline}</th>
-                                                    <th>{transformStatusQuizReadable(quiz.content.meta.isActive)}</th>
-                                                    <th>{quiz.content.meta.score}</th>
-                                                    <th>{showActionOpenQuiz(quiz.content.meta.isActive, quiz.content.meta.isComplete, quiz.moduleID)}</th>
+                                                    <th>{quiz.moduleTitle}</th>
+                                                    <th>{quiz.content.assignedDate}</th>
+                                                    <th>{quiz.content.deadlineDate}</th>
+                                                    <th>{transformStatusQuizReadable(quiz.content.isActive)}</th>
+                                                    <th></th>
+                                                    <th>{showActionOpenQuiz(quiz.content.isActive, quiz.content.isComplete, quiz.moduleID)}</th>
                                                 </tr>
                                             ))}
                                         </tbody>

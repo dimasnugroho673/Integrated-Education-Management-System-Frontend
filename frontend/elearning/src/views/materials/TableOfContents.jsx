@@ -19,6 +19,7 @@ import {
 } from '@coreui/react'
 import { generateModuleIcon, getCourseIDActive, getCourseSessionIDActive, getKeyToken } from 'src/utils/Common'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 class TableOfContents extends Component {
 
@@ -36,13 +37,15 @@ class TableOfContents extends Component {
     const params = {
       api_token: `${getKeyToken()}`,
       courseID: `${getCourseIDActive()}`,
-      sessionID: `${getCourseSessionIDActive()}`
+      sessionID: `${getCourseSessionIDActive()}`,
+      moduleType: 'all',
+      withContent: false
     }
 
     axios.get(`${process.env.REACT_APP_API_ENDPOINT}/modules`, { params: params }).then(response => {
+      console.table(response.data.data)
       this.setState({ isLoading: false, modules: response.data.data, filteredModules: response.data.data })
     })
-
   }
 
   handleSearchModule = (keyword) => {
@@ -53,6 +56,9 @@ class TableOfContents extends Component {
         module.moduleTitle.toLowerCase().includes(newKeyword)
       )
     })
+
+    console.log(this.state.filteredModules)
+
   }
 
   getModuleTypeCount = (type) => {
@@ -80,6 +86,23 @@ class TableOfContents extends Component {
       default:
         break;
     }
+
+  }
+
+  handleFilterByModuleType = (type) => {
+
+    if (type !== 'all') {
+      return this.setState({
+        filteredModules: this.state.modules.filter(module =>
+          module.moduleType.toLowerCase().includes(type)
+        )
+      })
+    } else {
+      return this.setState({
+        filteredModules: this.state.modules
+      })
+    }
+
 
   }
 
@@ -125,11 +148,13 @@ class TableOfContents extends Component {
 
                     <CCol md="4" sm="12" className="mt-2">
                       <CFormGroup>
-                        <CSelect custom name="ccmonth" id="ccmonth">
+                        <CSelect custom name="ccmonth" id="ccmonth" onChange={e => this.handleFilterByModuleType(e.target.value)}>
                           <option selected disabled>Jenis Modul</option>
-                          <option value="1">One</option>
-                          <option value="2">Two</option>
-                          <option value="3">Three</option>
+                          <option value="all">Semua Modul</option>
+                          <option value="material">Materi</option>
+                          <option value="assignment">Tugas</option>
+                          <option value="quiz">Kuis</option>
+                          <option value="exam">Ujian</option>
                         </CSelect>
                       </CFormGroup>
                     </CCol>
@@ -162,9 +187,35 @@ class TableOfContents extends Component {
                     <div className="col-md-12">
                       <CListGroup>
                         {filteredModules.map(module => {
-                          return <a href="1" class="list-group-item list-group-item-action border-0" aria-current="true">
-                            {generateModuleIcon(module.moduleType)} {module.moduleTitle}
-                          </a>
+                          // if (module.isActive) {
+                            return <Link to={`module/${module.moduleID}`} class="list-group-item list-group-item-action border-0" aria-current="true" style={{ color: module.isActive === false ? '#D3D3D3' : null }}>
+                              <CRow>
+                                <CCol className="col-8 text-left">
+                                  {generateModuleIcon(module.moduleType)} {module.moduleTitle}
+                                </CCol>
+
+                                {module.isActive === false ? 
+                                <CCol className="col-4 text-right">
+                                <button type="button" class="btn btn-outline-danger btn-sm btn-pill custom-btn-badge-danger ml-2" disabled>Belum dibuka</button>
+                                </CCol> 
+                                : null}
+
+                              </CRow>
+                            </Link>
+                          // } else {
+                          //   return <a href="!#" class="list-group-item list-group-item-action border-0 disabled" aria-disabled="true" style={{ color: '#D3D3D3' }}>
+                          //     <div className="row">
+                          //       <div className="col-8 text-left">
+                          //         {generateModuleIcon(module.moduleType)} {module.moduleTitle} {module.isActive ? "hehe" : "alaa"}
+                          //       </div>
+
+                          //       <div className="col-4 text-right">
+                          //         <button type="button" class="btn btn-outline-danger btn-sm btn-pill custom-btn-badge-danger ml-2" disabled>Belum dibuka</button>
+                          //       </div>
+                          //     </div>
+                          //   </a>
+                          // }
+
                         })}
 
                       </CListGroup>

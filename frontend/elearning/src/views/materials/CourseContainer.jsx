@@ -60,7 +60,7 @@ export default class CourseContainer extends Component {
                         </div>
                     </div>
 
-                <Quiz />
+                {/* <Quiz /> */}
                 {/* <Material /> */}
                 {/* <Assignment /> */}
 
