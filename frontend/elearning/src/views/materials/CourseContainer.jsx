@@ -16,6 +16,9 @@ import {
     CModalHeader,
     CModalTitle,
     CRow,
+    CInputGroup,
+    CInput,
+    CInputGroupAppend,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import Material from './Material'
@@ -23,13 +26,15 @@ import Quiz from "./Quiz"
 import Assignment from "./Assignment"
 import { getCourseIDActive, getCourseSessionIDActive, getKeyToken, transformStatusModuleStyle, transformStatusQuizReadable } from "src/utils/Common"
 import axios from "axios"
+import ModuleInactiveInfoCard from "src/components/ModuleInactiveInfoCard"
 
 export default class CourseContainer extends Component {
     constructor(props) {
         super(props)
         this.state = {
             isLoading: true,
-            module: null
+            module: null,
+            isShareModuleModalOpen: false
         }
     }
 
@@ -51,6 +56,18 @@ export default class CourseContainer extends Component {
             return;
         }
         this.fetchDetailModule()
+    }
+
+    handleCopyModuleLink = () => {
+          /* Get the text field */
+        let copyText = document.getElementById("input-module-link");
+
+        /* Select the text field */
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+        /* Copy the text inside the text field */
+        navigator.clipboard.writeText(copyText.value);
     }
 
 
@@ -75,18 +92,23 @@ export default class CourseContainer extends Component {
             )
         }
 
-        if (module.moduleType === 'material') {
-            ModuleContainer = <Material module={module} content={module.content} />
-        } else if (module.moduleType === 'assignment') {
-            ModuleContainer = <Assignment /> 
-        } else if (module.moduleType === 'quiz') {
-            ModuleContainer = <Quiz />
-        } else if (module.moduleType === 'exam') {
-            ModuleContainer = <Quiz />
+        if (module.isActive) {
+            if (module.moduleType === 'material') {
+                ModuleContainer = <Material module={module} content={module.content} />
+            } else if (module.moduleType === 'assignment') {
+                ModuleContainer = <Assignment module={module} content={module.content} />
+            } else if (module.moduleType === 'quiz') {
+                ModuleContainer = <Quiz />
+            } else if (module.moduleType === 'exam') {
+                ModuleContainer = <Quiz />
+            }
+        } else {
+            ModuleContainer = <ModuleInactiveInfoCard />
         }
 
+
         return (
-            <div class="container-md">
+            <div class="container-md pb-5">
 
                 <div className="row my-3">
                     <div className="col-md-6">
@@ -104,7 +126,7 @@ export default class CourseContainer extends Component {
                         <button type="button" class="btn btn-outline-danger btn-sm btn-pill custom-btn-badge-success ml-3" style={{ boxShadow: "none", backgroundColor: "#1DD991", color: "white" }} disabled>Selesai</button>
 
                         <CButton
-                            onClick={() => this.setState({ modal: true })}
+                            onClick={() => this.setState({ isShareModuleModalOpen: true })}
                             className="btn btn-outline-info ml-3">
                             <CIcon name="cil-share" /> Share modul
                         </CButton>
@@ -113,9 +135,41 @@ export default class CourseContainer extends Component {
 
                 {ModuleContainer}
 
-                {/* <Quiz /> */}
-                {/* <Material /> */}
-                {/* <Assignment /> */}
+                <CCard className="p-3">
+                    <CCardBody>
+                        <div class="media">
+                            <img src="https://www.cornwallbusinessawards.co.uk/wp-content/uploads/2017/11/dummy450x450-300x300.jpg" class="align-self-center mr-3 rounded-pill" alt="..." width="38px" />
+                            <div class="media-body">
+                                <CInputGroup className="mt-0">
+                                    <CInput type="text" class="form-control" placeholder="Tulis komentar anda disini..." />
+
+                                    <CInputGroupAppend>
+                                        <CButton type="button" color="secondary" variant="outline">Kirim</CButton>
+                                    </CInputGroupAppend>
+                                </CInputGroup>
+                            </div>
+                        </div>
+                    </CCardBody>
+                </CCard>
+
+                {/* SHARE MODULE MODAL */}
+                <CModal
+                    show={this.state.isShareModuleModalOpen}
+                    onClose={() => this.setState({ isShareModuleModalOpen: false })}
+                    centered={true}
+                    size="lg"
+                >
+                        <CModalHeader>
+                            <CModalTitle>Share modul <strong>{module.moduleTitle}</strong></CModalTitle>
+                        </CModalHeader>
+                        <CModalBody>
+                            <CRow>
+                                <CCol className="col-10"><CInput type="text" id="input-module-link" value={window.location.href} disabled /></CCol>
+                                <CCol className="col-2"><CButton color="primary" variant="outline" className="btn-block" onClick={e => this.handleCopyModuleLink()}>Copy link</CButton></CCol>
+                            </CRow>
+                            
+                        </CModalBody>
+                </CModal>
 
             </div>
         )
