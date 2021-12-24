@@ -13,30 +13,14 @@ export class Book extends Component {
     }
 
     componentDidMount() {
+        const key = localStorage.getItem("lms-sess-key");
+        axios.defaults.headers.common['Authorization'] = `Bearer ${key}`
         axios
-            .get("https://jsonplaceholder.typicode.com/posts?_start=0&_limit=3")
-            .then(() => {
+            .get("https://mock-api-integrated-lms.herokuapp.com/api/v1/loans/book?isFinished=false")
+            .then((result) => {
+                console.log(result)
                 this.setState({
-                    books: [
-                        {
-                            msgid: "23123123",
-                            type: "Library",
-                            bookDesc: "Buku Menjadi Android Developer",
-                            bookWriter: "Ahmad Imaduddin dan Sidiq Permana",
-                            bookEdition: "Ed. 1, 2021",
-                            date: "20-02-2021",
-                            deadline: "28-02-2021",
-                        },
-                        {
-                            msgid: "23123124",
-                            type: "Library",
-                            bookDesc: "Buku Menjadi Panduan UI/UX",
-                            bookWriter: "Budiansyah",
-                            bookEdition: "Ed. 2, 2019",
-                            date: "20-04-2021",
-                            deadline: "10-05-2021",
-                        },
-                    ],
+                    books: result.data.data,
                     dataReady: true,
                 });
             });
@@ -47,7 +31,7 @@ export class Book extends Component {
 
         const token = localStorage.getItem("lms-sess-key");
         if (!token) {
-            return <Redirect to="/auth/login" />;
+            return <Redirect to="/login" />;
         }
 
         if (this.state.dataReady === false) {
