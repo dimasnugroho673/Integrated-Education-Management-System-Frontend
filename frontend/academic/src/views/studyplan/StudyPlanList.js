@@ -5,11 +5,17 @@ class StudyPlanList extends Component {
         super(props);
         this.state = {
             isActive: false,
-            sks: 0,
+            courseCodePicked: [],
+            courseIDPickcked: []
         };
 
         this.handleCheckbox = this.handleCheckbox.bind(this)
         this.handleRadio = this.handleRadio.bind(this)
+    }
+
+    componentDidMount() {
+        var checkboxStudyPlan = document.getElementById('checkbox_' + this.props.data.courseCode)
+        checkboxStudyPlan.disabled = true
     }
 
     toggleAccordion = () => {
@@ -18,31 +24,34 @@ class StudyPlanList extends Component {
         });
     };
 
-    handleRadio = (id, sksTotal, studyTaken) => {
-        document.getElementById(id).checked = true;
-        document.getElementById(id).disabled = false;
-        this.setState({
-            sks: this.state.sks + sksTotal,
-        });
-        
-        this.props.calculateSKS(sksTotal, studyTaken)
-        // this.props.calculateStudyTaken(studyTaken)
+    handleRadio = (id, sksTotal, courseID, courseTitle, courseLecture, courseRoom, courseSchedule) => {
+        if ((this.props.maxSKS - this.props.countSKS) - sksTotal < 0) {
+            alert("Sisa SKS tidak cukup!")
+            document.getElementById('checkbox_' + id).checked = false;
+            document.getElementById('checkbox_' + id).disabled = true;
+            var radio = document.getElementsByName('radio_' + id);
+            for (var i = 0; i < radio.length; i++) {
+                radio[i].checked = false;
+            }
+        } else {
+            if (document.getElementById('checkbox_' + id).checked == false) {
+                this.props.addSKS(sksTotal, courseID, id, courseTitle, courseLecture, courseRoom, courseSchedule)
+            } else if (document.getElementById('checkbox_' + id).checked == true) {
+                this.props.addSKS(0, courseID, id, courseTitle, courseLecture, courseRoom, courseSchedule)
+            }
+            document.getElementById('checkbox_' + id).checked = true;
+            document.getElementById('checkbox_' + id).disabled = false;
+        }
+
     }
 
-    handleCheckbox = (id, courseTitle, sksTotal) => {
-        document.getElementById(courseTitle).disabled = true;
-        var radio = document.getElementsByName(id);
+    handleCheckbox = (id, sksTotal) => {
+        document.getElementById('checkbox_' + id).disabled = true;
+        var radio = document.getElementsByName('radio_' + id);
         for (var i = 0; i < radio.length; i++) {
             radio[i].checked = false;
         }
-        this.setState({
-            sks: this.state.sks - sksTotal,
-        });
-    }
-
-    componentDidMount() {
-        var checkboxStudyPlan = document.getElementById(this.props.data.courseTitle)
-        checkboxStudyPlan.disabled = true
+        this.props.removeSKS(sksTotal, id)
     }
 
     render() {
@@ -63,12 +72,12 @@ class StudyPlanList extends Component {
                                                     <input
                                                         type="checkbox"
                                                         className="custom-control-input"
-                                                        id={this.props.data.courseTitle}
-                                                        onClick={() => { this.handleCheckbox(this.props.data.courseCode, this.props.data.courseTitle, this.props.data.courseCredits) }}
+                                                        id={'checkbox_' + this.props.data.courseCode}
+                                                        onChange={() => { this.handleCheckbox(this.props.data.courseCode, this.props.data.courseCredits) }}
                                                     />
                                                     <label
                                                         className="custom-control-label"
-                                                        htmlFor={this.props.data.courseTitle}
+                                                        htmlFor={'checkbox_' + this.props.data.courseCode}
                                                     ></label>
                                                 </div>
                                             </td>
@@ -95,7 +104,7 @@ class StudyPlanList extends Component {
                                         <tr>
                                             <td style={{ width: '8%' }}></td>
                                             <td>
-                                                {this.props.data.session.map((session, index) => {
+                                                {this.props.data.session.map((session) => {
                                                     return (
                                                         <div
                                                             className="custom-control custom-radio"
@@ -104,13 +113,16 @@ class StudyPlanList extends Component {
                                                             <input
                                                                 type="radio"
                                                                 className="custom-control-input"
-                                                                name={this.props.data.courseCode}
+                                                                name={'radio_' + this.props.data.courseCode}
                                                                 id={session.courseID}
-                                                                onClick={() => { this.handleRadio(this.props.data.courseTitle, this.props.data.courseCredits, this.props.data.session[index]) }}
+                                                                onChange={() => {
+                                                                    this.handleRadio(this.props.data.courseCode, this.props.data.courseCredits, session.courseID,
+                                                                        this.props.data.courseTitle, session.courseLecture, session.courseRoom, session.courseSchedule)
+                                                                }}
                                                             />
                                                             <label
                                                                 className="custom-control-label"
-                                                                name={this.props.data.courseCode}
+                                                                name={'radio_' + this.props.data.courseCode}
                                                                 htmlFor={session.courseID}
                                                             >
                                                                 {session.courseSchedule}, {session.courseLecture},{" "}

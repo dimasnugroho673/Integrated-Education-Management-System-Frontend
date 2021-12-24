@@ -83,10 +83,10 @@ export class PreviousInfo extends Component {
         const listAnnoun = this.state.announ;
         const listAlert = this.state.alert;
 
-        // const token = localStorage.getItem("token");
-        // if (!token) {
-        //     return <Redirect to="/auth/login" />;
-        // }
+        const token = localStorage.getItem("lms-sess-key");
+        if (!token) {
+            return <Redirect to="/auth/login" />;
+        }
 
         if (this.state.dataReady === false) {
             return (

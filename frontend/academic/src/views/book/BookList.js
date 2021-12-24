@@ -2,24 +2,22 @@ import React, { Component } from "react";
 
 class BookList extends Component {
 
-  render() {
+  formatter = new Intl.DateTimeFormat('id-ID', {
+    month: 'long',
+    day: '2-digit',
+    year: 'numeric',
+  });
 
-    let deadline = this.props.data.deadline;
-    const deadlineArray = deadline.split("-");
+  render() {
 
     return (
       <div className="list-group-item list-group-item-action flex-column align-items-start">
         <p><span className="badge badge-info">
-          Batas Pengembalian: {
-            new Intl.DateTimeFormat('id-ID', {
-              month: 'long',
-              day: '2-digit',
-              year: 'numeric',
-            }).format(new Date(deadlineArray[2], deadlineArray[1] - 1, deadlineArray[0]))}
+          Batas Pengembalian: {this.formatter.format(new Date(this.props.data.deadline))}
         </span></p>
-        <h5 className="mb-1">{this.props.data.bookDesc}</h5>
-        <small className="text-muted">{this.props.data.bookEdition}</small>
-        <p className="mb-1">{this.props.data.bookWriter}</p>
+        <h5 className="mb-1">{this.props.data.book.bookTitle}</h5>
+        <small className="text-muted">{this.props.data.book.publicationYear}</small>
+        <p className="mb-1">{this.props.data.book.bookPublisher}</p>
       </div>
     );
   }
