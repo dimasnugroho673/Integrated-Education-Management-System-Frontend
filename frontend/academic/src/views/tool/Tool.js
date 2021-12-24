@@ -13,26 +13,14 @@ export class Tool extends Component {
     }
 
     componentDidMount() {
+        const key = localStorage.getItem("lms-sess-key");
+        axios.defaults.headers.common['Authorization'] = `Bearer ${key}`
         axios
-            .get("https://jsonplaceholder.typicode.com/posts?_start=0&_limit=3")
-            .then(() => {
+            .get("https://mock-api-integrated-lms.herokuapp.com/api/v1/loans/tool")
+            .then((result) => {
+                console.log(result)
                 this.setState({
-                    tools: [
-                        {
-                            msgid: 24441233123,
-                            type: "Labs",
-                            deviceDesc: "Mikrotik UR 98912",
-                            date: "20-02-2021",
-                            deadline: "28-02-2021",
-                        },
-                        {
-                            msgid: 24441233124,
-                            type: "Labs",
-                            deviceDesc: "Swicth 8 port 100/100",
-                            date: "20-02-2021",
-                            deadline: "01-05-2021",
-                        },
-                    ],
+                    tools: result.data.data,
                     dataReady: true,
                 });
             });
