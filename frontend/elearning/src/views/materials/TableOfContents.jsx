@@ -188,7 +188,7 @@ class TableOfContents extends Component {
                       <CListGroup>
                         {filteredModules.map(module => {
                           // if (module.isActive) {
-                            return <Link to={`module/${module.moduleID}`} class="list-group-item list-group-item-action border-0" aria-current="true" style={{ color: module.isActive === false ? '#D3D3D3' : null }}>
+                            return <Link to={`module/${module.moduleID}/detail`} class="list-group-item list-group-item-action border-0" aria-current="true" style={{ color: module.isActive === false ? '#D3D3D3' : null }}>
                               <CRow>
                                 <CCol className="col-8 text-left">
                                   {generateModuleIcon(module.moduleType)} {module.moduleTitle}

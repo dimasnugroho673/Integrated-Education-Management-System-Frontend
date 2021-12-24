@@ -49,7 +49,7 @@ const routes = [
   // { path: '/', exact: true, name: 'Home' },
   { path: '/el/:courseID/info', name: 'Dashboard', component: Dashboard },
   { path: '/el/:courseID/module', exact: true, name: 'TableOfContents', component: TableOfContents },
-  { path: '/el/:courseID/module/:moduleID', name: 'CourseContainer', component: CourseContainer },
+  { path: '/el/:courseID/module/:moduleID/detail', name: 'CourseContainer', component: CourseContainer },
   { path: '/el/:courseID/assignment', name: 'AssignmentList', component: AssignmentList },
   { path: '/el/:courseID/quiz', name: 'QuizList', component: QuizList },
 
