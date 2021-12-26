@@ -41,10 +41,10 @@ const TheHeaderDropdown = () => {
         >
           <strong>Akun</strong>
         </CDropdownItem>
-        <CDropdownItem to="/profile">
+        <CDropdownItem to="/a/profile">
           <CIcon name="cil-user" className="mfe-2" />Profil
         </CDropdownItem>
-        <CDropdownItem to="/changepassword">
+        <CDropdownItem to="/a/changepassword">
           <CIcon name="cil-settings" className="mfe-2" />
           Rubah Password
         </CDropdownItem>
