@@ -48,11 +48,7 @@ const TheSidebarCoursePortal = () => {
         _tag: 'CSidebarNavItem',
         name: 'Silabus',
         to: `/el/${getCourseIDActive()}/module`,
-        icon: <CIcon name="cil-list" customClasses="c-sidebar-nav-icon" />,
-        badge: {
-          color: 'info',
-          text: 'NEW',
-        }
+        icon: <CIcon name="cil-list" customClasses="c-sidebar-nav-icon" />
       }]
 
       rawModuleData.map(module => (

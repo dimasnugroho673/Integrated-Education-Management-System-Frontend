@@ -98,14 +98,13 @@ export default class CourseContainer extends Component {
             } else if (module.moduleType === 'assignment') {
                 ModuleContainer = <Assignment module={module} content={module.content} />
             } else if (module.moduleType === 'quiz') {
-                ModuleContainer = <Quiz />
+                ModuleContainer = <Quiz module={module} content={module.content} />
             } else if (module.moduleType === 'exam') {
-                ModuleContainer = <Quiz />
+                ModuleContainer = <Quiz module={module} content={module.content} />
             }
         } else {
             ModuleContainer = <ModuleInactiveInfoCard />
         }
-
 
         return (
             <div class="container-md pb-5">
@@ -135,7 +134,7 @@ export default class CourseContainer extends Component {
 
                 {ModuleContainer}
 
-                <CCard className="p-3">
+                <CCard id="card-container-comment-module" className="p-3">
                     <CCardBody>
                         <div class="media">
                             <img src="https://www.cornwallbusinessawards.co.uk/wp-content/uploads/2017/11/dummy450x450-300x300.jpg" class="align-self-center mr-3 rounded-pill" alt="..." width="38px" />

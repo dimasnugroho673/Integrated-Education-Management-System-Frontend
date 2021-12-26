@@ -294,11 +294,31 @@
     box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.2);
 }
 
+.custom-card-module-submitted-assignment-attachment-title {
+    font-size: 16px;
+}   
+
+.custom-card-module-submitted-assignment-attachment:hover {
+    .custom-card-module-submitted-assignment-attachment-title {
+        color: #1A67D2;
+    }    
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.1) !important;
+}
+
+
+
 // custom
 
 
 
+.modal-header {
+    border-bottom: none;
+}
 
+.modal-footer {
+    border-top: none;
+}
 
 .card.card-statistic-1 .card-header,
 .card.card-statistic-2 .card-header {
@@ -498,6 +518,13 @@
     font-size: 12px;
     cursor: pointer;
     color: #6C757D;
+}
+
+.quiz-number-available {
+    font-weight: 800;
+    color: #7BDA79;
+    background-color: #F0F6FF;
+    border: 1px solid #7BDA79;
 }
 
 .quiz-number-active {

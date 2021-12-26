@@ -16,294 +16,265 @@ import {
     CModalHeader,
     CModalTitle,
     CRow,
+    CCardFooter,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import Material from './Material';
+import moment from "moment";
+import axios from "axios";
+import { getCourseIDActive, getCourseSessionIDActive, getKeyToken } from "src/utils/Common";
 
 
 export default class Quiz extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isLoading: true,
+            quizSession: false,
+            isLoading: false,
             activeQuestion: 0,
             showPrevButton: false,
             showNextButton: true,
-            content: {
-                "limitDeadline": 10000,
-                "dataQuiz": [
-                    {
-                        "no": 1,
-                        "question": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam venenatis accumsan erat et accumsan. Curabitur congue molestie pellentesque. Cras elementum lectus augue, quis euismod nunc lacinia sollicitudin. Maecenas sit amet sem ac libero venenatis consequat nec id lorem. Donec ex arcu, semper in massa in, scelerisque elementum lacus. Sed non varius erat, non blandit neque. Cras a aliquam velit. Curabitur massa quam, ornare elementum maximus nec, fringilla ut ex. Integer ac placerat nunc. Vivamus quis dui risus. Nulla ante erat, mattis sit amet interdum eu, sollicitudin laoreet mauris. Donec egestas eros at semper porta. Quisque elementum, tellus ac lobortis hendrerit, ipsum enim lacinia ante, id lacinia erat turpis non massa. Curabitur id molestie nulla, eget commodo nulla. Praesent dictum quam nec ante facilisis, quis dapibus mauris finibus. <strong>Apa itu frontend dev?</strong>",
-                        "choices": [
-                            {
-                                "id": "a",
-                                "option": "Ngetik ngetik surat"
-                            },
-                            {
-                                "id": "b",
-                                "option": "Gamers"
-                            },
-                            {
-                                "id": "c",
-                                "option": "Tukang service"
-                            },
-                            {
-                                "id": "d",
-                                "option": "Abang konter"
-                            },
-                            {
-                                "id": "e",
-                                "option": "Orang yang mengerjakan bagian depan sistem yang dilihat oleh user"
-                            }
-                        ]
-                    },
-                    {
-                        "no": 2,
-                        "question": "Apa itu backend dev?",
-                        "choices": [
-                            {
-                                "id": "a",
-                                "option": "Orang yang mengerjakan bagian belakang sistem yang tidak terlihat oleh user"
-                            },
-                            {
-                                "id": "b",
-                                "option": "Heker"
-                            },
-                            {
-                                "id": "c",
-                                "option": "Gamers"
-                            },
-                            {
-                                "id": "d",
-                                "option": "Abang konter"
-                            },
-                            {
-                                "id": "e",
-                                "option": "Orang gabut"
-                            }
-                        ]
-                    },
-                    {
-                        "no": 3,
-                        "question": "Apa itu fullstack dev?",
-                        "choices": [
-                            {
-                                "id": "a",
-                                "option": "Orang yang mengerjakan ketimpa"
-                            },
-                            {
-                                "id": "b",
-                                "option": "Kuli"
-                            },
-                            {
-                                "id": "c",
-                                "option": "Orang yang dapat mengemban seluruh tugas tim IT"
-                            },
-                            {
-                                "id": "d",
-                                "option": "Abang konter"
-                            },
-                            {
-                                "id": "e",
-                                "option": "Orang gabut"
-                            }
-                        ]
-                    },
-                    {
-                        "no": 4,
-                        "question": "Apa itu android dev?",
-                        "choices": [
-                            {
-                                "id": "a",
-                                "option": "Orang yang mengerjakan ketimpa"
-                            },
-                            {
-                                "id": "b",
-                                "option": "Kuli"
-                            },
-                            {
-                                "id": "c",
-                                "option": "Orang yang dapat mengemban seluruh tugas tim IT"
-                            },
-                            {
-                                "id": "d",
-                                "option": "Abang android"
-                            },
-                            {
-                                "id": "e",
-                                "option": "Orang gabut"
-                            }
-                        ]
-                    },
-                    {
-                        "no": 4,
-                        "question": "Apa itu iOS dev?",
-                        "choices": [
-                            {
-                                "id": "a",
-                                "option": "Orang yang mengerjakan ketimpa"
-                            },
-                            {
-                                "id": "b",
-                                "option": "Kuli"
-                            },
-                            {
-                                "id": "c",
-                                "option": "Orang yang dapat mengemban seluruh tugas tim IT"
-                            },
-                            {
-                                "id": "d",
-                                "option": "Abang iOS"
-                            },
-                            {
-                                "id": "e",
-                                "option": "Orang gabut"
-                            }
-                        ]
-                    },
-                ]
-            },
+            module: this.props.module,
+            content: this.props.content,
             answers: [],
+            answersPercentage: 0,
+            durationLimit: this.props.content.durationLimit,
         }
     }
 
     fetchQuestion = () => {
-        let search = window.location.search;
-        let params = new URLSearchParams(search);
-        let activeQuestion = params.get('page');
-
-        setInterval(() => {
-            this.setState({
-                isLoading: false,
-                activeQuestion: parseInt(activeQuestion) - 1
-            })
-
-            this.startTimer()
-        }, 2000);
+        return this.state.content.data[this.state.activeQuestion]
     }
 
     startTimer = () => {
+        // alert("start quiz")
+        const deadlineDate = new Date(this.state.content.deadlineDate).getTime();
 
+        // Update the count down every 1 second
+        let x = setInterval(function () {
+
+            // Get today's date and time
+            let now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            let distance = deadlineDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            // let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Output the result in an element with id="demo"
+            document.querySelector("#text-countdown-timer").innerHTML = `${hours ? hours + '.' : ''}${minutes < 10 ? '0' + minutes : minutes}.${seconds < 10 ? '0' + seconds : seconds}`
+
+            // If the count down is over, write some text 
+            if (distance < 0) {
+                clearInterval(x);
+                document.querySelector("#text-countdown-timer").innerHTML = "00.00";
+            }
+        }, 1000);
+    }
+
+    startQuiz = () => {
+        this.setState({ isLoading: true })
+        document.getElementById('card-container-comment-module').style.display = "none"
+
+        setTimeout(() => {
+            this.setState({ isLoading: false, quizSession: true })
+            this.startTimer()
+        }, 3000)
+    }
+
+    checkAnswerExist = (number) => {
+        let answers = this.state.answers
+        let result = answers.filter(answer => answer.number === number)
+
+        return result
+    }
+
+    generateOption = (number, value, label) => {
+        let answers = this.state.answers
+
+        let result = answers.find(answer => answer.number === number && answer.choice === value)
+
+        if (result !== undefined) {
+            return <div><i className="bi bi-check-circle-fill mr-2 text-success"></i> <span className="font-weight-bold"> {label}</span></div>
+        } else {
+            return <div><i className="bi bi-circle mr-2"></i> {label}</div>
+        }
+    }
+
+    setAnswer = (number, value) => {
+        const answers = this.state.answers
+
+        // check if answers not exist
+        if (this.checkAnswerExist(number).length < 1) {
+            answers.push({ number: number, choice: value })
+            this.setState({ answers: answers })
+        } else {
+            answers.map(answer => {
+                if (answer.number === number) {
+                    return answer.choice = value
+                }
+            })
+
+            this.setState({ answers: answers })
+        }
+
+        const answerPercentage = Math.round(this.state.answers.length / this.state.content.data.length * 100)
+        this.setState({ answersPercentage: answerPercentage })
+    }
+
+    prevQuestion = () => {
+        let activeQuestion = this.state.activeQuestion - 1
+
+        this.setState({ activeQuestion: activeQuestion })
+    }
+
+    nextQuestion = () => {
+        let activeQuestion = this.state.activeQuestion + 1
+
+        this.setState({ activeQuestion: activeQuestion, showPrevButton: true, showNextButton: true })
+    }
+
+    submitQuiz = (e) => {
+        e.preventDefault()
+
+        const body = {
+            idCourse: getCourseIDActive(),
+            idSession: getCourseSessionIDActive(),
+            answers: this.state.answers
+        }
+
+        axios.defaults.headers.common['Authorization'] = `Bearer ${getKeyToken()}`
+        axios.post(`${process.env.REACT_APP_API_ENDPOINT}/module/${this.state.module.moduleID}/quiz`, body).then(response => {
+            alert("Quiz berhasil disubmit, silahkan tunggu penilaian dari dosen")
+            console.log(response.data.meta)
+
+            this.setState({ quizSession: false })
+        })
     }
 
     componentDidMount() {
-        this.fetchQuestion()
+        // this.fetchQuestion()
+        // console.log(this.state.content[0].question)
+        document.getElementById('card-container-comment-module').style.display = "block"
     }
 
-    // nextQuestion = () => {
-    //     let activeQuestion = this.state.activeQuestion + 1
-    //     // let buttonNext
-    //     // let buttonPrev
-
-    //     // if (activeQuestion + 1 == this.state.dataContent.content.dataQuiz.length) {
-    //     //     activeQuestion = this.state.activeQuestion
-    //     //     buttonNext = true
-    //     //     buttonPrev = false
-    //     // } else {
-    //     //     activeQuestion = activeQuestion
-    //     //     buttonNext = true
-    //     //     buttonPrev = true
-    //     // }
-
-    //     this.setState({ activeQuestion: activeQuestion, showPrevButton: true, showNextButton: true })
-    // }
-
     render() {
-
-        const questions = this.state.content.dataQuiz[this.state.activeQuestion]
 
         if (this.state.isLoading) {
             return (
                 <Fragment>
-                    <div class="text-center">
-                        <div class="spinner-border text-primary" role="status">
-                            <span class="sr-only">Loading...</span>
+                    <div className="text-center">
+                        <div className="spinner-border text-primary" role="status">
+                            <span className="sr-only">Loading...</span>
                         </div>
                     </div>
                 </Fragment>
             )
         }
 
+        const question = this.fetchQuestion()
+        const isDeadline = (new Date(this.state.content.deadlineDate).getTime() - new Date().getTime()) <= 0
+
+        if (this.state.quizSession) {
+            return (
+                <Fragment>
+                    <CRow className="my-4">
+                        <CCol md="12" sm="12" className="text-right">
+                            <CButton variant="outline" color="info" className="btn-pill custom-btn-badge-outline-primary" style={{ color: 'black', minWidth: '200px' }} disabled><i className="bi bi-stopwatch mr-1"></i> Sisa Waktu : <span id="text-countdown-timer">00.00</span></CButton>
+                        </CCol>
+                    </CRow>
+
+                    <CRow>
+                        <CCol md="10">
+                            <CCard>
+                                <CCardHeader>Soal</CCardHeader>
+                                <CCardBody>
+                                    <ol>
+                                        <li value={this.state.activeQuestion + 1}>
+                                            <div dangerouslySetInnerHTML={{ __html: question.question }}></div>
+                                        </li>
+                                    </ol>
+
+                                    <section className="mb-2 ml-5">
+                                        <h6 className="mb-3">Jawaban...</h6>
+
+                                        {question.answerOptions.map(answer => {
+                                            return <div className="mb-2" onClick={() => this.setAnswer(question.number, answer.value)}>{this.generateOption(question.number, answer.value, answer.label)}</div>
+                                        })}
+                                    </section>
+                                </CCardBody>
+                            </CCard>
+
+                            <CRow className="mb-4">
+                                <CCol md="4" sm="12">
+                                    <CButton variant="outline" color={(this.state.activeQuestion !== 0 ? "primary" : "secondary")} className="btn-pill" onClick={() => this.prevQuestion()} style={{ minWidth: '150px' }} disabled={this.state.activeQuestion !== 0 ? false : true}><i className="bi-chevron-left mr-1"></i> Sebelumnya</CButton>
+
+                                    <CButton variant="outline" color={((this.state.activeQuestion + 1) !== this.state.content.data.length ? "primary" : "secondary")} className="btn-pill ml-3" onClick={() => this.nextQuestion()} style={{ minWidth: '150px' }} disabled={(this.state.activeQuestion + 1) !== this.state.content.data.length ? false : true}>Selanjutnya <i className="bi-chevron-right ml-1"></i></CButton>
+                                </CCol>
+                            </CRow>
+                        </CCol>
+
+                        <CCol md="2">
+                            <CCard>
+                                <CCardHeader>Status soal</CCardHeader>
+                                <CCardBody className="mx-auto" style={{ minHeight: '300px' }}>
+                                    <CRow>
+                                        {this.state.content.data.map((question, i) => {
+                                            if (this.checkAnswerExist(i + 1).length > 0) {
+                                                return <div className="col-2 ml-1 mr-1">
+                                                    <p className={"quiz-number quiz-number-available" + (this.state.activeQuestion === i ? ' quiz-number-active ' : '')} onClick={e => this.setState({ activeQuestion: i })}>{i + 1}</p>
+                                                </div>
+                                            } else {
+                                                return <div className="col-2 ml-1 mr-1">
+                                                    <p className={"quiz-number" + (this.state.activeQuestion === i ? ' quiz-number-active ' : '')} onClick={e => this.setState({ activeQuestion: i })}>{i + 1}</p>
+                                                </div>
+                                            }
+
+                                        })}
+                                    </CRow>
+                                </CCardBody>
+                                <CCardFooter>
+                                    <div className="text-center">
+                                        <CButton variant="outline" color="secondary" size="small" className="btn-pill" style={{ color: '#6C757D' }} disabled>{this.state.answersPercentage}% Soal terjawab</CButton>
+                                    </div>
+                                </CCardFooter>
+                            </CCard>
+
+                            <CButton color="primary" className="btn-block" onClick={(e) => this.submitQuiz(e)}>Kirim Jawaban</CButton>
+                        </CCol>
+
+
+                    </CRow>
+
+
+                </Fragment>
+            )
+        }
+
+        if (this.state.module.score) {
+            return (
+                <Fragment>
+                    Scorenya adalah...
+                </Fragment>
+            )
+        }
+
+        if (isDeadline) {
+            return (
+                <Fragment>
+               Dah kelewat Deadline boss
+            </Fragment>
+            )
+        }
+
         return (
             <Fragment>
-                <div className="row my-4">
-                    <div className="col-md-12 text-right">
-                        <button className="btn btn-outline-info btn-pill custom-btn-badge-outline-primary" style={{ color: 'black' }} disabled><i class="bi bi-stopwatch mr-1"></i> Sisa Waktu : 18:50</button>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-md-10">
-                        <div className="card">
-                            <div className="card-header">
-                                Soal
-                            </div>
-                            <div className="card-body">
-                                <ol>
-                                    <li value={this.state.activeQuestion + 1}>
-                                        <div dangerouslySetInnerHTML={{ __html: this.state.content.dataQuiz[this.state.activeQuestion].question }}></div>
-                                    </li>
-                                </ol>
+                Aturan
 
-                                <section className="mb-2 ml-5">
-                                    <h6>Jawaban...</h6>
-                                    {questions.choices.map(question => (
-
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="answer" id={question.id} value={question.id} onClick={e => this.setState({
-                                                answers: {
-                                                    number: this.state.activeQuestion + 1,
-                                                    answer: question.id
-                                                }
-                                            })} />
-                                            <label class="form-check-label" for={question.id}>
-                                                {question.option}
-                                            </label>
-                                        </div>
-                                        // <p>{question.option}</p>
-                                    ))}
-                                </section>
-
-                            </div>
-                        </div>
-
-                        <div className="row">
-                            <div className="col-md-4">
-                                <button className="btn btn-outline-info btn-pill" style={{ minWidth: '150px' }}><i class="bi-chevron-left mr-1"></i> Sebelumnya</button>
-                                <button className="btn btn-outline-info btn-pill ml-3" style={{ minWidth: '150px' }}>Selanjutnya <i class="bi-chevron-right ml-1"></i></button>
-                            </div>
-
-                            <div className="col-md-6">
-                                <button className="btn btn-outline-info">Lihat semua jawaban</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-2">
-                        <div className="card">
-                            <div className="card-header">
-                                Status soal
-                            </div>
-                            <div className="card-body mx-auto" style={{ minHeight: '300px' }}>
-
-                                <div className="row">
-                                    {this.state.content.dataQuiz.map((question, i) => (
-                                        <div className="col-md-2 ml-1    mr-1">
-                                            <p className={"quiz-number " + (this.state.activeQuestion == i ? 'quiz-number-active' : 'border')} onClick={e => this.setState({ activeQuestion: i })}>{i + 1}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                            <div className="card-footer">
-                                <div className="text-center">
-                                    <button className="btn btn-sm btn-outline-secondary btn-pill" style={{ color: '#6C757D' }} disabled>80% Soal terjawab</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button className="btn btn-info btn-block">Kirim Jawaban</button>
-                    </div>
-                </div>
-
+                <CButton color="primary" onClick={() => this.startQuiz()}>Mulai ujian</CButton>
             </Fragment>
         )
     }
