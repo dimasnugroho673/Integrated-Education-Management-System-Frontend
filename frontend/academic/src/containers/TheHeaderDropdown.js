@@ -13,7 +13,7 @@ const TheHeaderDropdown = () => {
   const logOut = (event) => {
     event.preventDefault();
     localStorage.removeItem("lms-sess-key");
-    window.location.href = "/login";
+    window.location.href = "/auth/login";
   };
 
 
