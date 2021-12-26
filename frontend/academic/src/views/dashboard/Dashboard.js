@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from "axios";
 import AnnounInfo from "./AnnounInfo";
 import AlertInfo from "./AlertInfo";
+import { Redirect } from 'react-router-dom';
 
 export default class Dashboard extends Component {
   constructor() {
