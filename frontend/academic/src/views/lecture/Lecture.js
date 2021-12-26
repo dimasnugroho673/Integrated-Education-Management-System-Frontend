@@ -13,115 +13,24 @@ export default class Lecture extends Component {
     }
 
     componentDidMount() {
-        axios
-            .get("https://jsonplaceholder.typicode.com/posts?_start=0&_limit=3")
-            .then(() => {
-                this.setState({
-                    courseList: [
-                        {
-                            courseID: "987123798712361238127312",
-                            courseCode: "INF11011",
-                            courseTitle: "Pemograman Jaringan",
-                            courseCredits: "3",
-                            courseLecture: "Budi Raharjo",
-                            courseRoom: "Ruang 2",
-                            courseSchedule: "Selasa 07.00-10.00 WIB",
-                            info: [
-                                {
-                                    msgid: "56734575675",
-                                    message: "Tugas membuat WebRTC belum di kerjakan"
-                                }
-                            ]
-                        },
-                        {
-                            courseID: "8762394872346234",
-                            courseCode: "INF11099",
-                            courseTitle: "Matematika Diskrit",
-                            courseCredits: "3",
-                            courseLecture: "Prof Dr.Susi Susanti, M.Sc",
-                            courseRoom: "Ruang 1",
-                            courseSchedule: "Senin 13.00-15.00 WIB",
-                            info: []
-                        },
-                        {
-                            courseID: "8232394898346276",
-                            courseCode: "INF11029",
-                            courseTitle: "Pemograman Web",
-                            courseCredits: "4",
-                            courseLecture: "Prof Dr.Lorem Ipsum, M.Sc",
-                            courseRoom: "Ruang 6",
-                            courseSchedule: "Rabu 13.00-15.00 WIB",
-                            info: [
-                                {
-                                    msgid: "56674575612",
-                                    message: "Tugas membuat web HTML CSS sederhana"
-                                }
-                            ]
-                        },
-                        {
-                            courseID: "8245394872344421",
-                            courseCode: "INF11021",
-                            courseTitle: "Metode Numerik",
-                            courseCredits: "3",
-                            courseLecture: "Prof Dr.Seri Mawa, M.Sc",
-                            courseRoom: "Ruang 3",
-                            courseSchedule: "Jumat 13.00-15.00 WIB",
-                            info: []
-                        },
-                        {
-                            courseID: "8556794845349901",
-                            courseCode: "INF11039",
-                            courseTitle: "Sistem Operasi",
-                            courseCredits: "3",
-                            courseLecture: "Beni Sulisno",
-                            courseRoom: "Ruang 1",
-                            courseSchedule: "Selasa 13.00-15.00 WIB",
-                            info: []
-                        },
-                        {
-                            courseID: "7781794845343390",
-                            courseCode: "INF11041",
-                            courseTitle: "Probabilistik dan Statistika",
-                            courseCredits: "3",
-                            courseLecture: "Prof Dr.Besi Suci, M.Sc",
-                            courseRoom: "Ruang 1",
-                            courseSchedule: "Rabu 10.00-12.00 WIB",
-                            info: []
-                        },
-                        {
-                            courseID: "833994845388091",
-                            courseCode: "INF11049",
-                            courseTitle: "Sistem Digital",
-                            courseCredits: "3",
-                            courseLecture: "Sam Budian, M.Cs.",
-                            courseRoom: "Ruang 1",
-                            courseSchedule: "Senin 07.00-10.00 WIB",
-                            info: [
-                                {
-                                    msgid: "58974575991",
-                                    message: "Tugas membuat simulasi sensor jarak sederhana"
-                                }
-                            ]
-                        },
-                        {
-                            courseID: "8773784845343308",
-                            courseCode: "INF11051",
-                            courseTitle: "Analisa dan Perancangan Perangkat Lunak",
-                            courseCredits: "2",
-                            courseLecture: "Beni Sulisno",
-                            courseRoom: "Ruang 3",
-                            courseSchedule: "Jumat 07.00-12.00 WIB",
-                            info: [
-                                {
-                                    msgid: "58974572321",
-                                    message: "Tugas membuat perancangan awal perangkat lunak"
-                                }
-                            ]
-                        }
-                    ],
-                    dataReady: true
+        if (localStorage.getItem("lirs_status")) {
+            const key = localStorage.getItem("lms-sess-key");
+            axios.defaults.headers.common['Authorization'] = `Bearer ${key}`
+            axios
+                .get("https://mock-api-integrated-lms.herokuapp.com/api/v1/user/courses")
+                .then((result) => {
+                    console.log(result)
+                    this.setState({
+                        courseList: result.data.data,
+                        dataReady: true,
+                    });
                 });
+        } else {
+            this.setState({
+                courseList: [],
+                dataReady: true
             });
+        }
     }
 
     render() {
