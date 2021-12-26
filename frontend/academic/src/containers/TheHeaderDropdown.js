@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-  CBadge,
   CDropdown,
   CDropdownItem,
   CDropdownMenu,
@@ -10,6 +9,14 @@ import {
 import CIcon from '@coreui/icons-react'
 
 const TheHeaderDropdown = () => {
+
+  const logOut = (event) => {
+    event.preventDefault();
+    localStorage.removeItem("lms-sess-key");
+    window.location.href = "/login";
+  };
+
+
   return (
     <CDropdown
       inNav
@@ -32,55 +39,18 @@ const TheHeaderDropdown = () => {
           color="light"
           className="text-center"
         >
-          <strong>Account</strong>
+          <strong>Akun</strong>
         </CDropdownItem>
-        <CDropdownItem>
-          <CIcon name="cil-bell" className="mfe-2" />
-          Updates
-          <CBadge color="info" className="mfs-auto">42</CBadge>
+        <CDropdownItem to="/profile">
+          <CIcon name="cil-user" className="mfe-2" />Profil
         </CDropdownItem>
-        <CDropdownItem>
-          <CIcon name="cil-envelope-open" className="mfe-2" />
-          Messages
-          <CBadge color="success" className="mfs-auto">42</CBadge>
-        </CDropdownItem>
-        <CDropdownItem>
-          <CIcon name="cil-task" className="mfe-2" />
-          Tasks
-          <CBadge color="danger" className="mfs-auto">42</CBadge>
-        </CDropdownItem>
-        <CDropdownItem>
-          <CIcon name="cil-comment-square" className="mfe-2" />
-          Comments
-          <CBadge color="warning" className="mfs-auto">42</CBadge>
-        </CDropdownItem>
-        <CDropdownItem
-          header
-          tag="div"
-          color="light"
-          className="text-center"
-        >
-          <strong>Settings</strong>
-        </CDropdownItem>
-        <CDropdownItem>
-          <CIcon name="cil-user" className="mfe-2" />Profile
-        </CDropdownItem>
-        <CDropdownItem>
+        <CDropdownItem to="/changepassword">
           <CIcon name="cil-settings" className="mfe-2" />
-          Settings
-        </CDropdownItem>
-        <CDropdownItem>
-          <CIcon name="cil-credit-card" className="mfe-2" />
-          Payments
-          <CBadge color="secondary" className="mfs-auto">42</CBadge>
-        </CDropdownItem>
-        <CDropdownItem>
-          <CIcon name="cil-file" className="mfe-2" />
-          Projects
-          <CBadge color="primary" className="mfs-auto">42</CBadge>
+          Rubah Password
         </CDropdownItem>
         <CDropdownItem divider />
-        <CDropdownItem>
+        <CDropdownItem
+          onClick={logOut}>
           <CIcon name="cil-lock-locked" className="mfe-2" />
           Lock Account
         </CDropdownItem>

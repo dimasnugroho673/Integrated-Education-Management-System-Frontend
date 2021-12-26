@@ -45,6 +45,8 @@ const Book = React.lazy(() => import('./views/book/Book'));
 const Tool = React.lazy(() => import('./views/tool/Tool'));
 const Academic = React.lazy(() => import('./views/academic/Academic'));
 const PreviousInfo = React.lazy(() => import('./views/previousinfo/PreviousInfo'));
+const Profile = React.lazy(() => import('./views/profile/Profile'));
+const ChangePassword = React.lazy(() => import('./views/changepassword/ChangePassword'));
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -55,6 +57,9 @@ const routes = [
   { path: '/tool', name: 'Tool', component: Tool },
   { path: '/academic', name: 'Academic', component: Academic },
   { path: '/previousinfo', name: 'Previous Info', component: PreviousInfo },
+  { path: '/profile', name: 'Profile', component: Profile },
+  { path: '/changepassword', name: 'Change Password', component: ChangePassword },
+
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },
   { path: '/theme/typography', name: 'Typography', component: Typography },
