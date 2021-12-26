@@ -24,7 +24,7 @@ class StudyPlanList extends Component {
         });
     };
 
-    handleRadio = (id, sksTotal, courseID, courseTitle, courseLecture, courseRoom, courseSchedule) => {
+    handleRadio = (id, sksTotal, courseID, courseSessionID) => {
         if ((this.props.maxSKS - this.props.countSKS) - sksTotal < 0) {
             alert("Sisa SKS tidak cukup!")
             document.getElementById('checkbox_' + id).checked = false;
@@ -35,9 +35,9 @@ class StudyPlanList extends Component {
             }
         } else {
             if (document.getElementById('checkbox_' + id).checked == false) {
-                this.props.addSKS(sksTotal, courseID, id, courseTitle, courseLecture, courseRoom, courseSchedule)
+                this.props.addSKS(sksTotal, courseID, courseSessionID)
             } else if (document.getElementById('checkbox_' + id).checked == true) {
-                this.props.addSKS(0, courseID, id, courseTitle, courseLecture, courseRoom, courseSchedule)
+                this.props.addSKS(0, courseID, courseSessionID)
             }
             document.getElementById('checkbox_' + id).checked = true;
             document.getElementById('checkbox_' + id).disabled = false;
@@ -73,7 +73,9 @@ class StudyPlanList extends Component {
                                                         type="checkbox"
                                                         className="custom-control-input"
                                                         id={'checkbox_' + this.props.data.courseCode}
-                                                        onChange={() => { this.handleCheckbox(this.props.data.courseCode, this.props.data.courseCredits) }}
+                                                        onChange={() => {
+                                                            this.handleCheckbox(this.props.data.courseCode, parseInt(this.props.data.courseCredits, 10))
+                                                        }}
                                                     />
                                                     <label
                                                         className="custom-control-label"
@@ -104,29 +106,31 @@ class StudyPlanList extends Component {
                                         <tr>
                                             <td style={{ width: '8%' }}></td>
                                             <td>
-                                                {this.props.data.session.map((session) => {
+                                                {this.props.data.sessions.map((session) => {
                                                     return (
                                                         <div
                                                             className="custom-control custom-radio"
-                                                            key={session.courseID}
+                                                            key={session.courseSessionID}
                                                         >
                                                             <input
                                                                 type="radio"
                                                                 className="custom-control-input"
                                                                 name={'radio_' + this.props.data.courseCode}
-                                                                id={session.courseID}
+                                                                id={session.courseSessionID}
                                                                 onChange={() => {
-                                                                    this.handleRadio(this.props.data.courseCode, this.props.data.courseCredits, session.courseID,
-                                                                        this.props.data.courseTitle, session.courseLecture, session.courseRoom, session.courseSchedule)
+                                                                    this.handleRadio(this.props.data.courseCode, parseInt(this.props.data.courseCredits, 10), this.props.data.courseID,
+                                                                        session.courseSessionID)
                                                                 }}
                                                             />
                                                             <label
                                                                 className="custom-control-label"
                                                                 name={'radio_' + this.props.data.courseCode}
-                                                                htmlFor={session.courseID}
+                                                                htmlFor={session.courseSessionID}
                                                             >
-                                                                {session.courseSchedule}, {session.courseLecture},{" "}
-                                                                {session.courseRoom}
+
+                                                                {session.lectures.length == 1 ? <>{session.courseSchedule},{" "}{session.lectures[0].lecture.lectureName}, {" "}{session.room.roomName}</> :
+                                                                    <>{session.courseSchedule},{" "}{session.lectures[0].lecture.lectureName},{" "}{session.lectures[1].lecture.lectureName}, {" "}{session.room.roomName}</>}
+
                                                             </label>
                                                         </div>
                                                     );

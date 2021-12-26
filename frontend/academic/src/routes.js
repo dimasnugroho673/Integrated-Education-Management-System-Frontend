@@ -50,13 +50,13 @@ const ChangePassword = React.lazy(() => import('./views/changepassword/ChangePas
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
-  { path: '/dashboard', name: 'Dashboard', component: Dashboard },
-  { path: '/studyplan', name: 'Study Plan', component: StudyPlan },
-  { path: '/lecture', name: 'Lecture', component: Lecture },
-  { path: '/book', name: 'Book', component: Book },
-  { path: '/tool', name: 'Tool', component: Tool },
-  { path: '/academic', name: 'Academic', component: Academic },
-  { path: '/previousinfo', name: 'Previous Info', component: PreviousInfo },
+  { path: '/a/dashboard', name: 'Dashboard', component: Dashboard },
+  { path: '/a/studyplan', name: 'Study Plan', component: StudyPlan },
+  { path: '/a/lecture', name: 'Lecture', component: Lecture },
+  { path: '/a/book', name: 'Book', component: Book },
+  { path: '/a/tool', name: 'Tool', component: Tool },
+  { path: '/a/academic', name: 'Academic', component: Academic },
+  { path: '/a/previousinfo', name: 'Previous Info', component: PreviousInfo },
   { path: '/profile', name: 'Profile', component: Profile },
   { path: '/changepassword', name: 'Change Password', component: ChangePassword },
 
