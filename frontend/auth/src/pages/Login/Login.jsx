@@ -60,7 +60,7 @@ const Login = () => {
 
             axios.post('https://mock-api-integrated-lms.herokuapp.com/api/v1/login', data)
                 .then(result => {
-                    localStorage.setItem('lms-sess-key', JSON.stringify(result.data.key))
+                    localStorage.setItem('lms-sess-key', result.data.key)
                     window.location.href = "/a/dashboard"
                 })
                 .catch(e => {
