@@ -57,8 +57,8 @@ const routes = [
   { path: '/a/tool', name: 'Tool', component: Tool },
   { path: '/a/academic', name: 'Academic', component: Academic },
   { path: '/a/previousinfo', name: 'Previous Info', component: PreviousInfo },
-  { path: '/profile', name: 'Profile', component: Profile },
-  { path: '/changepassword', name: 'Change Password', component: ChangePassword },
+  { path: '/a/profile', name: 'Profile', component: Profile },
+  { path: '/a/changepassword', name: 'Change Password', component: ChangePassword },
 
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },
