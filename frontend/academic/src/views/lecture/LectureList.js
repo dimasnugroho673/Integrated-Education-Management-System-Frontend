@@ -17,7 +17,7 @@ class LectureList extends Component {
           onClick={() => this.handleClickMaterial(this.props.data.courseID, this.props.data.session.courseSessionID)}>
           <div className="row">
             <div className="col-5" style={{ verticalAlign: "middle", textAlign: "center" }}>
-              <img src="assets/image/logo_mini.png" className="image-course-thumbnail" alt={"Image " + this.props.data.courseTitle}></img>
+              <img src={process.env.PUBLIC_URL + 'assets/image/logo_mini.png'} className="image-course-thumbnail" alt={"Image " + this.props.data.courseTitle}></img>
             </div>
             <div className="col-7">
               <h5 className="text-course-title">{this.props.data.courseTitle}</h5>

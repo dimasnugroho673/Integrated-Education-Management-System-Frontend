@@ -27,8 +27,8 @@ const TheSidebar = () => {
       onShowChange={(val) => dispatch({ type: 'set', sidebarShow: val })} className="c-sidebar-light"
     >
       <CSidebarBrand className="d-md-down-none" to="/">
-        <img src="assets/image/logo.png" width="160px" className="c-sidebar-brand-full" />
-        <img src="assets/image/logo_mini.png" width="30px" className="c-sidebar-brand-minimized" />
+        <img src={process.env.PUBLIC_URL + 'assets/image/logo.png'} width="160px" className="c-sidebar-brand-full" />
+        <img src={process.env.PUBLIC_URL + 'assets / image / logo_mini.png'} width="30px" className="c-sidebar-brand-minimized" />
 
         {/* <CIcon
           className="c-sidebar-brand-full"
