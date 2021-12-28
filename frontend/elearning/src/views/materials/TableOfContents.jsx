@@ -223,7 +223,7 @@ class TableOfContents extends Component {
                 <CCardBody>
                   <div className="row">
                     <div className="col-md-12">
-                      <img src="https://uc33e7a0d11724904d620dae9aeb.previews.dropboxusercontent.com/p/thumb/ABaM4nkqdlI_q5ONPslxdK4J4CuUHRQtNOkHrPoPzqswb3JzuyQpKuYZIkPWeY3Bx4v44hVyy1opWGtXrYyiaqC00Wc2Q4WrDNahG4pYUWaK3BXuZSkM8j_cbugUDB3qdxunniFUB0Vh5pe8LURydvS7wAxoSNVtm5OsxexIGaBSIcLvUz6BGcLdyJloEW3J9Nn1QboYtBdutl4xCPM4v60LZndMpd1qIbwtQ_CJVp0bI9vG50t772sFKnP2_EvQFMhjI3lYXJD2V4FmfT9APMle0rHg8mszyvuR01DWztCXNuVHWFg0gNqzF6fmE1pzPvDjiRlJoBDtzmLsyqPGfC75wTquMEzacbqFO9t9EHOiIQ5HkEESR3dlOdHr8PLGiuQ/p.png" width="110px" alt="" className='my-4' />
+                      <img src={"https://raw.githubusercontent.com/dimasnugroho673/Integrated-Education-Management-System-Frontend/main/assets/images/ilus-paper-blue.png?token=ALBMY5ISBTQIS7FUV6U5T3LBZNF3Q"} width="110px" alt="" className='my-4' />
                       <h6 className="font-weight-bold">Terakhir dibaca</h6>
                       <br />
                       <h6>{this.state.moduleLastRead.moduleTitle}</h6>

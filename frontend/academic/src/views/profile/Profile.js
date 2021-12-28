@@ -42,116 +42,118 @@ export class Profile extends Component {
 
 
         return (
-            <div className="main-content">
-                <section className="section">
-                    <div className="section-header">
-                        {/* <div className="bg-primary rounded wrapper-icon-page-title">
+            <div className="container-xl">
+                <div className="main-content">
+                    <section className="section">
+                        <div className="section-header">
+                            {/* <div className="bg-primary rounded wrapper-icon-page-title">
                                 <span
                                     className="iconify icon-page-title"
                                     data-icon="uil:wrench"
                                     data-inline="false"
                                 ></span>
                             </div> */}
-                        <h1>Profil</h1>
-                        {/* <div class="section-header-breadcrumb">
+                            <h1>Profil</h1>
+                            {/* <div class="section-header-breadcrumb">
                             <div class="breadcrumb-item">Alat</div>
                         </div> */}
-                    </div>
+                        </div>
 
-                    <div className="section-body">
-                        <div className="row">
-                            {/* mobile only */}
+                        <div className="section-body">
+                            <div className="row">
+                                {/* mobile only */}
 
-                            <div className="col-md-12">
-                                <div className="row">
-                                    <div className="col-md-12">
-                                        <div className="card">
-                                            <div className="col-12 col-md-12 col-lg-12">
-                                                <div style={{ backgroundImage: 'url("../avatars/9.png")', height: '200px', marginRight: '-15px', marginLeft: '-15px', borderTopRightRadius: '10px', borderTopLeftRadius: '10px' }}></div>
-                                                <div className="profile-widget">
-                                                    <div className="profile-widget-header">
-                                                        <img
-                                                            alt="image"
-                                                            src="../avatars/6.jpg"
-                                                            className="rounded-circle profile-widget-picture"
-                                                        />
-                                                    </div>
-                                                    <div className="profile-widget-description">
-                                                        <div className="profile-widget-name">
-                                                            {profile.name}
+                                <div className="col-md-12">
+                                    <div className="row">
+                                        <div className="col-md-12">
+                                            <div className="card">
+                                                <div className="col-12 col-md-12 col-lg-12">
+                                                    <div style={{ backgroundImage: 'url("../avatars/9.png")', height: '200px', marginRight: '-15px', marginLeft: '-15px', borderTopRightRadius: '10px', borderTopLeftRadius: '10px' }}></div>
+                                                    <div className="profile-widget">
+                                                        <div className="profile-widget-header">
+                                                            <img
+                                                                alt="image"
+                                                                src="../avatars/6.jpg"
+                                                                className="rounded-circle profile-widget-picture"
+                                                            />
                                                         </div>
-                                                        <div className="profile-widget-nim">
-                                                            {profile.nim}
+                                                        <div className="profile-widget-description">
+                                                            <div className="profile-widget-name">
+                                                                {profile.name}
+                                                            </div>
+                                                            <div className="profile-widget-nim">
+                                                                {profile.nim}
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div className="profile-widget-tab">
-                                                        <Tabs
-                                                            value={this.state.tab}
-                                                            textColor="primary"
-                                                            indicatorColor="primary"
-                                                            variant="scrollable"
-                                                            scrollButtons="auto"
-                                                            onChange={(_, newValue) => this.setTab(newValue)}
-                                                        >
-                                                            <Tab label="Data Umum" />
-                                                            <Tab label="Keluarga" />
-                                                            <Tab label="Alamat" />
-                                                            <Tab label="Data Akademik" />
-                                                        </Tabs>
+                                                        <div className="profile-widget-tab">
+                                                            <Tabs
+                                                                value={this.state.tab}
+                                                                textColor="primary"
+                                                                indicatorColor="primary"
+                                                                variant="scrollable"
+                                                                scrollButtons="auto"
+                                                                onChange={(_, newValue) => this.setTab(newValue)}
+                                                            >
+                                                                <Tab label="Data Umum" />
+                                                                <Tab label="Keluarga" />
+                                                                <Tab label="Alamat" />
+                                                                <Tab label="Data Akademik" />
+                                                            </Tabs>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div className="col-md-12">
-                                <div className="row">
-                                    <div className="col-md-12">
-                                        {(() => {
-                                            if (this.state.tab === 0) {
-                                                return (
-                                                    <div className="card">
-                                                        <div className="card-body">
-                                                            <h3>TAB 1 clicked!</h3>
+                                <div className="col-md-12">
+                                    <div className="row">
+                                        <div className="col-md-12">
+                                            {(() => {
+                                                if (this.state.tab === 0) {
+                                                    return (
+                                                        <div className="card">
+                                                            <div className="card-body">
+                                                                <h3>TAB 1 clicked!</h3>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                )
-                                            } else if (this.state.tab === 1) {
-                                                return (
-                                                    <div className="card">
-                                                        <div className="card-body">
-                                                            <h3>TAB 2 clicked!</h3>
+                                                    )
+                                                } else if (this.state.tab === 1) {
+                                                    return (
+                                                        <div className="card">
+                                                            <div className="card-body">
+                                                                <h3>TAB 2 clicked!</h3>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                )
-                                            } else if (this.state.tab === 2) {
-                                                return (
-                                                    <div className="card">
-                                                        <div className="card-body">
-                                                            <h3>TAB 3 clicked!</h3>
+                                                    )
+                                                } else if (this.state.tab === 2) {
+                                                    return (
+                                                        <div className="card">
+                                                            <div className="card-body">
+                                                                <h3>TAB 3 clicked!</h3>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                )
-                                            } else if (this.state.tab === 3) {
-                                                return (
-                                                    <div className="card">
-                                                        <div className="card-body">
-                                                            <h3>TAB 4 clicked!</h3>
+                                                    )
+                                                } else if (this.state.tab === 3) {
+                                                    return (
+                                                        <div className="card">
+                                                            <div className="card-body">
+                                                                <h3>TAB 4 clicked!</h3>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                )
-                                            }
-                                        })()}
+                                                    )
+                                                }
+                                            })()}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            {/*  */}
+                                {/*  */}
+                            </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
+                </div>
             </div>
         );
 

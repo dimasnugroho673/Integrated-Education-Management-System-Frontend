@@ -9,7 +9,7 @@ class AlertInfo extends Component {
             <li className="media">
               <div className="card-body">
                 <div className="row">
-                  <div className="col-md-3">
+                  <div className="col-2">
                     <div className="activities">
                       <div className="activity">
                         <div className="activity-icon bg-danger text-white shadow-primary">
@@ -18,7 +18,7 @@ class AlertInfo extends Component {
                       </div>
                     </div>
                   </div>
-                  <div className="col-md-9">
+                  <div className="col-10">
                     <div className="media-title mb-1">
                       {this.props.data.title}
                     </div>
@@ -35,7 +35,7 @@ class AlertInfo extends Component {
                     {this.props.data.content.map((content) => {
                       return (
                         <div
-                          className="text-job text-muted"
+                          className="text-job text-muted mt-3"
                           key={content.deadline}
                         >
                           {content.deadline}

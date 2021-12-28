@@ -11,29 +11,29 @@ const _nav =  [
     _tag: 'CSidebarNavItem',
     name: 'Info Mata Kuliah',
     to: `/el/${getCourseIDActive()}/info`,
-    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
-    badge: {
-      color: 'info',
-      text: 'NEW',
-    }
+    icon: <span class="iconify mr-2" data-icon="uil:dashboard" style={{ fontWeight: 'bold', fontSize: '18px' }}></span>,
+    // badge: {
+    //   color: 'info',
+    //   text: 'NEW',
+    // }
   },
   {
     _tag: 'CSidebarNavItem',
     name: 'Daftar Quiz',
     to: `/el/${getCourseIDActive()}/quiz`,
-    icon: 'cil-file',
+    icon: <span class="iconify mr-2" data-icon="uil:comment-question" style={{ fontWeight: 'bold', fontSize: '18px' }}></span>,
   },
   {
     _tag: 'CSidebarNavItem',
     name: 'Daftar Tugas',
     to: `/el/${getCourseIDActive()}/assignment`,
-    icon: 'cil-list',
+    icon: <span class="iconify mr-2" data-icon="uil:file-edit-alt" style={{ fontWeight: 'bold', fontSize: '18px' }}></span>,
   },
   {
     _tag: 'CSidebarNavItem',
     name: 'Materi',
     to: `/el/${getCourseIDActive()}/module`,
-    icon: 'cil-drop',
+    icon: <span class="iconify mr-2" data-icon="uil:books" style={{ fontWeight: 'bold', fontSize: '18px' }}></span>,
   },
   // {
   //   _tag: 'CSidebarNavItem',

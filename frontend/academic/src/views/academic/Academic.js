@@ -102,57 +102,17 @@ export class Academic extends Component {
 
         if (this.state.dataReady === false) {
             return (
-                <div className="main-content">
-                    <section className="section">
-                        <div className="section-header">
-                            {/* <div className="bg-primary rounded wrapper-icon-page-title">
+                <div className="container-xl">
+                    <div className="main-content">
+                        <section className="section">
+                            <div className="section-header">
+                                {/* <div className="bg-primary rounded wrapper-icon-page-title">
                                 <span
                                     className="iconify icon-page-title"
                                     data-icon="uil:file-alt"
                                     data-inline="false"
                                 ></span>
                             </div> */}
-                            <h1>Akademik</h1>
-                            {/* <div className="section-header-breadcrumb">
-                            <div className="breadcrumb-item">Akademik</div>
-                        </div> */}
-                        </div>
-
-                        <div className="section-body">
-                            <div className="row">
-                                {/* mobile only */}
-
-                                <div className="col-md-12">
-                                    <div className="card">
-                                        <div className="card-body">
-                                            <div className="d-flex justify-content-center text-primary">
-                                                <div className="spinner-border" role="status">
-                                                    <span className="sr-only">Loading...</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/*  */}
-                            </div>
-                        </div>
-                    </section>
-                </div>
-            );
-        } else {
-            if (courseHistory.length === 0) {
-                return (
-                    <div className="main-content">
-                        <section className="section">
-                            <div className="section-header">
-                                {/* <div className="bg-primary rounded wrapper-icon-page-title">
-                                    <span
-                                        className="iconify icon-page-title"
-                                        data-icon="uil:file-alt"
-                                        data-inline="false"
-                                    ></span>
-                                </div> */}
                                 <h1>Akademik</h1>
                                 {/* <div className="section-header-breadcrumb">
                             <div className="breadcrumb-item">Akademik</div>
@@ -165,51 +125,12 @@ export class Academic extends Component {
 
                                     <div className="col-md-12">
                                         <div className="card">
-                                            <div className="card-header">
-                                                <table
-                                                    style={{
-                                                        marginBottom: "20px",
-                                                    }}
-                                                >
-                                                    <tbody>
-                                                        <tr>
-                                                            <td
-                                                                style={{
-                                                                    textAlign: "left",
-                                                                    background: "white",
-                                                                    fontWeight: "bold",
-                                                                    width: "300px",
-                                                                }}
-                                                            >
-                                                                <span>Total Kredit Lulus : 0</span>
-                                                            </td>
-                                                            <td
-                                                                style={{
-                                                                    textAlign: "left",
-                                                                    fontWeight: "bold",
-                                                                    width: "120px",
-                                                                }}
-                                                            >
-                                                                <span>IPK : 0</span>
-                                                            </td>
-                                                            <td
-                                                                style={{
-                                                                    textAlign: "left",
-                                                                    fontWeight: "bold",
-                                                                    width: "250px",
-                                                                }}
-                                                            >
-                                                                <span>Total Semester : 0</span>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-
                                             <div className="card-body">
-                                                <h6 className="text-center mt-4">
-                                                    Data Riwayat Akademik Belum Tersedia.
-                                                </h6>
+                                                <div className="d-flex justify-content-center text-primary">
+                                                    <div className="spinner-border" role="status">
+                                                        <span className="sr-only">Loading...</span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -219,104 +140,189 @@ export class Academic extends Component {
                             </div>
                         </section>
                     </div>
-                );
-            } else {
+                </div>
+            );
+        } else {
+            if (courseHistory.length === 0) {
                 return (
-                    <div className="main-content">
-                        <section className="section">
-                            <div className="section-header">
-                                {/* <div className="bg-primary rounded wrapper-icon-page-title">
+                    <div className="container-xl">
+                        <div className="main-content">
+                            <section className="section">
+                                <div className="section-header">
+                                    {/* <div className="bg-primary rounded wrapper-icon-page-title">
                                     <span
                                         className="iconify icon-page-title"
                                         data-icon="uil:file-alt"
                                         data-inline="false"
                                     ></span>
                                 </div> */}
-                                <h1>Akademik</h1>
-                                {/* <div className="section-header-breadcrumb">
+                                    <h1>Akademik</h1>
+                                    {/* <div className="section-header-breadcrumb">
                             <div className="breadcrumb-item">Akademik</div>
                         </div> */}
-                            </div>
+                                </div>
 
-                            <div className="section-body">
-                                <div className="row">
-                                    {/* mobile only */}
+                                <div className="section-body">
+                                    <div className="row">
+                                        {/* mobile only */}
 
-                                    <div className="col-md-12">
-                                        <div className="card">
-                                            <div className="card-header">
-                                                <table
-                                                    style={{
-                                                        marginBottom: "20px",
-                                                    }}
-                                                >
-                                                    <tbody>
-                                                        <tr>
-                                                            <td
-                                                                style={{
-                                                                    textAlign: "left",
-                                                                    background: "white",
-                                                                    fontWeight: "bold",
-                                                                    width: "300px",
-                                                                }}
-                                                            >
-                                                                <span>Total Kredit Lulus : 42</span>
-                                                            </td>
-                                                            <td
-                                                                style={{
-                                                                    textAlign: "left",
-                                                                    fontWeight: "bold",
-                                                                    width: "120px",
-                                                                }}
-                                                            >
-                                                                <span>IPK : 2.50</span>
-                                                            </td>
-                                                            <td
-                                                                style={{
-                                                                    textAlign: "left",
-                                                                    fontWeight: "bold",
-                                                                    width: "250px",
-                                                                }}
-                                                            >
-                                                                <span>Total Semester : 7</span>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                        <div className="col-md-12">
+                                            <div className="card">
+                                                <div className="card-header">
+                                                    <table
+                                                        style={{
+                                                            marginBottom: "20px",
+                                                        }}
+                                                    >
+                                                        <tbody>
+                                                            <tr>
+                                                                <td
+                                                                    style={{
+                                                                        textAlign: "left",
+                                                                        background: "white",
+                                                                        fontWeight: "bold",
+                                                                        width: "300px",
+                                                                    }}
+                                                                >
+                                                                    <span>Total Kredit Lulus : 0</span>
+                                                                </td>
+                                                                <td
+                                                                    style={{
+                                                                        textAlign: "left",
+                                                                        fontWeight: "bold",
+                                                                        width: "120px",
+                                                                    }}
+                                                                >
+                                                                    <span>IPK : 0</span>
+                                                                </td>
+                                                                <td
+                                                                    style={{
+                                                                        textAlign: "left",
+                                                                        fontWeight: "bold",
+                                                                        width: "250px",
+                                                                    }}
+                                                                >
+                                                                    <span>Total Semester : 0</span>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
 
-                                            <div className="card-body">
-                                                {courseHistory.map((history) => {
-                                                    if (
-                                                        (history.courseGrade === "A") |
-                                                        (history.courseGrade === "B") |
-                                                        (history.courseGrade === "C")
-                                                    ) {
-                                                        return (
-                                                            <AcademicList
-                                                                key={history.courseID}
-                                                                data={history}
-                                                                lulus="Lulus"
-                                                            />
-                                                        );
-                                                    } else {
-                                                        return (
-                                                            <AcademicList
-                                                                key={history.courseID}
-                                                                data={history}
-                                                                lulus="Tidak Lulus"
-                                                            />
-                                                        );
-                                                    }
-                                                })}
+                                                <div className="card-body">
+                                                    <h6 className="text-center mt-4">
+                                                        Data Riwayat Akademik Belum Tersedia.
+                                                    </h6>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    {/*  */}
+                                        {/*  */}
+                                    </div>
                                 </div>
-                            </div>
-                        </section>
+                            </section>
+                        </div>
+                    </div>
+                );
+            } else {
+                return (
+                    <div className="container-xl">
+                        <div className="main-content">
+                            <section className="section">
+                                <div className="section-header">
+                                    {/* <div className="bg-primary rounded wrapper-icon-page-title">
+                                    <span
+                                        className="iconify icon-page-title"
+                                        data-icon="uil:file-alt"
+                                        data-inline="false"
+                                    ></span>
+                                </div> */}
+                                    <h1>Akademik</h1>
+                                    {/* <div className="section-header-breadcrumb">
+                            <div className="breadcrumb-item">Akademik</div>
+                        </div> */}
+                                </div>
+
+                                <div className="section-body">
+                                    <div className="row">
+                                        {/* mobile only */}
+
+                                        <div className="col-md-12">
+                                            <div className="card">
+                                                <div className="card-header">
+                                                    <table
+                                                        style={{
+                                                            marginBottom: "20px",
+                                                        }}
+                                                    >
+                                                        <tbody>
+                                                            <tr>
+                                                                <td
+                                                                    style={{
+                                                                        textAlign: "left",
+                                                                        background: "white",
+                                                                        fontWeight: "bold",
+                                                                        width: "300px",
+                                                                    }}
+                                                                >
+                                                                    <span>Total Kredit Lulus : 42</span>
+                                                                </td>
+                                                                <td
+                                                                    style={{
+                                                                        textAlign: "left",
+                                                                        fontWeight: "bold",
+                                                                        width: "120px",
+                                                                    }}
+                                                                >
+                                                                    <span>IPK : 2.50</span>
+                                                                </td>
+                                                                <td
+                                                                    style={{
+                                                                        textAlign: "left",
+                                                                        fontWeight: "bold",
+                                                                        width: "250px",
+                                                                    }}
+                                                                >
+                                                                    <span>Total Semester : 7</span>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                                <div className="card-body">
+                                                    {courseHistory.map((history) => {
+                                                        if (
+                                                            (history.courseGrade === "A") |
+                                                            (history.courseGrade === "B") |
+                                                            (history.courseGrade === "C")
+                                                        ) {
+                                                            return (
+                                                                <AcademicList
+                                                                    key={history.courseID}
+                                                                    data={history}
+                                                                    lulus="Lulus"
+                                                                />
+                                                            );
+                                                        } else {
+                                                            return (
+                                                                <AcademicList
+                                                                    key={history.courseID}
+                                                                    data={history}
+                                                                    lulus="Tidak Lulus"
+                                                                />
+                                                            );
+                                                        }
+                                                    })}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/*  */}
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
                     </div>
                 );
             }

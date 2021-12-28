@@ -43,70 +43,17 @@ export default class Lecture extends Component {
 
         if (this.state.dataReady === false) {
             return (
-                <div className="main-content">
-                    <section className="section">
-                        <div className="section-header">
-                            {/* <div className="bg-primary rounded wrapper-icon-page-title">
+                <div class="container-xl">
+                    <div className="main-content">
+                        <section className="section">
+                            <div className="section-header">
+                                {/* <div className="bg-primary rounded wrapper-icon-page-title">
                                 <span
                                     className="iconify icon-page-title"
                                     data-icon="uil:calendar-alt"
                                     data-inline="false"
                                 ></span>
                             </div> */}
-                            <h1>Kuliah</h1>
-                            {/* <div class="section-header-breadcrumb">
-                            <div class="breadcrumb-item">Kuliah</div>
-                        </div> */}
-                        </div>
-
-                        <div className="section-body">
-                            <div className="row">
-                                {/* mobile only */}
-
-                                <div className="col-md-12">
-                                    <div>
-                                        <h6>LIST MATA KULIAH</h6>
-                                    </div>
-                                    <div>
-                                        <p>
-                                            Berikut ini adalah daftar mata kuliah yang kamu ambil
-                                            pada semester ini.
-                                        </p>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-md-12">
-                                            <div className="card">
-                                                <div className="card-body">
-                                                    <div className="d-flex justify-content-center text-primary">
-                                                        <div className="spinner-border" role="status">
-                                                            <span className="sr-only">Loading...</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/*  */}
-                            </div>
-                        </div>
-                    </section>
-                </div>
-            );
-        } else {
-            if (CourseList.length === 0) {
-                return (
-                    <div className="main-content">
-                        <section className="section">
-                            <div className="section-header">
-                                {/* <div className="bg-primary rounded wrapper-icon-page-title">
-                                    <span
-                                        className="iconify icon-page-title"
-                                        data-icon="uil:calendar-alt"
-                                        data-inline="false"
-                                    ></span>
-                                </div> */}
                                 <h1>Kuliah</h1>
                                 {/* <div class="section-header-breadcrumb">
                             <div class="breadcrumb-item">Kuliah</div>
@@ -131,9 +78,11 @@ export default class Lecture extends Component {
                                             <div className="col-md-12">
                                                 <div className="card">
                                                     <div className="card-body">
-                                                        <h6 className="text-center mt-4">
-                                                            Data Mata Kuliah yang Diambil Belum Tersedia.
-                                                        </h6>
+                                                        <div className="d-flex justify-content-center text-primary">
+                                                            <div className="spinner-border" role="status">
+                                                                <span className="sr-only">Loading...</span>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -145,56 +94,113 @@ export default class Lecture extends Component {
                             </div>
                         </section>
                     </div>
-                );
-            } else {
+                </div>
+            );
+        } else {
+            if (CourseList.length === 0) {
                 return (
-                    <div className="main-content">
-                        <section className="section">
-                            <div className="section-header">
-                                {/* <div className="bg-primary rounded wrapper-icon-page-title">
+                    <div class="container-xl">
+                        <div className="main-content">
+                            <section className="section">
+                                <div className="section-header">
+                                    {/* <div className="bg-primary rounded wrapper-icon-page-title">
                                     <span
                                         className="iconify icon-page-title"
                                         data-icon="uil:calendar-alt"
                                         data-inline="false"
                                     ></span>
                                 </div> */}
-                                <h1>Kuliah</h1>
-                                {/* <div class="section-header-breadcrumb">
+                                    <h1>Kuliah</h1>
+                                    {/* <div class="section-header-breadcrumb">
                             <div class="breadcrumb-item">Kuliah</div>
                         </div> */}
-                            </div>
-
-                            <div className="section-body">
-                                <div className="row">
-                                    {/* mobile only */}
-
-                                    <div className="col-md-12">
-                                        <div>
-                                            <h6>LIST MATA KULIAH</h6>
-                                        </div>
-                                        <div>
-                                            <p>
-                                                Berikut ini adalah daftar mata kuliah yang kamu ambil
-                                                pada semester ini.
-                                            </p>
-                                        </div>
-                                        <div className="row">
-                                            {CourseList.map((course) => {
-                                                return (
-                                                    <LectureList
-                                                        key={course.courseID}
-                                                        data={course}
-                                                        newinfo={course.info}
-                                                    />
-                                                );
-                                            })}
-                                        </div>
-                                    </div>
                                 </div>
 
-                                {/*  */}
-                            </div>
-                        </section>
+                                <div className="section-body">
+                                    <div className="row">
+                                        {/* mobile only */}
+
+                                        <div className="col-md-12">
+                                            <div>
+                                                <h6>LIST MATA KULIAH</h6>
+                                            </div>
+                                            <div>
+                                                <p>
+                                                    Berikut ini adalah daftar mata kuliah yang kamu ambil
+                                                    pada semester ini.
+                                                </p>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-md-12">
+                                                    <div className="card">
+                                                        <div className="card-body">
+                                                            <h6 className="text-center mt-4">
+                                                                Data Mata Kuliah yang Diambil Belum Tersedia.
+                                                            </h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/*  */}
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                );
+            } else {
+                return (
+                    <div class="container-xl">
+                        <div className="main-content">
+                            <section className="section">
+                                <div className="section-header">
+                                    {/* <div className="bg-primary rounded wrapper-icon-page-title">
+                                    <span
+                                        className="iconify icon-page-title"
+                                        data-icon="uil:calendar-alt"
+                                        data-inline="false"
+                                    ></span>
+                                </div> */}
+                                    <h1>Kuliah</h1>
+                                    {/* <div class="section-header-breadcrumb">
+                            <div class="breadcrumb-item">Kuliah</div>
+                        </div> */}
+                                </div>
+
+                                <div className="section-body">
+                                    <div className="row">
+                                        {/* mobile only */}
+
+                                        <div className="col-md-12">
+                                            <div>
+                                                <h6>LIST MATA KULIAH</h6>
+                                            </div>
+                                            <div>
+                                                <p>
+                                                    Berikut ini adalah daftar mata kuliah yang kamu ambil
+                                                    pada semester ini.
+                                                </p>
+                                            </div>
+                                            <div className="row">
+                                                {CourseList.map((course) => {
+                                                    return (
+                                                        <LectureList
+                                                            key={course.courseID}
+                                                            data={course}
+                                                            newinfo={course.info}
+                                                        />
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/*  */}
+                                </div>
+                            </section>
+                        </div>
                     </div>
                 );
             }

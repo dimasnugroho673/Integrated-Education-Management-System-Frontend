@@ -36,70 +36,17 @@ export class Book extends Component {
 
         if (this.state.dataReady === false) {
             return (
-                <div className="main-content">
-                    <section className="section">
-                        <div className="section-header">
-                            {/* <div className="bg-primary rounded wrapper-icon-page-title">
+                <div className="container-xl">
+                    <div className="main-content">
+                        <section className="section">
+                            <div className="section-header">
+                                {/* <div className="bg-primary rounded wrapper-icon-page-title">
                                 <span
                                     className="iconify icon-page-title"
                                     data-icon="uil:book"
                                     data-inline="false"
                                 ></span>
                             </div> */}
-                            <h1>Peminjaman Buku</h1>
-                            {/* <div class="section-header-breadcrumb">
-                            <div class="breadcrumb-item">Buku</div>
-                        </div> */}
-                        </div>
-
-                        <div className="section-body">
-                            <div className="row">
-                                {/* mobile only */}
-
-                                <div className="col-md-12">
-                                    <div>
-                                        <h6>LIST PEMINJAMAN BUKU</h6>
-                                    </div>
-                                    <div>
-                                        <p>
-                                            Berikut ini adalah daftar buku yang kamu pinjam, harap
-                                            mengembalikan buku sebelum jatuh tempo.
-                                        </p>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-md-12">
-                                            <div className="card">
-                                                <div className="card-body">
-                                                    <div className="d-flex justify-content-center text-primary">
-                                                        <div className="spinner-border" role="status">
-                                                            <span className="sr-only">Loading...</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/*  */}
-                            </div>
-                        </div>
-                    </section>
-                </div>
-            );
-        } else {
-            if (books.length === 0) {
-                return (
-                    <div className="main-content">
-                        <section className="section">
-                            <div className="section-header">
-                                {/* <div className="bg-primary rounded wrapper-icon-page-title">
-                                    <span
-                                        className="iconify icon-page-title"
-                                        data-icon="uil:book"
-                                        data-inline="false"
-                                    ></span>
-                                </div> */}
                                 <h1>Peminjaman Buku</h1>
                                 {/* <div class="section-header-breadcrumb">
                             <div class="breadcrumb-item">Buku</div>
@@ -124,9 +71,11 @@ export class Book extends Component {
                                             <div className="col-md-12">
                                                 <div className="card">
                                                     <div className="card-body">
-                                                        <h6 className="text-center mt-4">
-                                                            Data Buku yang Dipinjam Belum Tersedia.
-                                                        </h6>
+                                                        <div className="d-flex justify-content-center text-primary">
+                                                            <div className="spinner-border" role="status">
+                                                                <span className="sr-only">Loading...</span>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -138,60 +87,117 @@ export class Book extends Component {
                             </div>
                         </section>
                     </div>
-                );
-            } else {
+                </div>
+            );
+        } else {
+            if (books.length === 0) {
                 return (
-                    <div className="main-content">
-                        <section className="section">
-                            <div className="section-header">
-                                {/* <div className="bg-primary rounded wrapper-icon-page-title">
+                    <div className="container-xl">
+                        <div className="main-content">
+                            <section className="section">
+                                <div className="section-header">
+                                    {/* <div className="bg-primary rounded wrapper-icon-page-title">
                                     <span
                                         className="iconify icon-page-title"
                                         data-icon="uil:book"
                                         data-inline="false"
                                     ></span>
                                 </div> */}
-                                <h1>Peminjaman Buku</h1>
-                                {/* <div class="section-header-breadcrumb">
+                                    <h1>Peminjaman Buku</h1>
+                                    {/* <div class="section-header-breadcrumb">
                             <div class="breadcrumb-item">Buku</div>
                         </div> */}
-                            </div>
+                                </div>
 
-                            <div className="section-body">
-                                <div className="row">
-                                    {/* mobile only */}
+                                <div className="section-body">
+                                    <div className="row">
+                                        {/* mobile only */}
 
-                                    <div className="col-md-12">
-                                        <div>
-                                            <h6>LIST PEMINJAMAN BUKU</h6>
-                                        </div>
-                                        <div>
-                                            <p>
-                                                Berikut ini adalah daftar buku yang kamu pinjam, harap
-                                                mengembalikan buku sebelum jatuh tempo.
-                                            </p>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-md-12">
-                                                <div className="list-group">
-                                                    {books.map((book, iBook) => {
-                                                        return (
-                                                            <BookList
-                                                                key={book.msgid}
-                                                                data={book}
-                                                                number={iBook + 1}
-                                                            />
-                                                        );
-                                                    })}
+                                        <div className="col-md-12">
+                                            <div>
+                                                <h6>LIST PEMINJAMAN BUKU</h6>
+                                            </div>
+                                            <div>
+                                                <p>
+                                                    Berikut ini adalah daftar buku yang kamu pinjam, harap
+                                                    mengembalikan buku sebelum jatuh tempo.
+                                                </p>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-md-12">
+                                                    <div className="card">
+                                                        <div className="card-body">
+                                                            <h6 className="text-center mt-4">
+                                                                Data Buku yang Dipinjam Belum Tersedia.
+                                                            </h6>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    {/*  */}
+                                        {/*  */}
+                                    </div>
                                 </div>
-                            </div>
-                        </section>
+                            </section>
+                        </div>
+                    </div>
+                );
+            } else {
+                return (
+                    <div className="container-xl">
+                        <div className="main-content">
+                            <section className="section">
+                                <div className="section-header">
+                                    {/* <div className="bg-primary rounded wrapper-icon-page-title">
+                                    <span
+                                        className="iconify icon-page-title"
+                                        data-icon="uil:book"
+                                        data-inline="false"
+                                    ></span>
+                                </div> */}
+                                    <h1>Peminjaman Buku</h1>
+                                    {/* <div class="section-header-breadcrumb">
+                            <div class="breadcrumb-item">Buku</div>
+                        </div> */}
+                                </div>
+
+                                <div className="section-body">
+                                    <div className="row">
+                                        {/* mobile only */}
+
+                                        <div className="col-md-12">
+                                            <div>
+                                                <h6>LIST PEMINJAMAN BUKU</h6>
+                                            </div>
+                                            <div>
+                                                <p>
+                                                    Berikut ini adalah daftar buku yang kamu pinjam, harap
+                                                    mengembalikan buku sebelum jatuh tempo.
+                                                </p>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-md-12">
+                                                    <div className="list-group">
+                                                        {books.map((book, iBook) => {
+                                                            return (
+                                                                <BookList
+                                                                    key={book.msgid}
+                                                                    data={book}
+                                                                    number={iBook + 1}
+                                                                />
+                                                            );
+                                                        })}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/*  */}
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
                     </div>
                 );
             }

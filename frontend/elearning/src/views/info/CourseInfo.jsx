@@ -15,6 +15,7 @@ import {
 import CIcon from '@coreui/icons-react'
 import axios from 'axios'
 import { getCourseIDActive, getKeyToken } from 'src/utils/Common'
+import { bool } from 'prop-types'
 
 class CourseInfo extends Component {
 
@@ -22,7 +23,8 @@ class CourseInfo extends Component {
     super()
     this.state = {
       isLoading: true,
-      course: null
+      course: null,
+      showCourseInfo: true,
     }
   }
 
@@ -42,17 +44,17 @@ class CourseInfo extends Component {
 
     if (this.state.isLoading) {
       return (
-          <Fragment>
-              <div class="text-center">
-                  <div class="spinner-border text-primary" role="status">
-                      <span class="sr-only">Loading...</span>
-                  </div>
-              </div>
-          </Fragment>
+        <Fragment>
+          <div class="text-center">
+            <div class="spinner-border text-primary" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        </Fragment>
       )
-  }
+    }
 
-  const course = this.state.course
+    const course = this.state.course
 
     return (
       <>
@@ -78,11 +80,7 @@ class CourseInfo extends Component {
                         <h3 className="text-white text-uppercase banner-course-title">{course.courseTitle}</h3>
                       </div>
                       <div className="col-2">
-                        <span class="dot-menu float-right" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">hehe</span>
-
-                        <div class="dropdown-menu" style={{ marginRight: '103px' }} aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" href="#">Keluar dari kelas</a>
-                        </div>
+                        <span class="dot-menu float-right" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onClick={() => this.setState({ showCourseInfo: !this.state.showCourseInfo })}><span class="iconify text-white" data-icon="uil:info-circle" style={{ fontSize: '32px' }}></span></span>
                       </div>
                     </div>
 
@@ -141,7 +139,7 @@ class CourseInfo extends Component {
                   </div>
                 </div>
 
-                <div className="card-footer bg-white pt-4 pb-4">
+                {this.state.showCourseInfo ? <div className="card-footer bg-white pt-4 pb-4">
                   {course.session.lectures.map((lecture, i) => {
                     return <h6><span className="font-weight-bold">Dosen</span> {course.session.lectures.length > 1 ? i + 1 : ''} {lecture.lecture.lectureName}</h6>
                   })}
@@ -149,7 +147,8 @@ class CourseInfo extends Component {
                   <h6><span className="font-weight-bold">{course.session.room.roomName}</span></h6>
 
                   <h6><span className="font-weight-bold">{course.session.courseSchedule}</span></h6>
-                </div>
+                </div> : null}
+
               </div>
 
             </div>
@@ -192,7 +191,7 @@ class CourseInfo extends Component {
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item">Tenggat : 09.30</li>
                   </ul>
-                  <div className="card-footer btn btn-info custom-button-card-footer-kuis" style={{ border: '0' }}>
+                  <div className="card-footer btn btn-primary custom-button-card-footer-kuis" style={{ border: '0' }}>
                     Kerjakan kuis
                   </div>
                 </div>

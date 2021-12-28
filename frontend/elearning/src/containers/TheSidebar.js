@@ -10,6 +10,7 @@ import {
   CSidebarMinimizer,
   CSidebarNavDropdown,
   CSidebarNavItem,
+  CImg,
 } from '@coreui/react'
 
 import CIcon from '@coreui/icons-react'
@@ -17,8 +18,6 @@ import CIcon from '@coreui/icons-react'
 // sidebar nav config
 import navigation from './_nav'
 import navigationMaterials from './_navMaterials'
-import Logo from './logo.png'
-import LogoMini from './logo_mini.png'
 
 const TheSidebar = () => {
   const dispatch = useDispatch()
@@ -27,23 +26,14 @@ const TheSidebar = () => {
   return (
     <CSidebar
       show={show}
-      onShowChange={(val) => dispatch({type: 'set', sidebarShow: val })} className="c-sidebar-light"
+      onShowChange={(val) => dispatch({ type: 'set', sidebarShow: val })} className="c-sidebar-light"
     >
       <CSidebarBrand className="d-md-down-none" to="/">
-        <img src={Logo} width="160px"  className="c-sidebar-brand-full" />
-        <img src={LogoMini} width="30px"  className="c-sidebar-brand-minimized" />
+        <img src="https://raw.githubusercontent.com/dimasnugroho673/Integrated-Education-Management-System-Frontend/main/assets/images/logo-full.png?token=ALBMY5NYLEZIOVA6IPRS2Y3BZNFAE"
+          width="160px" className="c-sidebar-brand-full" />
 
-        {/* <CIcon
-          className="c-sidebar-brand-full"
-          name="logo-negative"
-          height={35}
-        />
-        <CIcon
-          className="c-sidebar-brand-minimized"
-          name="sygnet"
-          height={35}
-        /> */}
-        
+        <img src="https://raw.githubusercontent.com/dimasnugroho673/Integrated-Education-Management-System-Frontend/main/assets/images/logo-mini.png?token=ALBMY5KF46ASJKJRZWDXGIDBZNFDK" width="30px" className="c-sidebar-brand-minimized" />
+
       </CSidebarBrand>
       <CSidebarNav>
 
@@ -57,7 +47,7 @@ const TheSidebar = () => {
           }}
         />
       </CSidebarNav>
-      <CSidebarMinimizer className="c-d-md-down-none"/>
+      <CSidebarMinimizer className="c-d-md-down-none" />
     </CSidebar>
   )
 }

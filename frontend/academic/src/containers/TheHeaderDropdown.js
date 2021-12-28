@@ -52,7 +52,7 @@ const TheHeaderDropdown = () => {
         <CDropdownItem
           onClick={logOut}>
           <CIcon name="cil-lock-locked" className="mfe-2" />
-          Lock Account
+          Keluar
         </CDropdownItem>
       </CDropdownMenu>
     </CDropdown>
