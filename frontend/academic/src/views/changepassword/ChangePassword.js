@@ -1,28 +1,102 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEye, faEyeSlash, faSpinner } from '@fortawesome/free-solid-svg-icons'
 
-export class ChnagePassword extends Component {
+export class ChangePassword extends Component {
     constructor() {
         super();
         this.state = {
             dataReady: false,
-            books: [],
+            oldpass: '',
+            newpass: '',
+            confirmnewpass: '',
+            error: '',
+            success: '',
+            showOldPass: false,
+            showNewPass: false,
+            showConfirmNewPass: false,
+            isSubmit: false,
+            loadingProcess: false,
         };
     }
 
-    componentDidMount() {
-        const key = localStorage.getItem("lms-sess-key");
-        axios.defaults.headers.common['Authorization'] = `Bearer ${key}`
-        axios
-            .get("https://mock-api-integrated-lms.herokuapp.com/api/v1/loans/book?isFinished=false")
-            .then((result) => {
-                console.log(result)
-                this.setState({
-                    books: result.data.data,
-                    dataReady: true,
-                });
-            });
+    submitLogin = () => {
+
+        this.setState({ isSubmit: true });
+        this.setState({ loadingProcess: true });
+
+        if (this.state.oldpass == '' || this.state.newpass == '' || this.state.confirmnewpass == '') {
+            this.setState({ loadingProcess: false });
+            return false;
+        } else {
+            const data = {
+                oldpasswd: this.state.oldpass,
+                newpasswd: this.state.confirmnewpass
+            }
+
+            const key = localStorage.getItem("lms-sess-key");
+            axios.defaults.headers.common['Authorization'] = `Bearer ${key}`
+            axios.put('https://mock-api-integrated-lms.herokuapp.com/api/v1/user/password', data)
+                .then(result => {
+                    if (result.data.status !== 'error') {
+                        this.setState({ loadingProcess: false });
+                        this.setState({ success: 'Password Berhasil Dirubah!' })
+                    }
+                })
+                .catch(_ => {
+                    this.setState({ loadingProcess: false });
+                    this.setState({ error: 'Password Lama Salah!' })
+                })
+        }
+
+    }
+
+    changePointer = (e) => {
+        e.target.style.cursor = 'pointer'
+    }
+
+    onChangeOldPass = (e) => {
+        const value = e.target.value
+        this.setState({ oldpass: value })
+        this.setState({ error: '' })
+    }
+
+    onChangeNewPass = (e) => {
+        const value = e.target.value
+        this.setState({ newpass: value })
+        this.setState({ error: '' })
+    }
+
+    onChangeConfirmNewPass = (e) => {
+        const value = e.target.value
+        this.setState({ confirmnewpass: value })
+        this.setState({ error: '' })
+    }
+
+    handleShowOldPassword = () => {
+        if (this.state.showOldPass == true) {
+            this.setState({ showOldPass: false })
+        } else {
+            this.setState({ showOldPass: true })
+        }
+    }
+
+    handleShowNewPassword = () => {
+        if (this.state.showNewPass == true) {
+            this.setState({ showNewPass: false })
+        } else {
+            this.setState({ showNewPass: true })
+        }
+    }
+
+    handleShowConfirmNewPassword = () => {
+        if (this.state.showConfirmNewPass == true) {
+            this.setState({ showConfirmNewPass: false })
+        } else {
+            this.setState({ showConfirmNewPass: true })
+        }
     }
 
     render() {
@@ -67,7 +141,21 @@ export class ChnagePassword extends Component {
                                                         <li>Tidak menggunakan password yang telah bocor pada website <b><a href="https://haveibeenpwned.com/">have i been pwned</a></b></li>
                                                     </ul>
                                                 </div>
+
+                                                {this.state.error !== '' && (
+                                                    <div class="alert alert-danger" role="alert" style={{ marginTop: "20px" }}>
+                                                        {this.state.error}
+                                                    </div>
+                                                )}
+
+                                                {this.state.success !== '' && (
+                                                    <div class="alert alert-success" role="alert" style={{ marginTop: "20px" }}>
+                                                        {this.state.success}
+                                                    </div>
+                                                )}
+
                                                 <div className="form-group">
+
                                                     <div className="d-block">
                                                         <label
                                                             htmlFor="password"
@@ -76,14 +164,30 @@ export class ChnagePassword extends Component {
                                                             Password Lama
                                                         </label>
                                                     </div>
-                                                    <input
-                                                        id="password"
-                                                        type="password"
-                                                        className="form-control"
-                                                        name="password"
-                                                        tabIndex="2"
-                                                        required
-                                                    />
+
+                                                    <div className="input-group mb-3">
+                                                        <input
+                                                            id="oldpassword"
+                                                            type={this.state.showOldPass == true ? 'text' : 'password'}
+                                                            className="form-control"
+                                                            name="oldpassword"
+                                                            tabIndex="2"
+                                                            required
+                                                            value={this.state.oldpass}
+                                                            onChange={this.onChangeOldPass}
+                                                        />
+
+                                                        <div className="input-group-append" title="Show Password">
+                                                            <span className="input-group-text bg-semi-white password-show-icon" onClick={this.handleShowOldPassword} onMouseOver={this.changePointer}>
+                                                                {this.state.showOldPass == false ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />}
+                                                            </span>
+                                                        </div>
+
+                                                        {this.state.isSubmit == true && this.state.oldpass == '' ? <div className="invalid-feedback" style={{ display: 'inherit' }}>
+                                                            Password Lama Tidak Boleh Kosong!
+                                                        </div> : null}
+                                                    </div>
+
                                                 </div>
 
                                                 <div className="form-group">
@@ -95,14 +199,31 @@ export class ChnagePassword extends Component {
                                                             Password Baru
                                                         </label>
                                                     </div>
-                                                    <input
-                                                        id="password"
-                                                        type="password"
-                                                        className="form-control"
-                                                        name="password"
-                                                        tabIndex="2"
-                                                        required
-                                                    />
+
+                                                    <div className="input-group mb-3">
+                                                        <input
+                                                            id="newpassword"
+                                                            type={this.state.showNewPass == true ? 'text' : 'password'}
+                                                            className="form-control"
+                                                            name="newpassword"
+                                                            tabIndex="2"
+                                                            required
+                                                            value={this.state.newpass}
+                                                            onChange={this.onChangeNewPass}
+                                                        />
+
+                                                        <div className="input-group-append" title="Show Password">
+                                                            <span className="input-group-text bg-semi-white password-show-icon" onClick={this.handleShowNewPassword} onMouseOver={this.changePointer}>
+                                                                {this.state.showNewPass == false ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />}
+                                                            </span>
+                                                        </div>
+
+                                                        {this.state.isSubmit == true && this.state.newpass == '' ? <div className="invalid-feedback" style={{ display: 'inherit' }}>
+                                                            Password Baru Tidak Boleh Kosong!
+                                                        </div> : null}
+
+                                                    </div>
+
                                                 </div>
 
                                                 <div className="form-group">
@@ -114,25 +235,41 @@ export class ChnagePassword extends Component {
                                                             Ulangi Password Baru
                                                         </label>
                                                     </div>
-                                                    <input
-                                                        id="password"
-                                                        type="password"
-                                                        className="form-control"
-                                                        name="password"
-                                                        tabIndex="2"
-                                                        required
-                                                    />
+
+                                                    <div className="input-group mb-3">
+                                                        <input
+                                                            id="confirmnewpassword"
+                                                            type={this.state.showConfirmNewPass == true ? 'text' : 'password'}
+                                                            className="form-control"
+                                                            name="confirmnewpassword"
+                                                            tabIndex="2"
+                                                            required
+                                                            value={this.state.confirmnewpass}
+                                                            onChange={this.onChangeConfirmNewPass}
+                                                        />
+
+                                                        <div className="input-group-append" title="Show Password">
+                                                            <span className="input-group-text bg-semi-white password-show-icon" onClick={this.handleShowConfirmNewPassword} onMouseOver={this.changePointer}>
+                                                                {this.state.showConfirmNewPass == false ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />}
+                                                            </span>
+                                                        </div>
+
+                                                        {this.state.isSubmit == true && this.state.confirmnewpass == '' ? <div className="invalid-feedback" style={{ display: 'inherit' }}>
+                                                            Konfirmasi Password Baru Tidak Boleh Kosong!
+                                                        </div> : null}
+
+                                                    </div>
+
                                                 </div>
 
                                                 <div className="form-group">
-                                                    <button
-                                                        type="submit"
-                                                        className="btn btn-primary btn-lg btn-block"
-                                                        tabIndex="4"
-                                                    >
-                                                        Ganti Password
-                                                    </button>
 
+                                                    <button type="submit" className="btn btn-primary  btn-lg btn-block" onClick={this.submitLogin} tabIndex="4" > {this.state.loadingProcess == true && (
+                                                        <i
+                                                            className="fa fa-spinner fa-spin"
+                                                            style={{ marginRight: "5px" }}
+                                                        />
+                                                    )} {this.state.loadingProcess == true ? 'Loading' : 'Ganti Password'} </button>
 
                                                 </div>
                                             </div>
@@ -150,4 +287,4 @@ export class ChnagePassword extends Component {
     }
 }
 
-export default ChnagePassword
+export default ChangePassword
