@@ -18,8 +18,8 @@ const Login = () => {
     const [loadingProcess, setLoadingProcess] = useState(false);
 
     useEffect(() => seo({
-        title: 'Focus - Login',
-        metaDescription: 'With some meta description'
+        title: 'LearningHub - Login',
+        metaDescription: 'Login page LearningHub'
     }), []);
 
     const token = localStorage.getItem('lms-sess-key')
@@ -58,7 +58,7 @@ const Login = () => {
             // localStorage.setItem('token', 'testing')
             // setRedirect(true)
 
-            axios.post('https://mock-api-integrated-lms.herokuapp.com/api/v1/login', data)
+            axios.post('http://18.136.126.140/api/v1/login', data)
                 .then(result => {
                     localStorage.setItem('lms-sess-key', result.data.key)
                     window.location.href = "/a/dashboard"
@@ -101,17 +101,7 @@ const Login = () => {
                     <div className="col-lg-5 col-sm-7 mx-auto text-left p-5 col-login-right">
 
                         <section className="mb-5">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="93" height="93" viewBox="0 0 93 93">
-                                <g id="Group_99" data-name="Group 99" transform="translate(-1655 -8)">
-                                    <path id="Path_83" data-name="Path 83" d="M46.5,0A46.5,46.5,0,1,1,0,46.5,46.5,46.5,0,0,1,46.5,0Z" transform="translate(1655 8)" fill="#3f47f4" />
-                                    <g id="Group_98" data-name="Group 98">
-                                        <path id="Subtraction_2" data-name="Subtraction 2" d="M-1979.2,74.438a5.6,5.6,0,0,1-4.124-1.57,5.6,5.6,0,0,1-1.57-4.125V27.864a5.353,5.353,0,0,1,1.387-3.942,5.356,5.356,0,0,1,3.942-1.387h25.112a6.337,6.337,0,0,1,4.088,1.1,4.232,4.232,0,0,1,1.314,3.431,4.139,4.139,0,0,1-1.314,3.358,6.341,6.341,0,0,1-4.088,1.1h-19.2V43.34h4.683A10.077,10.077,0,0,0-1970.107,48a9.964,9.964,0,0,0,.972,4.319h-4.513V68.744a5.727,5.727,0,0,1-1.5,4.162A5.428,5.428,0,0,1-1979.2,74.438Z" transform="translate(3671 8)" fill="#fff" />
-                                        <path id="Path_89" data-name="Path 89" d="M6,0A6,6,0,1,1,0,6,6,6,0,0,1,6,0Z" transform="translate(1704 50)" fill="#47c363" />
-                                        <path id="Path_85" data-name="Path 85" d="M6,0A6,6,0,1,1,0,6,6,6,0,0,1,6,0Z" transform="translate(1709 50)" fill="#f5b62b" />
-                                        <path id="Path_86" data-name="Path 86" d="M6,0A6,6,0,1,1,0,6,6,6,0,0,1,6,0Z" transform="translate(1715 50)" fill="#f24d47" />
-                                    </g>
-                                </g>
-                            </svg>
+                           <img src="https://previews.dropbox.com/p/thumb/ABaqVcsVkmH2cmUb40BB6_mlUfygByXnBeI4Felffd6PbI7EviMt8iaaMls_yBIk99awvLU99H9JEFpGPrPiwV09vUvz4NMaFI-31LmPLM4WgRS-uEP830trg7ZGeh-yHeXnjnJpU_lilutlOE7-lKGYqXEOCVDf7hj6rn0CSQOW3nUCbZkLX5VdQtcQLbVcEYAAfK5OO-GGt7JNRQEQPPGue68dtSh_RoV_wft5-9RaO5b4I9S80fm0Rk0G41W9rxdGxY9K5l9jtHC9ddQPIJwWqVuRBH_TOMK_VUi1YH-ItfXgJUNAJWqez6AGQXsYgIjiDuCFfP_78E78etEP38-ZGqqvQpAhstmYP4oOKrv3kg/p.png?size=2048x1536&size_mode=3" width="280px" alt="" />
                         </section>
 
                         <h1 class="" style={{ fontWeight: 900 }}>Sign in and Let's journey.</h1>
@@ -124,10 +114,10 @@ const Login = () => {
                         )
                         }
 
-                        <form className="mt-5">
+                        <form className="mt-5" onSubmit={() => submitLogin()}>
                             <div class="form-group">
                                 <label for="exampleInputEmail1" style={{ fontWeight: 800 }}>NIM</label>
-                                <input type="email" className={isSubmit == true && username == '' ? 'form-control is-invalid' : 'form-control'} value={username} onChange={onChangeUsername} placeholder="NIM" />
+                                <input type="email" className={isSubmit == true && username == '' ? 'form-control is-invalid' : 'form-control'} value={username} onChange={onChangeUsername} placeholder="NIM" required />
                                 {isSubmit == true && username == '' ? <div class="invalid-feedback">
                                     NIM cannot empty!
                                 </div> : null}
@@ -138,7 +128,7 @@ const Login = () => {
                                 <label for="exampleInputPassword1" style={{ fontWeight: 800 }}>Password</label>
 
                                 <div class="input-group mb-3">
-                                    <input type={showPassword == true ? 'text' : 'password'} style={{ borderRight: 'none' }} className={isSubmit == true && pass == '' ? 'form-control is-invalid' : 'form-control'} placeholder="Password" value={pass} onChange={onChangePassword} />
+                                    <input type={showPassword == true ? 'text' : 'password'} style={{ borderRight: 'none' }} className={isSubmit == true && pass == '' ? 'form-control is-invalid' : 'form-control'} placeholder="Password" value={pass} onChange={onChangePassword} required />
 
                                     <div class="input-group-append" title="Show Password">
                                         <span class="input-group-text bg-semi-white password-show-icon" onClick={handleShowPassword} onMouseOver={changePointer}>
@@ -157,7 +147,7 @@ const Login = () => {
 
 
                             <Ripples>
-                                <button type="button" className="btn btn-primary buttonload" onClick={submitLogin} style={{ minWidth: '100px', fontWeight: 800 }}> {loadingProcess && (
+                                <button type="submit" className="btn btn-primary buttonload" onClick={submitLogin} style={{ minWidth: '100px', fontWeight: 800 }}> {loadingProcess && (
                                     <i
                                         className="fa fa-spinner fa-spin"
                                         style={{ marginRight: "5px" }}
@@ -170,13 +160,7 @@ const Login = () => {
                 </div>
             </Fragment>
         )
-
-
-
     }
-
-
-
 }
 
 export default Login
