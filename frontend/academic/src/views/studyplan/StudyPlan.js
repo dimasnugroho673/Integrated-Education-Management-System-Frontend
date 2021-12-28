@@ -33,7 +33,7 @@ export class StudyPlan extends Component {
         const key = localStorage.getItem("lms-sess-key");
         axios.defaults.headers.common['Authorization'] = `Bearer ${key}`
         axios
-            .get("https://mock-api-integrated-lms.herokuapp.com/api/v1/courses")
+            .get(`${process.env.REACT_APP_API_ENDPOINT}/courses`)
             .then((result) => {
                 console.log(result)
                 this.setState({
@@ -611,6 +611,7 @@ export class StudyPlan extends Component {
                             <CModal
                                 show={this.state.modal}
                                 onClose={() => this.setCloseModal()}
+                                centered={true}
                             >
                                 <CModalHeader closeButton>
                                     <CModalTitle>Ajukan Rencana Studi</CModalTitle>
