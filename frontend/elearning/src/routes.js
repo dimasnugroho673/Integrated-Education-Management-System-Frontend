@@ -25,7 +25,7 @@ const ButtonDropdowns = React.lazy(() => import('./views/buttons/button-dropdown
 const ButtonGroups = React.lazy(() => import('./views/buttons/button-groups/ButtonGroups'));
 const Buttons = React.lazy(() => import('./views/buttons/buttons/Buttons'));
 const Charts = React.lazy(() => import('./views/charts/Charts'));
-const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'));
+// const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'));
 const CoreUIIcons = React.lazy(() => import('./views/icons/coreui-icons/CoreUIIcons'));
 const Flags = React.lazy(() => import('./views/icons/flags/Flags'));
 const Brands = React.lazy(() => import('./views/icons/brands/Brands'));
@@ -38,6 +38,7 @@ const Widgets = React.lazy(() => import('./views/widgets/Widgets'));
 const Users = React.lazy(() => import('./views/users/Users'));
 const User = React.lazy(() => import('./views/users/User'));
 
+const CourseInfo = React.lazy(()=> import('./views/info/CourseInfo'));
 const TableOfContents = React.lazy(() => import('./views/materials/TableOfContents'));
 const Material = React.lazy(() => import('./views/materials/Material'));
 const Quiz = React.lazy(() => import('./views/materials/Quiz'));
@@ -47,7 +48,8 @@ const QuizList = React.lazy(() => import('./views/list/QuizList'));
 
 const routes = [
   // { path: '/', exact: true, name: 'Home' },
-  { path: '/el/:courseID/info', name: 'Dashboard', component: Dashboard },
+  // { path: '/el/:courseID/info', name: 'Dashboard', component: Dashboard },
+  { path: '/el/:courseID/info', name: 'CourseInfo', component: CourseInfo },
   { path: '/el/:courseID/module', exact: true, name: 'TableOfContents', component: TableOfContents },
   { path: '/el/:courseID/module/:moduleID/detail', name: 'CourseContainer', component: CourseContainer },
   { path: '/el/:courseID/assignment', name: 'AssignmentList', component: AssignmentList },

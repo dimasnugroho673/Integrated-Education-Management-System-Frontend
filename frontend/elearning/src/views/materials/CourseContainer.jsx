@@ -70,6 +70,15 @@ export default class CourseContainer extends Component {
         navigator.clipboard.writeText(copyText.value);
     }
 
+    saveLastReadModule = () => {
+        const lastRead = {
+            moduleID: this.state.module.moduleID,
+            moduleTitle: this.state.module.moduleTitle,
+            moduleType: this.state.module.moduleType
+        }
+
+        localStorage.setItem('lms-module-last-read', JSON.stringify(lastRead))
+    }
 
     componentDidMount() {
         this.fetchDetailModule()
@@ -90,6 +99,10 @@ export default class CourseContainer extends Component {
                     </div>
                 </Fragment>
             )
+        }
+
+        if (!this.state.isLoading) {
+            this.saveLastReadModule()
         }
 
         if (module.isActive) {
@@ -126,8 +139,8 @@ export default class CourseContainer extends Component {
 
                         <CButton
                             onClick={() => this.setState({ isShareModuleModalOpen: true })}
-                            className="btn btn-outline-info ml-3">
-                            <CIcon name="cil-share" /> Share modul
+                            className="btn btn-outline-primary ml-3">
+                            <i class="bi bi-share-fill mr-2"></i> Share modul
                         </CButton>
                     </div>
                 </div>

@@ -46,33 +46,41 @@ export default class Quiz extends Component {
     }
 
     startTimer = () => {
-        // alert("start quiz")
-        const deadlineDate = new Date(this.state.content.deadlineDate).getTime();
+        if (this.state.quizSession) {
+            // alert("start quiz")
+            const deadlineDate = new Date(this.state.content.deadlineDate).getTime();
 
-        // Update the count down every 1 second
-        let x = setInterval(function () {
+            // Update the count down every 1 second
+            let x = setInterval(function () {
 
-            // Get today's date and time
-            let now = new Date().getTime();
+                // Get today's date and time
+                let now = new Date().getTime();
 
-            // Find the distance between now and the count down date
-            let distance = deadlineDate - now;
+                // Find the distance between now and the count down date
+                let distance = deadlineDate - now;
 
-            // Time calculations for days, hours, minutes and seconds
-            // let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                // Time calculations for days, hours, minutes and seconds
+                // let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            // Output the result in an element with id="demo"
-            document.querySelector("#text-countdown-timer").innerHTML = `${hours ? hours + '.' : ''}${minutes < 10 ? '0' + minutes : minutes}.${seconds < 10 ? '0' + seconds : seconds}`
+                // Output the result in an element with id="demo"
+                let countDownTimerText = document.querySelector("#text-countdown-timer")
 
-            // If the count down is over, write some text 
-            if (distance < 0) {
-                clearInterval(x);
-                document.querySelector("#text-countdown-timer").innerHTML = "00.00";
-            }
-        }, 1000);
+                if (countDownTimerText) {
+                    countDownTimerText.innerHTML = `${hours ? hours + '.' : ''}${minutes < 10 ? '0' + minutes : minutes}.${seconds < 10 ? '0' + seconds : seconds}`
+                }
+
+                // If the count down is over, write some text 
+                if (distance < 0) {
+                    clearInterval(x);
+                    if (countDownTimerText) {
+                        countDownTimerText.innerHTML = "00.00";
+                    }
+                }
+            }, 1000)
+        }
     }
 
     startQuiz = () => {
@@ -152,6 +160,7 @@ export default class Quiz extends Component {
             console.log(response.data.meta)
 
             this.setState({ quizSession: false })
+            document.getElementById('card-container-comment-module').style.display = "block"
         })
     }
 
@@ -265,16 +274,28 @@ export default class Quiz extends Component {
         if (isDeadline) {
             return (
                 <Fragment>
-               Dah kelewat Deadline boss
-            </Fragment>
+                    Dah kelewat Deadline boss
+                </Fragment>
             )
         }
 
         return (
             <Fragment>
-                Aturan
+                <CRow>
+                    <CCol md="12">
+                        <CCard className="p-4">
+                            <CCardHeader>{this.state.module.moduleTitle}</CCardHeader>
+                            <CCardBody>
+                                <h3>Catatan Quiz</h3>
 
-                <CButton color="primary" onClick={() => this.startQuiz()}>Mulai ujian</CButton>
+                                <div className="mb-5" dangerouslySetInnerHTML={{ __html: this.state.content.additionalInfo }}></div>
+
+                                <CButton color="primary" onClick={() => this.startQuiz()}>Mulai ujian</CButton>
+                            </CCardBody>
+                        </CCard>
+                    </CCol>
+                </CRow>
+
             </Fragment>
         )
     }

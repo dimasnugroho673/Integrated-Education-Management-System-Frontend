@@ -29,7 +29,8 @@ class TableOfContents extends Component {
       isLoading: true,
       modules: [],
       filteredModules: [],
-      keywordFilter: null
+      keywordFilter: null,
+      moduleLastRead: null
     }
   }
 
@@ -106,8 +107,15 @@ class TableOfContents extends Component {
 
   }
 
+  fetchModuleLastRead = () => {
+    const lastRead = JSON.parse(localStorage.getItem('lms-module-last-read'))
+
+    this.setState({ moduleLastRead: lastRead })
+  }
+
   componentDidMount() {
     this.fetchModules()
+    this.fetchModuleLastRead()
   }
 
   render() {
@@ -187,35 +195,20 @@ class TableOfContents extends Component {
                     <div className="col-md-12">
                       <CListGroup>
                         {filteredModules.map(module => {
-                          // if (module.isActive) {
-                            return <Link to={`module/${module.moduleID}/detail`} class="list-group-item list-group-item-action border-0" aria-current="true" style={{ color: module.isActive === false ? '#D3D3D3' : null }}>
-                              <CRow>
-                                <CCol className="col-8 text-left">
-                                  {generateModuleIcon(module.moduleType)} {module.moduleTitle}
-                                </CCol>
+                          return <Link to={`module/${module.moduleID}/detail`} class="list-group-item list-group-item-action border-0" aria-current="true" style={{ color: module.isActive === false ? '#D3D3D3' : null }}>
+                            <CRow>
+                              <CCol className="col-8 text-left">
+                                {generateModuleIcon(module.moduleType)} {module.moduleTitle}
+                              </CCol>
 
-                                {module.isActive === false ? 
+                              {module.isActive === false ?
                                 <CCol className="col-4 text-right">
-                                <button type="button" class="btn btn-outline-danger btn-sm btn-pill custom-btn-badge-danger ml-2" disabled>Belum dibuka</button>
-                                </CCol> 
+                                  <button type="button" class="btn btn-outline-danger btn-sm btn-pill custom-btn-badge-danger ml-2" disabled>Belum dibuka</button>
+                                </CCol>
                                 : null}
 
-                              </CRow>
-                            </Link>
-                          // } else {
-                          //   return <a href="!#" class="list-group-item list-group-item-action border-0 disabled" aria-disabled="true" style={{ color: '#D3D3D3' }}>
-                          //     <div className="row">
-                          //       <div className="col-8 text-left">
-                          //         {generateModuleIcon(module.moduleType)} {module.moduleTitle} {module.isActive ? "hehe" : "alaa"}
-                          //       </div>
-
-                          //       <div className="col-4 text-right">
-                          //         <button type="button" class="btn btn-outline-danger btn-sm btn-pill custom-btn-badge-danger ml-2" disabled>Belum dibuka</button>
-                          //       </div>
-                          //     </div>
-                          //   </a>
-                          // }
-
+                            </CRow>
+                          </Link>
                         })}
 
                       </CListGroup>
@@ -226,16 +219,17 @@ class TableOfContents extends Component {
             </CCol>
 
             <CCol md="4" sm="12">
-              <CCard>
+              <CCard className="p-2">
                 <CCardBody>
                   <div className="row">
                     <div className="col-md-12">
+                      <img src="https://uc33e7a0d11724904d620dae9aeb.previews.dropboxusercontent.com/p/thumb/ABaM4nkqdlI_q5ONPslxdK4J4CuUHRQtNOkHrPoPzqswb3JzuyQpKuYZIkPWeY3Bx4v44hVyy1opWGtXrYyiaqC00Wc2Q4WrDNahG4pYUWaK3BXuZSkM8j_cbugUDB3qdxunniFUB0Vh5pe8LURydvS7wAxoSNVtm5OsxexIGaBSIcLvUz6BGcLdyJloEW3J9Nn1QboYtBdutl4xCPM4v60LZndMpd1qIbwtQ_CJVp0bI9vG50t772sFKnP2_EvQFMhjI3lYXJD2V4FmfT9APMle0rHg8mszyvuR01DWztCXNuVHWFg0gNqzF6fmE1pzPvDjiRlJoBDtzmLsyqPGfC75wTquMEzacbqFO9t9EHOiIQ5HkEESR3dlOdHr8PLGiuQ/p.png" width="110px" alt="" className='my-4' />
                       <h6 className="font-weight-bold">Terakhir dibaca</h6>
                       <br />
-                      <h6>Pengenalan Pemrograman Web</h6>
-                      <small>Tipe : Materi</small>
+                      <h6>{this.state.moduleLastRead.moduleTitle}</h6>
+                      <small className="text-capitalize">Tipe : {this.state.moduleLastRead.moduleType}</small>
 
-                      <button className="btn btn-block btn-info mt-4">Lanjut belajar</button>
+                      <Link to={`/el/${getCourseIDActive()}/module/${this.state.moduleLastRead.moduleID}/detail`} className="btn btn-block btn-primary mt-4">Lanjut belajar</Link>
                     </div>
                   </div>
                 </CCardBody>
