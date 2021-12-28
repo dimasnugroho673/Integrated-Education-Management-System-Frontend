@@ -18,7 +18,7 @@ export class Profile extends Component {
         const key = localStorage.getItem("lms-sess-key");
         axios.defaults.headers.common['Authorization'] = `Bearer ${key}`
         axios
-            .get("https://mock-api-integrated-lms.herokuapp.com/api/v1/user/profile")
+            .get(`${process.env.REACT_APP_API_ENDPOINT}/user/profile`)
             .then((result) => {
                 console.log(result)
                 this.setState({

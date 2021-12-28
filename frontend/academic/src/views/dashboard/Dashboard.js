@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
+import { Redirect } from "react-router-dom";
 import axios from "axios";
 import AnnounInfo from "./AnnounInfo";
 import AlertInfo from "./AlertInfo";
-import { Redirect } from 'react-router-dom';
 
 export default class Dashboard extends Component {
   constructor() {
@@ -11,10 +11,22 @@ export default class Dashboard extends Component {
       dataReady: false,
       announ: [],
       alert: [],
+      profile: [],
     };
   }
 
   componentDidMount() {
+    const key = localStorage.getItem("lms-sess-key");
+    axios.defaults.headers.common['Authorization'] = `Bearer ${key}`
+    axios
+      .get(`${process.env.REACT_APP_API_ENDPOINT}/user/profile`)
+      .then((result) => {
+        console.log(result)
+        this.setState({
+          profile: result.data.data,
+          dataReady: true,
+        });
+      });
     axios
       .get("https://jsonplaceholder.typicode.com/posts?_start=0&_limit=3")
       .then(() => {
@@ -81,6 +93,7 @@ export default class Dashboard extends Component {
   render() {
     const listAnnoun = this.state.announ;
     const listAlert = this.state.alert;
+    const profile = this.state.profile;
 
     const token = localStorage.getItem("lms-sess-key");
     if (!token) {
@@ -92,21 +105,28 @@ export default class Dashboard extends Component {
         <div className="main-content">
           <section className="section">
             <div className="section-body">
-              <div className="card text-white bg-gradient-info">
+              <div className="card text-white bg-dashboard">
                 <div className="card-body mt-2">
                   <div className="card-body-content">
-                    {/* <img src="../image/ilus_background_class.svg" className="ilus-home-learning" alt="" srcset="" /> */}
-                    <div className="row">
-                      <div className="col-10">
-                        <h2>
-                          Selamat Datang M. Wahyu Irgan Agustino
-                        </h2>
+
+                    <div style={{ display: 'inline-block' }}>
+                      <div className="row">
+                        <div className="col-12">
+                          <h2>
+                            Selamat Datang {profile.name}
+                          </h2>
+                        </div>
                       </div>
+                      <p>
+                        Dapatkan informasi terkini mengenai perkuliahan anda
+                        disini.
+                      </p>
                     </div>
-                    <p>
-                      Dapatkan informasi terkini mengenai perkuliahan anda
-                      disini.
-                    </p>
+
+                    <div style={{ display: 'inline-block', float: 'right' }}>
+                      <img src="../assets/image/header_illustration.png" style={{ width: '200px', height: '200px' }} className="ilus-home-learning" alt="" srcset="" />
+                    </div>
+
                   </div>
                 </div>
               </div>
@@ -152,14 +172,14 @@ export default class Dashboard extends Component {
           <div className="main-content">
             <section className="section">
               <div className="section-body">
-                <div className="card text-white bg-gradient-info">
+                <div className="card text-white bg-dashboard">
                   <div className="card-body mt-2">
                     <div className="card-body-content">
                       {/* <img src="../image/ilus_background_class.svg" className="ilus-home-learning" alt="" srcset="" /> */}
                       <div className="row">
                         <div className="col-10">
                           <h2>
-                            Selamat Datang M. Wahyu Irgan Agustino
+                            Selamat Datang {profile.name}
                           </h2>
                         </div>
                       </div>
@@ -212,14 +232,14 @@ export default class Dashboard extends Component {
           <div className="main-content">
             <section className="section">
               <div className="section-body">
-                <div className="card text-white bg-gradient-info">
+                <div className="card text-white bg-dashboard">
                   <div className="card-body mt-2">
                     <div className="card-body-content">
                       {/* <img src="../image/ilus_background_class.svg" className="ilus-home-learning" alt="" srcset="" /> */}
                       <div className="row">
                         <div className="col-10">
                           <h2>
-                            Selamat Datang M. Wahyu Irgan Agustino
+                            Selamat Datang {profile.name}
                           </h2>
                         </div>
                       </div>
@@ -268,14 +288,14 @@ export default class Dashboard extends Component {
           <div className="main-content">
             <section className="section">
               <div className="section-body">
-                <div className="card text-white bg-gradient-info">
+                <div className="card text-white bg-dashboard">
                   <div className="card-body mt-2">
                     <div className="card-body-content">
                       {/* <img src="../image/ilus_background_class.svg" className="ilus-home-learning" alt="" srcset="" /> */}
                       <div className="row">
                         <div className="col-10">
                           <h2>
-                            Selamat Datang M. Wahyu Irgan Agustino
+                            Selamat Datang {profile.name}
                           </h2>
                         </div>
                       </div>
@@ -307,6 +327,7 @@ export default class Dashboard extends Component {
                             color={
                               "activity-icon bg-primary text-white shadow-primary"
                             }
+                            url="/book"
                           />
                         );
                       } else if (announ.type === "Labs") {
@@ -318,6 +339,7 @@ export default class Dashboard extends Component {
                             color={
                               "activity-icon bg-success text-white shadow-primary"
                             }
+                            url="/tool"
                           />
                         );
                       } else if (announ.type === "General") {
@@ -357,21 +379,28 @@ export default class Dashboard extends Component {
           <div className="main-content">
             <section className="section">
               <div className="section-body">
-                <div className="card text-white bg-gradient-info">
+                <div className="card text-white bg-dashboard">
                   <div className="card-body mt-2">
                     <div className="card-body-content">
-                      {/* <img src="../image/ilus_background_class.svg" className="ilus-home-learning" alt="" srcset="" /> */}
-                      <div className="row">
-                        <div className="col-10">
-                          <h2>
-                            Selamat Datang M. Wahyu Irgan Agustino
-                          </h2>
+
+                      <div style={{ display: 'inline-block' }}>
+                        <div className="row">
+                          <div className="col-12">
+                            <h2>
+                              Selamat Datang {profile.name}
+                            </h2>
+                          </div>
                         </div>
+                        <p>
+                          Dapatkan informasi terkini mengenai perkuliahan anda
+                          disini.
+                        </p>
                       </div>
-                      <p>
-                        Dapatkan informasi terkini mengenai perkuliahan anda
-                        disini.
-                      </p>
+
+                      <div style={{ display: 'inline-block', float: 'right' }}>
+                        <img src="../assets/image/header_illustration.png" style={{ width: '200px', height: '200px' }} className="ilus-home-learning" alt="" srcset="" />
+                      </div>
+
                     </div>
                   </div>
                 </div>
@@ -397,6 +426,7 @@ export default class Dashboard extends Component {
                             color={
                               "activity-icon bg-primary text-white shadow-primary"
                             }
+                            url="/book"
                           />
                         );
                       } else if (announ.type === "Labs") {
@@ -408,6 +438,7 @@ export default class Dashboard extends Component {
                             color={
                               "activity-icon bg-success text-white shadow-primary"
                             }
+                            url="/tool"
                           />
                         );
                       } else if (announ.type === "General") {
