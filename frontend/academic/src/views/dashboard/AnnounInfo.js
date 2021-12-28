@@ -1,9 +1,15 @@
 import React, { Component } from "react";
 
 class AnnounInfo extends Component {
+
+  handleClickMaterial = (url) => {
+    window.location = url;
+  }
+
   render() {
     return (
-      <div className="card">
+      <div className="card"
+        onClick={() => this.handleClickMaterial(this.props.url)}>
         <div className="col-12 col-sm-12 col-lg-12">
           <ul className="list-unstyled list-unstyled-border list-unstyled-noborder">
             <li className="media">

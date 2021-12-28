@@ -16,7 +16,7 @@ export class Book extends Component {
         const key = localStorage.getItem("lms-sess-key");
         axios.defaults.headers.common['Authorization'] = `Bearer ${key}`
         axios
-            .get("https://mock-api-integrated-lms.herokuapp.com/api/v1/loans/book?isFinished=false")
+            .get(`${process.env.REACT_APP_API_ENDPOINT}/loans/book?isFinished=false`)
             .then((result) => {
                 console.log(result)
                 this.setState({

@@ -59,7 +59,7 @@ export class StudyPlan extends Component {
         const key = localStorage.getItem("lms-sess-key");
         axios.defaults.headers.common['Authorization'] = `Bearer ${key}`
         axios
-            .post("https://mock-api-integrated-lms.herokuapp.com/api/v1/user/course", data)
+            .post(`${process.env.REACT_APP_API_ENDPOINT}/user/course`, data)
             .then((result) => {
                 if (result.data.status == 'success') {
                     console.log(result)

@@ -38,7 +38,7 @@ export class ChangePassword extends Component {
 
             const key = localStorage.getItem("lms-sess-key");
             axios.defaults.headers.common['Authorization'] = `Bearer ${key}`
-            axios.put('https://mock-api-integrated-lms.herokuapp.com/api/v1/user/password', data)
+            axios.put(`${process.env.REACT_APP_API_ENDPOINT}/user/password`, data)
                 .then(result => {
                     if (result.data.status !== 'error') {
                         this.setState({ loadingProcess: false });
