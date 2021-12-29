@@ -31,7 +31,7 @@ class LectureList extends Component {
           onClick={() => this.handleClickMaterial(this.props.data.courseID, this.props.data.session.courseSessionID,
             this.props.data.courseCode, this.props.data.courseTitle, this.props.data.courseScope)}>
           <div className="row">
-            <div className="col-3" style={{ verticalAlign: "middle", textAlign: "center" }}>
+            <div className="col-4" style={{ verticalAlign: "middle", textAlign: "center" }}>
               <img src={"https://raw.githubusercontent.com/dimasnugroho673/Integrated-Education-Management-System-Frontend/main/assets/images/ilus-course.jpg?token=ALBMY5KE2BN7QITSKABLORTBZNPFM"} className="image-course-thumbnail ml-2" alt={"Image " + this.props.data.courseTitle}></img>
             </div>
             <div className="col-7 text-left">

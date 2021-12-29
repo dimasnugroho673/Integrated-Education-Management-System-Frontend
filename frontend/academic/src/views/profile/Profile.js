@@ -115,7 +115,29 @@ export class Profile extends Component {
                                                     return (
                                                         <div className="card">
                                                             <div className="card-body">
-                                                                <h3>TAB 1 clicked!</h3>
+                                                                <h3>Data Umum</h3>
+                                                                <div className="row">
+                                                                    <div className="col-md-6" style={{ marginBottom: '10px' }}>
+                                                                        <div><b>Email</b></div>
+                                                                        <div>{profile.email}</div>
+                                                                        <div><b>Nomor HP Aktif</b></div>
+                                                                        <div>082190807687</div>
+                                                                        <div><b>Kab/Kota Lahir</b></div>
+                                                                        <div>Batam</div>
+                                                                        <div><b>Tanggal Lahir</b></div>
+                                                                        <div>12 Juni 1999</div>
+                                                                        <div><b>Nomor Induk Kependudukan</b></div>
+                                                                        <div>2171121206991111</div>
+                                                                    </div>
+                                                                    <div className="col-md-6" style={{ marginBottom: '10px' }}>
+                                                                        <div><b>Program Studi</b></div>
+                                                                        <div>Teknik Informatika</div>
+                                                                        <div><b>Fakultas</b></div>
+                                                                        <div>Teknik</div>
+                                                                        <div><b>UKT</b></div>
+                                                                        <div>Rp. 2.400.000,00</div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     )
@@ -123,7 +145,29 @@ export class Profile extends Component {
                                                     return (
                                                         <div className="card">
                                                             <div className="card-body">
-                                                                <h3>TAB 2 clicked!</h3>
+                                                                <h3>Keluarga</h3>
+                                                                <div className="row">
+                                                                    <div className="col-md-6" style={{ marginBottom: '10px' }}>
+                                                                        <div><b>Nama Ayah</b></div>
+                                                                        <div>Budi Kusuma</div>
+                                                                        <div><b>Nomor HP Aktif</b></div>
+                                                                        <div>085608765478</div>
+                                                                        <div><b>Pekerjaan</b></div>
+                                                                        <div>Wiraswasta</div>
+                                                                        <div><b>Pendidikan</b></div>
+                                                                        <div>SLTA/Sederajat</div>
+                                                                    </div>
+                                                                    <div className="col-md-6" style={{ marginBottom: '10px' }}>
+                                                                        <div><b>Nama Ibu</b></div>
+                                                                        <div>Ayu Surayu</div>
+                                                                        <div><b>Nomor HP Aktif</b></div>
+                                                                        <div>089671829673</div>
+                                                                        <div><b>Pekerjaan</b></div>
+                                                                        <div>Ibu Rumah Tangga</div>
+                                                                        <div><b>Pendidikan</b></div>
+                                                                        <div>SLTA/Sederajat</div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     )
@@ -131,7 +175,13 @@ export class Profile extends Component {
                                                     return (
                                                         <div className="card">
                                                             <div className="card-body">
-                                                                <h3>TAB 3 clicked!</h3>
+                                                                <h3>Alamat</h3>
+                                                                <div className="row">
+                                                                    <div className="col-md-12" style={{ marginBottom: '10px' }}>
+                                                                        <div><b>Alamat</b></div>
+                                                                        <div>Jl. Centre Point, Tlk. Tering, Kec. Batam Kota, Kota Batam, Kepulauan Riau 29444</div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     )
@@ -139,7 +189,27 @@ export class Profile extends Component {
                                                     return (
                                                         <div className="card">
                                                             <div className="card-body">
-                                                                <h3>TAB 4 clicked!</h3>
+                                                                <h3>Data Akademik</h3>
+                                                                <div className="row">
+                                                                    <div className="col-md-6" style={{ marginBottom: '10px' }}>
+                                                                        <div><b>Angkatan</b></div>
+                                                                        <div>2017</div>
+                                                                        <div><b>Tanggal Masuk</b></div>
+                                                                        <div>7 Juli 2017</div>
+                                                                        <div><b>Tanggal Lulus</b></div>
+                                                                        <div>-</div>
+                                                                        <div><b>Jalur Masuk</b></div>
+                                                                        <div>SBMPTN</div>
+                                                                    </div>
+                                                                    <div className="col-md-6" style={{ marginBottom: '10px' }}>
+                                                                        <div><b>IPK</b></div>
+                                                                        <div>3.31</div>
+                                                                        <div><b>SKS Ditempuh</b></div>
+                                                                        <div>65</div>
+                                                                        <div><b>Dosen PA</b></div>
+                                                                        <div>Ferliansyah Putra, S.T., M.T.</div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     )
