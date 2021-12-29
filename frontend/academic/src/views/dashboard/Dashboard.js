@@ -113,7 +113,7 @@ export default class Dashboard extends Component {
                       <div style={{ display: 'inline-block' }}>
                         <div className="row">
                           <div className="col-12">
-                            <h2>
+                            <h2 style={{ color: '#fff' }}>
                               Selamat Datang {profile.name}
                             </h2>
                           </div>
@@ -181,7 +181,7 @@ export default class Dashboard extends Component {
                         {/* <img src="../image/ilus_background_class.svg" className="ilus-home-learning" alt="" srcset="" /> */}
                         <div className="row">
                           <div className="col-10">
-                            <h2>
+                            <h2 style={{ color: '#fff' }}>
                               Selamat Datang {profile.name}
                             </h2>
                           </div>
@@ -243,7 +243,7 @@ export default class Dashboard extends Component {
                         {/* <img src="../image/ilus_background_class.svg" className="ilus-home-learning" alt="" srcset="" /> */}
                         <div className="row">
                           <div className="col-10">
-                            <h2>
+                            <h2 style={{ color: '#fff' }}>
                               Selamat Datang {profile.name}
                             </h2>
                           </div>
@@ -301,7 +301,7 @@ export default class Dashboard extends Component {
                         {/* <img src="../image/ilus_background_class.svg" className="ilus-home-learning" alt="" srcset="" /> */}
                         <div className="row">
                           <div className="col-10">
-                            <h2>
+                            <h2 style={{ color: '#fff' }}>
                               Selamat Datang {profile.name}
                             </h2>
                           </div>
@@ -395,7 +395,7 @@ export default class Dashboard extends Component {
                         <div style={{ display: 'inline-block' }}>
                           <div className="row">
                             <div className="col-12">
-                              <h2>
+                              <h2 style={{ color: '#fff' }}>
                                 Selamat Datang {profile.name}
                               </h2>
                             </div>
