@@ -2,11 +2,25 @@
 import React, { Component } from "react";
 
 class LectureList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      coursePlan: [],
+      courseActive: [],
+    };
+  }
 
-  handleClickMaterial(courseId, courseSessionId) {
+  handleClickMaterial(courseId, courseSessionId, courseCode, courseTitle, courseScope) {
+    this.state.courseActive.push({
+      courseId: courseId,
+      courseCode: courseCode,
+      courseTitle: courseTitle,
+      courseScope: courseScope
+    })
     window.location.href = "/el/" + courseId + "/info";
     localStorage.setItem("course-id-active", courseId);
     localStorage.setItem("course-session-id-active", courseSessionId);
+    localStorage.setItem("course-data-active", JSON.stringify(this.state.courseActive));
   }
 
   render() {
@@ -14,7 +28,8 @@ class LectureList extends Component {
       <div className="col-md-4">
         <div
           className="card card-course p-2"
-          onClick={() => this.handleClickMaterial(this.props.data.courseID, this.props.data.session.courseSessionID)}>
+          onClick={() => this.handleClickMaterial(this.props.data.courseID, this.props.data.session.courseSessionID,
+            this.props.data.courseCode, this.props.data.courseTitle, this.props.data.courseScope)}>
           <div className="row">
             <div className="col-3" style={{ verticalAlign: "middle", textAlign: "center" }}>
               <img src={"https://raw.githubusercontent.com/dimasnugroho673/Integrated-Education-Management-System-Frontend/main/assets/images/ilus-course.jpg?token=ALBMY5KE2BN7QITSKABLORTBZNPFM"} className="image-course-thumbnail ml-2" alt={"Image " + this.props.data.courseTitle}></img>
