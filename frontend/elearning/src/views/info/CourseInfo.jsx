@@ -14,8 +14,9 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import axios from 'axios'
-import { getCourseIDActive, getKeyToken } from 'src/utils/Common'
+import { getCourseDataActive, getCourseIDActive, getKeyToken } from 'src/utils/Common'
 import { bool } from 'prop-types'
+import { Link } from 'react-router-dom'
 
 class CourseInfo extends Component {
 
@@ -62,11 +63,12 @@ class CourseInfo extends Component {
 
           <nav aria-label="breadcrumb" className="breadcrumb-nav">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item"><a href="#">Library</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Data</li>
+              <li class="breadcrumb-item"><a href={'/a/dashboard'}>Dashboard</a></li>
+              <li class="breadcrumb-item"><Link to={`/el/${getCourseIDActive()}/info`}>{getCourseDataActive().courseTitle}</Link></li>
+              <li class="breadcrumb-item active" aria-current="page">List Quiz</li>
             </ol>
           </nav>
+
           <section class="section">
 
             <div class="section-body">
@@ -99,7 +101,7 @@ class CourseInfo extends Component {
                               <h4>Materi diunggah</h4>
                             </div>
                             <div class="card-body">
-                              10
+                              {course.session.dataCounter.material}
                             </div>
                           </div>
                         </div>
@@ -114,7 +116,7 @@ class CourseInfo extends Component {
                               <h4>Kuis diberikan</h4>
                             </div>
                             <div class="card-body">
-                              42
+                              {course.session.dataCounter.quiz}
                             </div>
                           </div>
                         </div>
@@ -126,10 +128,10 @@ class CourseInfo extends Component {
                           </div>
                           <div class="card-wrap">
                             <div class="card-header">
-                              <h4>Tugas dikerjakan</h4>
+                              <h4>Tugas diberikan</h4>
                             </div>
                             <div class="card-body">
-                              1201
+                              {course.session.dataCounter.assignment}
                             </div>
                           </div>
                         </div>

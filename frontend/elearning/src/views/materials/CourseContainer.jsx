@@ -24,9 +24,10 @@ import CIcon from '@coreui/icons-react'
 import Material from './Material'
 import Quiz from "./Quiz"
 import Assignment from "./Assignment"
-import { getCourseIDActive, getCourseSessionIDActive, getKeyToken, transformStatusModuleStyle, transformStatusQuizReadable } from "src/utils/Common"
+import { getCourseDataActive, getCourseIDActive, getCourseSessionIDActive, getKeyToken, transformStatusModuleStyle, transformStatusQuizReadable } from "src/utils/Common"
 import axios from "axios"
 import ModuleInactiveInfoCard from "src/components/ModuleInactiveInfoCard"
+import { Link } from "react-router-dom"
 
 export default class CourseContainer extends Component {
     constructor(props) {
@@ -59,7 +60,7 @@ export default class CourseContainer extends Component {
     }
 
     handleCopyModuleLink = () => {
-          /* Get the text field */
+        /* Get the text field */
         let copyText = document.getElementById("input-module-link");
 
         /* Select the text field */
@@ -124,12 +125,14 @@ export default class CourseContainer extends Component {
 
                 <div className="row my-3">
                     <div className="col-md-6">
-                        <CBreadcrumb>
-                            <CBreadcrumbItem>
-                                <CLink>Pemrograman Web</CLink>
-                            </CBreadcrumbItem>
-                            <CBreadcrumbItem active>Apache, NginX</CBreadcrumbItem>
-                        </CBreadcrumb>
+                        <nav aria-label="breadcrumb" className="breadcrumb-nav">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href={'/a/dashboard'}>Dashboard</a></li>
+                                <li class="breadcrumb-item"><Link to={`/el/${getCourseIDActive()}/info`}>{getCourseDataActive().courseTitle}</Link></li>
+                                <li class="breadcrumb-item"><Link to={`/el/${getCourseIDActive()}/module`}>Modul</Link></li>
+                                <li class="breadcrumb-item active" aria-current="page">{module.moduleTitle}</li>
+                            </ol>
+                        </nav>
                     </div>
 
                     <div className="col-md-6 text-right">
@@ -171,16 +174,16 @@ export default class CourseContainer extends Component {
                     centered={true}
                     size="lg"
                 >
-                        <CModalHeader>
-                            <CModalTitle>Share modul <strong>{module.moduleTitle}</strong></CModalTitle>
-                        </CModalHeader>
-                        <CModalBody>
-                            <CRow>
-                                <CCol className="col-10"><CInput type="text" id="input-module-link" value={window.location.href} disabled /></CCol>
-                                <CCol className="col-2"><CButton color="primary" variant="outline" className="btn-block" onClick={e => this.handleCopyModuleLink()}>Copy link</CButton></CCol>
-                            </CRow>
-                            
-                        </CModalBody>
+                    <CModalHeader>
+                        <CModalTitle>Share modul <strong>{module.moduleTitle}</strong></CModalTitle>
+                    </CModalHeader>
+                    <CModalBody>
+                        <CRow>
+                            <CCol className="col-10"><CInput type="text" id="input-module-link" value={window.location.href} disabled /></CCol>
+                            <CCol className="col-2"><CButton color="primary" variant="outline" className="btn-block" onClick={e => this.handleCopyModuleLink()}>Copy link</CButton></CCol>
+                        </CRow>
+
+                    </CModalBody>
                 </CModal>
 
             </div>

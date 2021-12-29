@@ -1,4 +1,5 @@
 import { CButton } from "@coreui/react"
+import { Link } from "react-router-dom"
 
 export const transformStatusQuizReadable = (status) => { 
     if (status) {
@@ -21,11 +22,15 @@ export const showActionOpenQuiz = (isActive, isComplete, moduleID) => {
         if (isComplete) {
             return "Sudah dikerjakan"
         } else {
-            return <CButton type="button" color="primary" variant="outline" onClick={e => window.location.href = `material/${moduleID}?page=1` } size="sm">Kerjakan</CButton>
+            return <Link to={`/el/${getCourseIDActive()}/module/${moduleID}/detail`} className="btn btn-outline-primary btn-sm">Kerjakan</Link>
         }
     } else {
         return ""
     }
+}
+
+export const getCourseDataActive = () => {
+    return JSON.parse(localStorage.getItem('course-data-active'))
 }
 
 export const getCourseIDActive = () => {
