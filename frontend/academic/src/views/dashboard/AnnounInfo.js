@@ -13,9 +13,9 @@ class AnnounInfo extends Component {
         <div className="col-12 col-sm-12 col-lg-12">
           <ul className="list-unstyled list-unstyled-border list-unstyled-noborder">
             <li className="media">
-              <div className="card-body ">
+              <div className="card-body">
                 <div className="row">
-                  <div className="col-2">
+                  <div className="col-3">
                     <div className="activities">
                       <div className="activity">
                         <div className={this.props.color}>
@@ -24,7 +24,7 @@ class AnnounInfo extends Component {
                       </div>
                     </div>
                   </div>
-                  <div className="col-10">
+                  <div className="col-9">
                     <div className="media-title mb-1">
                       {this.props.data.title}
                     </div>

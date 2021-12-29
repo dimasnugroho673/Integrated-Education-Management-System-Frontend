@@ -9,7 +9,7 @@ class AlertInfo extends Component {
             <li className="media">
               <div className="card-body">
                 <div className="row">
-                  <div className="col-2">
+                  <div className="col-3">
                     <div className="activities">
                       <div className="activity">
                         <div className="activity-icon bg-danger text-white shadow-primary">
@@ -18,7 +18,7 @@ class AlertInfo extends Component {
                       </div>
                     </div>
                   </div>
-                  <div className="col-10">
+                  <div className="col-9">
                     <div className="media-title mb-1">
                       {this.props.data.title}
                     </div>
