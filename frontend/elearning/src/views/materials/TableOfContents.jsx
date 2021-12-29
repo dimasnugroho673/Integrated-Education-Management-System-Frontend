@@ -17,7 +17,7 @@ import {
   CLabel,
   CSelect
 } from '@coreui/react'
-import { generateModuleIcon, getCourseIDActive, getCourseSessionIDActive, getKeyToken } from 'src/utils/Common'
+import { generateModuleIcon, getCourseDataActive, getCourseIDActive, getCourseSessionIDActive, getKeyToken } from 'src/utils/Common'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
@@ -138,11 +138,11 @@ class TableOfContents extends Component {
     return (
       <>
         <div class="container-lg">
-          <nav aria-label="breadcrumb" className="breadcrumb-nav">
+          <nav aria-label="breadcrumb" className="breadcrumb-nav mb-3">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item"><a href="#">Library</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Data</li>
+              <li class="breadcrumb-item"><a href={'/a/dashboard'}>Dashboard</a></li>
+              <li class="breadcrumb-item"><Link to={`/el/${getCourseIDActive()}/info`}>{getCourseDataActive().courseTitle}</Link></li>
+              <li class="breadcrumb-item active" aria-current="page">Silabus</li>
             </ol>
           </nav>
 

@@ -266,7 +266,18 @@ export default class Quiz extends Component {
         if (this.state.module.score) {
             return (
                 <Fragment>
-                    Scorenya adalah...
+                    <CRow>
+                        <CCol md="12">
+                            <CCard className="p-4">
+                                <CCardHeader>{this.state.module.moduleTitle}</CCardHeader>
+                                <CCardBody>
+                                    <div class="alert alert-info" role="alert">
+                                        Mohon tunggu, nilai anda sedang dicek oleh dosen
+                                    </div>
+                                </CCardBody>
+                            </CCard>
+                        </CCol>
+                    </CRow>
                 </Fragment>
             )
         }
@@ -274,7 +285,18 @@ export default class Quiz extends Component {
         if (isDeadline) {
             return (
                 <Fragment>
-                    Dah kelewat Deadline boss
+                    <CRow>
+                        <CCol md="12">
+                            <CCard className="p-4">
+                                <CCardHeader>{this.state.module.moduleTitle}</CCardHeader>
+                                <CCardBody>
+                                    <div class="alert alert-danger" role="alert">
+                                        Anda tidak dapat mengerjakan kuis, telah melewati deadline
+                                    </div>
+                                </CCardBody>
+                            </CCard>
+                        </CCol>
+                    </CRow>
                 </Fragment>
             )
         }
@@ -295,7 +317,6 @@ export default class Quiz extends Component {
                         </CCard>
                     </CCol>
                 </CRow>
-
             </Fragment>
         )
     }

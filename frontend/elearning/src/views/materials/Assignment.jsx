@@ -180,9 +180,11 @@ export default class Assignment extends Component {
 
                                 </Fragment> : null}
 
-                                {!this.state.content.submittedAssignment ? <button type="submit" class="btn btn-primary btn-block">Kirim tugas</button> : <p className="text-center font-weight-bold text-success">Tugas sudah dikumpulkan</p>}
+                                {this.state.content.submittedAssignment ? <p className="text-center font-weight-bold text-success">Tugas sudah dikumpulkan</p> : null}
 
-                                {this.state.isDeadline ? <p className="text-danger">Anda telat mengumpulkan tugas.</p> : null}
+                                {!this.state.content.submittedAssignment && !this.state.isDeadline ? <button type="submit" class="btn btn-primary btn-block">Kirim tugas</button> : null}
+
+                                {!this.state.content.submittedAssignment && this.state.isDeadline ? <p className="text-danger">Anda telat mengumpulkan tugas.</p> : null}
                                 </CForm>
 
                             </CCardBody>
