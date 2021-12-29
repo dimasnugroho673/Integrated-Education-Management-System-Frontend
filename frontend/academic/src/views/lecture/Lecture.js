@@ -43,7 +43,7 @@ export default class Lecture extends Component {
 
         if (this.state.dataReady === false) {
             return (
-                <div class="container-xl">
+                <div class="container-lg">
                     <div className="main-content">
                         <section className="section">
                             <div className="section-header">
@@ -99,7 +99,7 @@ export default class Lecture extends Component {
         } else {
             if (CourseList.length === 0) {
                 return (
-                    <div class="container-xl">
+                    <div class="container-lg">
                         <div className="main-content">
                             <section className="section">
                                 <div className="section-header">
@@ -152,7 +152,7 @@ export default class Lecture extends Component {
                 );
             } else {
                 return (
-                    <div class="container-xl">
+                    <div class="container-lg">
                         <div className="main-content">
                             <section className="section">
                                 <div className="section-header">

@@ -42,7 +42,7 @@ export class Profile extends Component {
 
 
         return (
-            <div className="container-xl">
+            <div className="container-lg">
                 <div className="main-content">
                     <section className="section">
                         <div className="section-header">

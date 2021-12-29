@@ -128,7 +128,7 @@ export class StudyPlan extends Component {
 
         if (this.state.dataReady === false) {
             return (
-                <div class="container-xl">
+                <div class="container-lg">
                     <div className="main-content-plan">
                         <section className="section">
                             <div className="section-header">
@@ -278,7 +278,7 @@ export class StudyPlan extends Component {
         } else {
             if (coursePlan.length === 0) {
                 return (
-                    <div class="container-xl">
+                    <div class="container-lg">
                         <div className="main-content-plan">
                             <section className="section">
                                 <div className="section-header">
@@ -425,7 +425,7 @@ export class StudyPlan extends Component {
                 );
             } else {
                 return (
-                    <div class="container-xl">
+                    <div class="container-lg">
                         <div className="main-content-plan">
                             <section className="section">
                                 <div className="section-header">

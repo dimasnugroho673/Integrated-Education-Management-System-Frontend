@@ -102,7 +102,7 @@ export class Academic extends Component {
 
         if (this.state.dataReady === false) {
             return (
-                <div className="container-xl">
+                <div className="container-lg">
                     <div className="main-content">
                         <section className="section">
                             <div className="section-header">
@@ -145,7 +145,7 @@ export class Academic extends Component {
         } else {
             if (courseHistory.length === 0) {
                 return (
-                    <div className="container-xl">
+                    <div className="container-lg">
                         <div className="main-content">
                             <section className="section">
                                 <div className="section-header">
@@ -226,7 +226,7 @@ export class Academic extends Component {
                 );
             } else {
                 return (
-                    <div className="container-xl">
+                    <div className="container-lg">
                         <div className="main-content">
                             <section className="section">
                                 <div className="section-header">

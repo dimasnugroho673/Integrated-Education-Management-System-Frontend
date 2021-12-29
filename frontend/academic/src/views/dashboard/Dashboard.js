@@ -102,7 +102,7 @@ export default class Dashboard extends Component {
 
     if (this.state.dataReady === false) {
       return (
-        <div class="container-xl">
+        <div class="container-lg">
           <div className="main-content">
             <section className="section">
               <div className="section-body">
@@ -171,7 +171,7 @@ export default class Dashboard extends Component {
     } else {
       if (listAnnoun.length === 0 && listAlert.length === 0) {
         return (
-          <div class="container-xl">
+          <div class="container-lg">
             <div className="main-content">
               <section className="section">
                 <div className="section-body">
@@ -233,7 +233,7 @@ export default class Dashboard extends Component {
         );
       } else if (listAnnoun.length === 0) {
         return (
-          <div class="container-xl">
+          <div class="container-lg">
             <div className="main-content">
               <section className="section">
                 <div className="section-body">
@@ -291,7 +291,7 @@ export default class Dashboard extends Component {
         );
       } else if (listAlert.length === 0) {
         return (
-          <div class="container-xl">
+          <div class="container-lg">
             <div className="main-content">
               <section className="section">
                 <div className="section-body">
@@ -384,7 +384,7 @@ export default class Dashboard extends Component {
         );
       } else {
         return (
-          <div class="container-xl">
+          <div class="container-lg">
             <div className="main-content">
               <section className="section">
                 <div className="section-body">

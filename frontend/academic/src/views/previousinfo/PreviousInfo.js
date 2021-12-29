@@ -90,7 +90,7 @@ export class PreviousInfo extends Component {
 
         if (this.state.dataReady === false) {
             return (
-                <div className="container-xl">
+                <div className="container-lg">
                     <div className="main-content">
                         <section className="section">
                             <div className="section-header">
@@ -137,7 +137,7 @@ export class PreviousInfo extends Component {
         } else {
             if (listAnnoun.length === 0 && listAlert.length === 0) {
                 return (
-                    <div className="container-xl">
+                    <div className="container-lg">
                         <div className="main-content">
                             <section className="section">
                                 <div className="section-header">
@@ -181,7 +181,7 @@ export class PreviousInfo extends Component {
                 );
             } else {
                 return (
-                    <div className="container-xl">
+                    <div className="container-lg">
                         <div className="main-content">
                             <section className="section">
                                 <div className="section-header">
