@@ -25,7 +25,7 @@ import CIcon from '@coreui/icons-react'
 import Material from './Material'
 import Moment from 'react-moment'
 import 'moment/locale/id'
-import moment from "moment"
+import moment, { min } from "moment"
 import ModuleSubmittedAssignmentAttachmentRow from "src/components/ModuleSubmittedAssignmentAttachmentRow"
 import { getCourseIDActive, getCourseSessionIDActive, getKeyToken } from "src/utils/Common"
 import axios from "axios"
@@ -108,7 +108,7 @@ export default class Assignment extends Component {
 
         const formData = new FormData()
         const attachment = document.querySelector('#input-attatchment').files[0]
-    
+
         formData.append("idCourse", getCourseIDActive())
         formData.append("idSession", getCourseSessionIDActive())
         formData.append("attachment", attachment)
@@ -150,7 +150,7 @@ export default class Assignment extends Component {
                                 <div dangerouslySetInnerHTML={{ __html: content.descriptions }}></div>
                             </CCardBody>
                             <CCardFooter>
-                                <strong>Tenggat :
+                                <strong>Tenggat : {' '}
                                     <Moment format="DD MMMM YYYY HH.mm" locale="id">
                                         {content.deadlineDate}
                                     </Moment>
@@ -165,26 +165,35 @@ export default class Assignment extends Component {
                             <CCardBody>
                                 <CForm onSubmit={e => this.handleSubmitAssignment(e)}>
 
-                                
-                                {this.state.content.submittedAssignment ?
-                                    <ModuleSubmittedAssignmentAttachmentRow handleDeleteAttachment={() => this.handleDeleteAttachment()} file={content.submittedAssignment.file} /> : null}
 
-                                {!this.state.content.submittedAssignment && !this.state.isDeadline ? <Fragment>
-                                    <CInputGroup style={{ border: '1px rgba(0, 0, 0, 0.2) dashed', borderRadius: '5px' }}>
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="input-attatchment" aria-describedby="inputGroupFileAddon01" onChange={e => this.handleAttachmentValidation()} />
-                                            <label class="custom-file-label" id="label-input-attachment" for="input-attatchment">Pilih berkas</label>
-                                        </div>
-                                    </CInputGroup>
-                                    <small class="form-text text-muted mb-3">Ekstensi berkas yang diperbolehkan {content.extensions.join(", ")}.</small>
+                                    {this.state.content.submittedAssignment ?
+                                        <ModuleSubmittedAssignmentAttachmentRow handleDeleteAttachment={() => this.handleDeleteAttachment()} file={content.submittedAssignment.file} /> : null}
 
-                                </Fragment> : null}
+                                    {!this.state.content.submittedAssignment && !this.state.isDeadline ? <Fragment>
+                                        <CInputGroup style={{ border: '1px rgba(0, 0, 0, 0.2) dashed', borderRadius: '5px' }}>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="input-attatchment" aria-describedby="inputGroupFileAddon01" onChange={e => this.handleAttachmentValidation()} />
+                                                <label class="custom-file-label" id="label-input-attachment" for="input-attatchment">Pilih berkas</label>
+                                            </div>
+                                        </CInputGroup>
+                                        <small class="form-text text-muted mb-3">Ekstensi berkas yang diperbolehkan {content.extensions.join(", ")}.</small>
 
-                                {this.state.content.submittedAssignment ? <p className="text-center font-weight-bold text-success">Tugas sudah dikumpulkan</p> : null}
+                                    </Fragment> : null}
 
-                                {!this.state.content.submittedAssignment && !this.state.isDeadline ? <button type="submit" class="btn btn-primary btn-block">Kirim tugas</button> : null}
+                                    {this.state.content.submittedAssignment ? <p className="text-center font-weight-bold text-success">Tugas sudah dikumpulkan</p> : null}
 
-                                {!this.state.content.submittedAssignment && this.state.isDeadline ? <p className="text-danger">Anda telat mengumpulkan tugas.</p> : null}
+                                    {this.state.isUploading ?
+                                        <Fragment>
+                                            <div class="text-center">
+                                                <div class="spinner-border text-primary" role="status">
+                                                    <span class="sr-only">Loading...</span>
+                                                </div>
+                                            </div>
+                                        </Fragment> : null}
+
+                                    {!this.state.content.submittedAssignment && !this.state.isDeadline && !this.state.isUploading ? <button type="submit" class="btn btn-primary btn-block">Kirim tugas</button> : null}
+
+                                    {!this.state.content.submittedAssignment && this.state.isDeadline ? <p className="text-danger">Anda telat mengumpulkan tugas.</p> : null}
                                 </CForm>
 
                             </CCardBody>

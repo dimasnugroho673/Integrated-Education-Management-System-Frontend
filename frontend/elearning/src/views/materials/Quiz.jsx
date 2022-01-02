@@ -269,7 +269,7 @@ export default class Quiz extends Component {
                     <CRow>
                         <CCol md="12">
                             <CCard className="p-4">
-                                <CCardHeader>{this.state.module.moduleTitle}</CCardHeader>
+                                <CCardHeader><h4>{this.state.module.moduleTitle}</h4></CCardHeader>
                                 <CCardBody>
                                     <div class="alert alert-info" role="alert">
                                         Mohon tunggu, nilai anda sedang dicek oleh dosen
@@ -288,7 +288,7 @@ export default class Quiz extends Component {
                     <CRow>
                         <CCol md="12">
                             <CCard className="p-4">
-                                <CCardHeader>{this.state.module.moduleTitle}</CCardHeader>
+                                <CCardHeader><h4>{this.state.module.moduleTitle}</h4></CCardHeader>
                                 <CCardBody>
                                     <div class="alert alert-danger" role="alert">
                                         Anda tidak dapat mengerjakan kuis, telah melewati deadline
@@ -306,7 +306,7 @@ export default class Quiz extends Component {
                 <CRow>
                     <CCol md="12">
                         <CCard className="p-4">
-                            <CCardHeader>{this.state.module.moduleTitle}</CCardHeader>
+                            <CCardHeader><h4>{this.state.module.moduleTitle}</h4></CCardHeader>
                             <CCardBody>
                                 <h3>Catatan Quiz</h3>
 

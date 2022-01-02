@@ -28,6 +28,7 @@ import { getCourseDataActive, getCourseIDActive, getCourseSessionIDActive, getKe
 import axios from "axios"
 import ModuleInactiveInfoCard from "src/components/ModuleInactiveInfoCard"
 import { Link } from "react-router-dom"
+import moment from "moment"
 
 export default class CourseContainer extends Component {
     constructor(props) {
@@ -81,8 +82,13 @@ export default class CourseContainer extends Component {
         localStorage.setItem('lms-module-last-read', JSON.stringify(lastRead))
     }
 
+    saveLastActivity = () => {
+        localStorage.setItem('lms-last-activity', JSON.stringify( moment().format("MMMM DD[,] YYYY") ))
+    }
+
     componentDidMount() {
         this.fetchDetailModule()
+        this.saveLastActivity()
     }
 
     render() {

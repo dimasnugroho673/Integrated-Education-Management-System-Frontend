@@ -67,13 +67,15 @@ h1, h2, h3, h4, h5, h6 {
 // dropdown-menu
 
 .dropdown-header {
-    padding: 15px;
-    border-radius: 10px 10px 0 0;
+  padding: 15px;
+  border-radius: 8px 8px 0 0;
 }
 
 .dropdown-menu {
-    box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.1);
 }
+
 
 // end dropwdown-menu
 

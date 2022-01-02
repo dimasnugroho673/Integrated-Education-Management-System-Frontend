@@ -13,6 +13,7 @@ import {
     CModalTitle,
     CRow,
 } from '@coreui/react'
+import iconDocumentBlue from '../assets/icons/icon-document-blue.png'
 
 class ModuleSubmittedAssignmentAttachmentRow extends Component {
 
@@ -36,7 +37,7 @@ class ModuleSubmittedAssignmentAttachmentRow extends Component {
                         <CCard className="custom-card-module-submitted-assignment-attachment" style={{ boxShadow: 'none', border: '1px rgba(0, 0, 0, 0.2) solid' }}>
                             <CRow className="no-gutters">
                                 <CCol className="col-2">
-                                    <img src="https://raw.githubusercontent.com/dimasnugroho673/Integrated-Education-Management-System-Frontend/main/assets/images/icon-document-blue.png?token=ALBMY5PIIZ5XQMXSZU4H4BDBZOU7S" width="40px" alt="..." style={{ marginTop: '28px', marginLeft: '20px' }} />
+                                    <img src={iconDocumentBlue} width="40px" alt="icon-document" style={{ marginTop: '28px', marginLeft: '20px' }} />
                                 </CCol>
                                 <CCol className="col-8" onClick={e => window.open(this.props.file.url)}>
                                     <CCardBody>

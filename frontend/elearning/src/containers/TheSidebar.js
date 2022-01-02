@@ -16,8 +16,9 @@ import {
 import CIcon from '@coreui/icons-react'
 
 // sidebar nav config
+import LogoRegular from './logo.png'
+import LogoMini from './logo_mini.png'
 import navigation from './_nav'
-import navigationMaterials from './_navMaterials'
 
 const TheSidebar = () => {
   const dispatch = useDispatch()
@@ -29,10 +30,8 @@ const TheSidebar = () => {
       onShowChange={(val) => dispatch({ type: 'set', sidebarShow: val })} className="c-sidebar-light"
     >
       <CSidebarBrand className="d-md-down-none" to="/">
-        <img src="https://raw.githubusercontent.com/dimasnugroho673/Integrated-Education-Management-System-Frontend/main/assets/images/logo-full.png?token=ALBMY5NYLEZIOVA6IPRS2Y3BZNFAE"
-          width="160px" className="c-sidebar-brand-full" />
-
-        <img src="https://raw.githubusercontent.com/dimasnugroho673/Integrated-Education-Management-System-Frontend/main/assets/images/logo-mini.png?token=ALBMY5KF46ASJKJRZWDXGIDBZNFDK" width="30px" className="c-sidebar-brand-minimized" />
+      <img src={LogoRegular} width="160px" className="c-sidebar-brand-full" alt="logo-regular" />
+        <img src={LogoMini} width="30px" className="c-sidebar-brand-minimized" alt="logo--mini" />
 
       </CSidebarBrand>
       <CSidebarNav>

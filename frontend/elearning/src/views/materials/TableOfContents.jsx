@@ -17,6 +17,7 @@ import {
   CLabel,
   CSelect
 } from '@coreui/react'
+import ilusPaperYellow from '../../assets/ilustrations/ilus-paper-yellow.png'
 import { generateModuleIcon, getCourseDataActive, getCourseIDActive, getCourseSessionIDActive, getKeyToken } from 'src/utils/Common'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
@@ -150,9 +151,9 @@ class TableOfContents extends Component {
             <CCol md="8" sm="12">
               <CCard>
                 <CCardHeader>
-                  Table of Content
+                  <CCardHeader><h4>Table of Content</h4></CCardHeader>
 
-                  <CRow className="mt-4">
+                  <CRow>
 
                     <CCol md="4" sm="12" className="mt-2">
                       <CFormGroup>
@@ -223,7 +224,7 @@ class TableOfContents extends Component {
                 <CCardBody>
                   <div className="row">
                     <div className="col-md-12">
-                      <img src={"https://raw.githubusercontent.com/dimasnugroho673/Integrated-Education-Management-System-Frontend/main/assets/images/ilus-paper-blue.png?token=ALBMY5ISBTQIS7FUV6U5T3LBZNF3Q"} width="110px" alt="" className='my-4' />
+                      <img src={ilusPaperYellow} width="110px" alt="" className='my-4' />
                       <h6 className="font-weight-bold">Terakhir dibaca</h6>
                       <br />
                       <h6>{this.state.moduleLastRead.moduleTitle}</h6>

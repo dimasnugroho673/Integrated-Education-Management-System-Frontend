@@ -45,6 +45,10 @@ export const getKeyToken = () => {
     return localStorage.getItem('lms-sess-key')
 }
 
+export const getLastActivity = () => {
+    return JSON.parse(localStorage.getItem('lms-last-activity'))
+}
+
 export const generateModuleIcon = (moduleType) => {
     if (moduleType === 'material') {
         return <span className="iconify mr-2" data-icon="uil:book-alt" style={{ fontWeight: 'bold', fontSize: '18px' }}></span>

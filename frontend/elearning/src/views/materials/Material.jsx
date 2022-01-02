@@ -28,7 +28,7 @@ export default class Material extends Component {
                                 <h4>{this.props.module.moduleTitle}</h4>
                             </CCardHeader>
                             <CCardBody>
-                                <div dangerouslySetInnerHTML={{ __html: this.props.content.data }}></div>
+                                <div className="card-material" dangerouslySetInnerHTML={{ __html: this.props.content.data }}></div>
                             </CCardBody>
                         </CCard>
                     </CCol>

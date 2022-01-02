@@ -15,13 +15,12 @@ import {
   Link
 } from 'react-router-dom'
 
-// sidebar nav config
-import navigationMaterials from './_navMaterials'
-import Logo from './logo.png'
+import LogoRegular from './logo.png'
 import LogoMini from './logo_mini.png'
-import { generateModuleIcon, getCourseIDActive, getCourseSessionIDActive, getKeyToken } from 'src/utils/Common'
+import { generateModuleIcon, getCourseDataActive, getCourseIDActive, getCourseSessionIDActive, getKeyToken, getLastActivity } from 'src/utils/Common'
 import axios from 'axios'
 import CIcon from '@coreui/icons-react'
+import moment from 'moment'
 
 const TheSidebarCoursePortal = () => {
   const dispatch = useDispatch()
@@ -67,23 +66,6 @@ const TheSidebarCoursePortal = () => {
   }
 
   useEffect(() => {
-    // setModules(
-    //   {
-    //     _tag: 'CSidebarNavTitle',
-    //     _children: ['Materi']
-    //   },
-    //   {
-    //     _tag: 'CSidebarNavItem',
-    //     name: 'Silabus',
-    //     to: '/el/module',
-    //     icon: <CIcon name="cil-list" customClasses="c-sidebar-nav-icon"/>,
-    //     badge: {
-    //       color: 'info',
-    //       text: 'NEW',
-    //     }
-    //   }
-    // )
-
     fetchModules()
   }, []);
 
@@ -93,8 +75,8 @@ const TheSidebarCoursePortal = () => {
       onShowChange={(val) => dispatch({ type: 'set', sidebarShow: val })} className="c-sidebar-light"
     >
       <CSidebarBrand className="d-md-down-none" to="/">
-        <img src={Logo} width="160px" className="c-sidebar-brand-full" />
-        <img src={LogoMini} width="30px" className="c-sidebar-brand-minimized" />
+        <img src={LogoRegular} width="160px" className="c-sidebar-brand-full" alt="logo-regular" />
+        <img src={LogoMini} width="30px" className="c-sidebar-brand-minimized" alt="logo--mini" />
 
       </CSidebarBrand>
       <CSidebarNav>
@@ -105,13 +87,13 @@ const TheSidebarCoursePortal = () => {
 
 
         <div className="ml-4 mr-4 mt-1">
-          <h4 className="font-weight-bold">Pemorgraman Web</h4>
+          <h4 className="font-weight-bold">{ getCourseDataActive().courseTitle }</h4>
 
           <div class="progress mt-4" style={{ height: "5px" }}>
             <div class="progress-bar" role="progressbar" style={{ width: "50%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
           <p className="mt-2 font-weight-bold">11% Selesai <br />
-            Last activity on October 4, 2021
+            Aktifitas terakhir pada { getLastActivity() }
           </p>
 
         </div>
