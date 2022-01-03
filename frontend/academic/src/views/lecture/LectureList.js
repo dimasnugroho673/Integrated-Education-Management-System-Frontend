@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from "react";
-import IllusCourseImage from '../../../public/images/ilus-course.jpg'
+import IllusCourseImage from '../../assets/image/ilus-course.jpg'
 
 class LectureList extends Component {
   constructor(props) {

@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import axios from "axios";
 import AnnounInfo from "./AnnounInfo";
 import AlertInfo from "./AlertInfo";
-import HeaderIllustrationImage from '../../../public/images/header_illustration.png'
+import HeaderIllustrationImage from '../../assets/image/header_illustration.png'
 
 export default class Dashboard extends Component {
   constructor() {

@@ -6,7 +6,7 @@ import {
   CHeaderBrand,
   CHeaderNav,
 } from '@coreui/react'
-import LogoImage from '../../../public/image/logo.png'
+import LogoImage from '../assets/image/logo.png'
 
 
 import {

@@ -3,7 +3,7 @@ import axios from "axios";
 import { Redirect } from "react-router-dom";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
-import ProfileImage from '../../../public/avatars/6.jpg'
+import ProfileImage from '../../assets/avatars/6.jpg'
 
 export class Profile extends Component {
     constructor() {

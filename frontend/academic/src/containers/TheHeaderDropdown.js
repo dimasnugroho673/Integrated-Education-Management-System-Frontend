@@ -7,7 +7,7 @@ import {
   CImg
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import ProfileImage from '../../../public/avatars/6.jpg'
+import ProfileImage from '../assets/avatars/6.jpg'
 
 const TheHeaderDropdown = () => {
 

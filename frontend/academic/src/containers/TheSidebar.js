@@ -11,8 +11,8 @@ import {
   CSidebarNavDropdown,
   CSidebarNavItem,
 } from '@coreui/react'
-import LogoImage from '../../../public/image/logo.png'
-import LogoImageMini from '../../../public/image/logo_mini.png'
+import LogoImage from '../assets/image/logo.png'
+import LogoImageMini from '../assets/image/logo_mini.png'
 
 
 // sidebar nav config
