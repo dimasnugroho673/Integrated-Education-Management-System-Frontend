@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import axios from "axios";
 import AnnounInfo from "./AnnounInfo";
 import AlertInfo from "./AlertInfo";
+import HeaderIllustrationImage from '../../../public/images/header_illustration.png'
 
 export default class Dashboard extends Component {
   constructor() {
@@ -125,7 +126,7 @@ export default class Dashboard extends Component {
                       </div>
 
                       <div style={{ display: 'inline-block', float: 'right' }}>
-                        <img src="../assets/image/header_illustration.png" style={{ width: '200px', height: '200px' }} className="ilus-home-learning" alt="" srcset="" />
+                        <img src={HeaderIllustrationImage} style={{ width: '200px', height: '200px' }} className="ilus-home-learning" alt="" srcset="" />
                       </div>
 
                     </div>
@@ -178,18 +179,25 @@ export default class Dashboard extends Component {
                   <div className="card text-white bg-dashboard">
                     <div className="card-body mt-2">
                       <div className="card-body-content">
-                        {/* <img src="../image/ilus_background_class.svg" className="ilus-home-learning" alt="" srcset="" /> */}
-                        <div className="row">
-                          <div className="col-10">
-                            <h2 style={{ color: '#fff' }}>
-                              Selamat Datang {profile.name}
-                            </h2>
+
+                        <div style={{ display: 'inline-block' }}>
+                          <div className="row">
+                            <div className="col-12">
+                              <h2 style={{ color: '#fff' }}>
+                                Selamat Datang {profile.name}
+                              </h2>
+                            </div>
                           </div>
+                          <p>
+                            Dapatkan informasi terkini mengenai perkuliahan anda
+                            disini.
+                          </p>
                         </div>
-                        <p>
-                          Dapatkan informasi terkini mengenai perkuliahan anda
-                          disini.
-                        </p>
+
+                        <div style={{ display: 'inline-block', float: 'right' }}>
+                          <img src={HeaderIllustrationImage} style={{ width: '200px', height: '200px' }} className="ilus-home-learning" alt="" srcset="" />
+                        </div>
+
                       </div>
                     </div>
                   </div>
@@ -240,18 +248,25 @@ export default class Dashboard extends Component {
                   <div className="card text-white bg-dashboard">
                     <div className="card-body mt-2">
                       <div className="card-body-content">
-                        {/* <img src="../image/ilus_background_class.svg" className="ilus-home-learning" alt="" srcset="" /> */}
-                        <div className="row">
-                          <div className="col-10">
-                            <h2 style={{ color: '#fff' }}>
-                              Selamat Datang {profile.name}
-                            </h2>
+
+                        <div style={{ display: 'inline-block' }}>
+                          <div className="row">
+                            <div className="col-12">
+                              <h2 style={{ color: '#fff' }}>
+                                Selamat Datang {profile.name}
+                              </h2>
+                            </div>
                           </div>
+                          <p>
+                            Dapatkan informasi terkini mengenai perkuliahan anda
+                            disini.
+                          </p>
                         </div>
-                        <p>
-                          Dapatkan informasi terkini mengenai perkuliahan anda
-                          disini.
-                        </p>
+
+                        <div style={{ display: 'inline-block', float: 'right' }}>
+                          <img src={HeaderIllustrationImage} style={{ width: '200px', height: '200px' }} className="ilus-home-learning" alt="" srcset="" />
+                        </div>
+
                       </div>
                     </div>
                   </div>
@@ -298,18 +313,25 @@ export default class Dashboard extends Component {
                   <div className="card text-white bg-dashboard">
                     <div className="card-body mt-2">
                       <div className="card-body-content">
-                        {/* <img src="../image/ilus_background_class.svg" className="ilus-home-learning" alt="" srcset="" /> */}
-                        <div className="row">
-                          <div className="col-10">
-                            <h2 style={{ color: '#fff' }}>
-                              Selamat Datang {profile.name}
-                            </h2>
+
+                        <div style={{ display: 'inline-block' }}>
+                          <div className="row">
+                            <div className="col-12">
+                              <h2 style={{ color: '#fff' }}>
+                                Selamat Datang {profile.name}
+                              </h2>
+                            </div>
                           </div>
+                          <p>
+                            Dapatkan informasi terkini mengenai perkuliahan anda
+                            disini.
+                          </p>
                         </div>
-                        <p>
-                          Dapatkan informasi terkini mengenai perkuliahan anda
-                          disini.
-                        </p>
+
+                        <div style={{ display: 'inline-block', float: 'right' }}>
+                          <img src={HeaderIllustrationImage} style={{ width: '200px', height: '200px' }} className="ilus-home-learning" alt="" srcset="" />
+                        </div>
+
                       </div>
                     </div>
                   </div>
@@ -407,7 +429,7 @@ export default class Dashboard extends Component {
                         </div>
 
                         <div style={{ display: 'inline-block', float: 'right' }}>
-                          <img src="../assets/image/header_illustration.png" style={{ width: '200px', height: '200px' }} className="ilus-home-learning" alt="" srcset="" />
+                          <img src={HeaderIllustrationImage} style={{ width: '200px', height: '200px' }} className="ilus-home-learning" alt="" srcset="" />
                         </div>
 
                       </div>
