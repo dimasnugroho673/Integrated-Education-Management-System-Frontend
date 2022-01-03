@@ -88,6 +88,7 @@ const TheSidebarCoursePortal = () => {
 
         <div className="ml-4 mr-4 mt-1">
           <h4 className="font-weight-bold">{ getCourseDataActive().courseTitle }</h4>
+          {/* <h4 className="font-weight-bold">Pemrograman Web</h4> */}
 
           <div class="progress mt-4" style={{ height: "5px" }}>
             <div class="progress-bar" role="progressbar" style={{ width: "50%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>

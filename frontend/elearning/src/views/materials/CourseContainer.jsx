@@ -29,6 +29,7 @@ import axios from "axios"
 import ModuleInactiveInfoCard from "src/components/ModuleInactiveInfoCard"
 import { Link } from "react-router-dom"
 import moment from "moment"
+import dummyProfile from '../../assets/ilustrations/dummy-profile.png'
 
 export default class CourseContainer extends Component {
     constructor(props) {
@@ -159,7 +160,7 @@ export default class CourseContainer extends Component {
                 <CCard id="card-container-comment-module" className="p-3">
                     <CCardBody>
                         <div class="media">
-                            <img src="https://www.cornwallbusinessawards.co.uk/wp-content/uploads/2017/11/dummy450x450-300x300.jpg" class="align-self-center mr-3 rounded-pill" alt="..." width="38px" />
+                            <img src={dummyProfile} class="align-self-center mr-3 rounded-pill" alt="img-profile" width="38px" />
                             <div class="media-body">
                                 <CInputGroup className="mt-0">
                                     <CInput type="text" class="form-control" placeholder="Tulis komentar anda disini..." />

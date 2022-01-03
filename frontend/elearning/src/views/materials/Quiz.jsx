@@ -290,9 +290,13 @@ export default class Quiz extends Component {
                             <CCard className="p-4">
                                 <CCardHeader><h4>{this.state.module.moduleTitle}</h4></CCardHeader>
                                 <CCardBody>
-                                    <div class="alert alert-danger" role="alert">
+                                    <CRow className="text-center mx-auto">
+                                        <CCol md="6" className="offset-md-3">
+                                        <div class="alert alert-danger" role="alert">
                                         Anda tidak dapat mengerjakan kuis, telah melewati deadline
                                     </div>
+                                        </CCol>
+                                    </CRow>
                                 </CCardBody>
                             </CCard>
                         </CCol>

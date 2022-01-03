@@ -227,10 +227,10 @@ class TableOfContents extends Component {
                       <img src={ilusPaperYellow} width="110px" alt="" className='my-4' />
                       <h6 className="font-weight-bold">Terakhir dibaca</h6>
                       <br />
-                      <h6>{this.state.moduleLastRead.moduleTitle}</h6>
-                      <small className="text-capitalize">Tipe : {this.state.moduleLastRead.moduleType}</small>
+                      <h6>{this.state.moduleLastRead ? this.state.moduleLastRead.moduleTitle : "Belum ada materi dibaca"}</h6>
+                      <small className="text-capitalize">Tipe : {this.state.moduleLastRead ? this.state.moduleLastRead.moduleType : "-"}</small>
 
-                      <Link to={`/el/${getCourseIDActive()}/module/${this.state.moduleLastRead.moduleID}/detail`} className="btn btn-block btn-primary mt-4">Lanjut belajar</Link>
+                      {this.state.moduleLastRead ? <Link to={`/el/${getCourseIDActive()}/module/${this.state.moduleLastRead.moduleID}/detail`} className="btn btn-block btn-primary mt-4">Lanjut belajar</Link> : <Link to={`/el/${getCourseIDActive()}/module/${this.state.modules[0].moduleID}/detail`} className="btn btn-block btn-primary mt-4">Mulai belajar</Link>}
                     </div>
                   </div>
                 </CCardBody>
