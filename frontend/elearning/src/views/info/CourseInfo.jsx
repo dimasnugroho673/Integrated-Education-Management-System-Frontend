@@ -37,6 +37,14 @@ class CourseInfo extends Component {
     })
   }
 
+  handleToAssignment = () => {
+    this.props.history.push('/el/8762394872346232/module/098123907123/detail')
+  }
+
+  handleToNotification = () => {
+    this.props.history.push('/el/8762394872346232/module')
+  }
+
   componentDidMount() {
     this.fetchDetailCourse()
   }
@@ -160,7 +168,7 @@ class CourseInfo extends Component {
 
                 <h6 className="mb-3">Pemberitahuan terbaru <span class="badge badge-pill badge-danger">2</span></h6>
 
-                <div class="card" style={{ backgroundColor: 'white' }} onClick={e => window.location.href = '/el/pbo/quiz/'} >
+                <div class="card" style={{ backgroundColor: 'white', cursor: 'pointer' }} onClick={() => this.handleToNotification()}>
                   <div class="card-body">
                     <div class="media">
                       <div className="bg-danger rounded-pill wrapper-icon-page-title"><span class="iconify icon-page-title" data-icon="uil:file-alt" data-inline="false"></span></div>
@@ -179,7 +187,7 @@ class CourseInfo extends Component {
 
                 <h6 className="mb-3">Kuis <span class="badge badge-pill badge-danger">1</span></h6>
 
-                <div class="card" style={{ backgroundColor: 'white' }} onClick={e => window.location.href = '/el/pbo/quiz/'} >
+                <div class="card" style={{ backgroundColor: 'white' }}>
                   <div class="card-body">
                     <div class="media">
                       <div className="bg-primary rounded-pill wrapper-icon-page-title"><span class="iconify icon-page-title" data-icon="uil:file-check-alt" data-inline="false"></span></div>
@@ -193,7 +201,7 @@ class CourseInfo extends Component {
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item">Tenggat : 09.30</li>
                   </ul>
-                  <div className="card-footer btn btn-primary custom-button-card-footer-kuis" style={{ border: '0' }}>
+                  <div className="card-footer btn btn-primary custom-button-card-footer-kuis" style={{ border: '0', cursor: 'pointer' }} onClick={() => this.handleToAssignment()}>
                     Kerjakan kuis
                   </div>
                 </div>
