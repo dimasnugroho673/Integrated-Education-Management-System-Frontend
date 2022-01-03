@@ -3,6 +3,7 @@ import axios from "axios";
 import { Redirect } from "react-router-dom";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
+import ProfileImage from '../../../public/avatars/6.jpg'
 
 export class Profile extends Component {
     constructor() {
@@ -73,7 +74,7 @@ export class Profile extends Component {
                                                         <div className="profile-widget-header">
                                                             <img
                                                                 alt="image"
-                                                                src="../avatars/6.jpg"
+                                                                src={ProfileImage}
                                                                 className="rounded-circle profile-widget-picture"
                                                             />
                                                         </div>

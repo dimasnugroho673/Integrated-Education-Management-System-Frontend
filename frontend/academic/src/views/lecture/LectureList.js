@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from "react";
+import IllusCourseImage from '../../../public/images/ilus-course.jpg'
 
 class LectureList extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class LectureList extends Component {
             this.props.data.courseCode, this.props.data.courseTitle, this.props.data.courseScope)}>
           <div className="row">
             <div className="col-4" style={{ verticalAlign: "middle", textAlign: "center" }}>
-              <img src={"https://raw.githubusercontent.com/dimasnugroho673/Integrated-Education-Management-System-Frontend/main/assets/images/ilus-course.jpg?token=ALBMY5KE2BN7QITSKABLORTBZNPFM"} className="image-course-thumbnail ml-2" alt={"Image " + this.props.data.courseTitle}></img>
+              <img src={IllusCourseImage} className="image-course-thumbnail ml-2" alt={"Image " + this.props.data.courseTitle}></img>
             </div>
             <div className="col-7 text-left">
               <h5 className="text-course-title ml-3">{this.props.data.courseTitle}</h5>
