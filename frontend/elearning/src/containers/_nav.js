@@ -9,6 +9,12 @@ const _nav =  [
   },
   {
     _tag: 'CSidebarNavItem',
+    name: 'Dashboard Akademik',
+    to: `/a/dashboard`,
+    icon: <span class="iconify" data-icon="uil:home-alt" style={{ fontWeight: 'bold', fontSize: '18px' }}></span>,
+  },
+  {
+    _tag: 'CSidebarNavItem',
     name: 'Info Mata Kuliah',
     to: `/el/${getCourseIDActive()}/info`,
     icon: <span class="iconify mr-2" data-icon="uil:dashboard" style={{ fontWeight: 'bold', fontSize: '18px' }}></span>,

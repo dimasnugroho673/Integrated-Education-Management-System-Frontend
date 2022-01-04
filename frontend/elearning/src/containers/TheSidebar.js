@@ -29,7 +29,7 @@ const TheSidebar = () => {
       show={show}
       onShowChange={(val) => dispatch({ type: 'set', sidebarShow: val })} className="c-sidebar-light"
     >
-      <CSidebarBrand className="d-md-down-none" to="/">
+      <CSidebarBrand className="d-md-down-none" to="/a/dashboard">
       <img src={LogoRegular} width="160px" className="c-sidebar-brand-full" alt="logo-regular" />
         <img src={LogoMini} width="30px" className="c-sidebar-brand-minimized" alt="logo--mini" />
 
