@@ -7,21 +7,29 @@ class LectureList extends Component {
     super(props);
     this.state = {
       coursePlan: [],
-      courseActive: [],
+      courseActive: null,
     };
   }
 
   handleClickMaterial(courseId, courseSessionId, courseCode, courseTitle, courseScope) {
-    this.state.courseActive.push({
+    this.setState({
+      courseActive: {
+        courseId: courseId,
+        courseCode: courseCode,
+        courseTitle: courseTitle,
+        courseScope: courseScope
+      }
+    })
+
+    window.location.href = "/el/" + courseId + "/info";
+    localStorage.setItem("course-id-active", courseId);
+    localStorage.setItem("course-session-id-active", courseSessionId);
+    localStorage.setItem("course-data-active", JSON.stringify({
       courseId: courseId,
       courseCode: courseCode,
       courseTitle: courseTitle,
       courseScope: courseScope
-    })
-    window.location.href = "/el/" + courseId + "/info";
-    localStorage.setItem("course-id-active", courseId);
-    localStorage.setItem("course-session-id-active", courseSessionId);
-    localStorage.setItem("course-data-active", JSON.stringify(this.state.courseActive));
+    }));
   }
 
   render() {

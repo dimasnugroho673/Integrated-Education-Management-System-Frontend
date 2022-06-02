@@ -158,6 +158,7 @@ export default class Quiz extends Component {
         axios.post(`${process.env.REACT_APP_API_ENDPOINT}/module/${this.state.module.moduleID}/quiz`, body).then(response => {
             alert("Quiz berhasil disubmit, silahkan tunggu penilaian dari dosen")
             console.log(response.data.meta)
+            window.location.reload()
 
             this.setState({ quizSession: false })
             document.getElementById('card-container-comment-module').style.display = "block"
@@ -271,9 +272,28 @@ export default class Quiz extends Component {
                             <CCard className="p-4">
                                 <CCardHeader><h4>{this.state.module.moduleTitle}</h4></CCardHeader>
                                 <CCardBody>
-                                    <div class="alert alert-info" role="alert">
+                                <CCard className="border" style={{ boxShadow: 'none' }}>
+                                <CCardHeader><h5>Nilai kuis</h5></CCardHeader>
+                                <CCardBody>
+                                    Anda telah selesai mengikuti kuis, nilai anda :
+                                
+                                    <h6 className="mt-3">Persentase : {JSON.parse(this.state.module.score.additionalInfo).percentage}</h6>
+                                    <h6>Total soal : {JSON.parse(this.state.module.score.additionalInfo).totalQuestions}</h6>
+                                    <h6>Soal terjawab : {JSON.parse(this.state.module.score.additionalInfo).totalAnswers}</h6>
+                                    <h6>Total jawaban benar : {JSON.parse(this.state.module.score.additionalInfo).totalCorrectAnswers}</h6>
+                                    <h6>Total jawaban salah : {JSON.parse(this.state.module.score.additionalInfo).totalWrongAnswers}</h6>
+                                    
+                                </CCardBody>
+                                <CCardFooter className="border-top">
+                                <h5 className="text-primary">Nilai anda : {this.state.module.score.moduleScore} - {this.state.module.score.moduleGrade} <i className="bi bi-check-circle-fill ml-1 text-success"></i></h5>
+
+                                </CCardFooter>
+                            </CCard>
+
+                            <CButton color="primary" onClick={() => this.startQuiz()}>Mulai kuis (demo)</CButton>
+                                    {/* <div class="alert alert-info" role="alert">
                                         Mohon tunggu, nilai anda sedang dicek oleh dosen
-                                    </div>
+                                    </div> */}
                                 </CCardBody>
                             </CCard>
                         </CCol>
@@ -316,7 +336,7 @@ export default class Quiz extends Component {
 
                                 <div className="mb-5" dangerouslySetInnerHTML={{ __html: this.state.content.additionalInfo }}></div>
 
-                                <CButton color="primary" onClick={() => this.startQuiz()}>Mulai ujian</CButton>
+                                <CButton color="primary" onClick={() => this.startQuiz()}>Mulai kuis</CButton>
                             </CCardBody>
                         </CCard>
                     </CCol>

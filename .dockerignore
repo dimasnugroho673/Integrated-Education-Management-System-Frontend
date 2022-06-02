@@ -1,2 +1,3 @@
-react-academic-system-test/node_modules
-skripsi-integration-system-subsystem-e-learning/node_modules
+frontend/auth/node_modules
+frontend/academic/node_modules
+frontend/elearning/node_modules
